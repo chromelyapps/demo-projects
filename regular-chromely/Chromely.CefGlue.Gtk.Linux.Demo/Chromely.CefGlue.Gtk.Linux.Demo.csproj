@@ -25,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Chromely.CefGlue.Gtk" Version="68.0.0-beta03" />
+    <PackageReference Include="Chromely.Core" Version="0.9.2" />
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
   </ItemGroup>
 
