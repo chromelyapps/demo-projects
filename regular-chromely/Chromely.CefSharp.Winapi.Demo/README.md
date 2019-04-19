@@ -26,7 +26,7 @@ class Program
                       .WithHostSize(1000, 600)
                       .WithStartUrl(startUrl);
 
-      using (var window = new CefSharpBrowserWindow(config))
+      using (var window = ChromelyWindow.Create(config))
       {
          return window.Run(args);
       }
@@ -72,7 +72,7 @@ class Program
                                 .RegisterEventHandler<ConsoleMessageEventArgs>(CefEventKey.ConsoleMessage, OnWebBrowserConsoleMessage)
                                 .RegisterEventHandler<StatusMessageEventArgs>(CefEventKey.StatusMessage, OnWebBrowserStatusMessage);
  
-                using (var window = new CefSharpBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schemes
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/chromelyapps/Chromely", true));
@@ -157,7 +157,7 @@ class Program
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
                                 .UseDefautJsHandler("boundControllerAsync", true)
 
-                using (var window = new CefSharpBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     window.RegisterEventHandler<FrameLoadStartEventArgs>(CefEventKey.FrameLoadStart, OnWebBrowserFrameLoadStart);
                     window.RegisterEventHandler<FrameLoadEndEventArgs>(CefEventKey.FrameLoadEnd, OnWebBrowserFrameLoadEnd);
@@ -275,7 +275,7 @@ class Program
                                 .RegisterJsHandler("boundControllerAsync", new CustomJsHandler1(), null, true)
                                 .RegisterJsHandler("boundControllerAsync2", new CustomJsHandler2(), null, true);
 
-                using (var window = new CefSharpBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Scan assemblies for Controller routes 
                     window.ScanAssemblies();

@@ -13,10 +13,8 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
 
-    using Chromely.CefGlue.Gtk.Browser.EventParams;
     using Chromely.CefGlue.Gtk.BrowserWindow;
     using Chromely.Core;
-    using Chromely.Core.Helpers;
     using Chromely.Core.Host;
     using Chromely.Core.Infrastructure;
 
@@ -28,7 +26,6 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
         {
             try
             {
-                HostHelpers.SetupDefaultExceptionHandlers();
                 var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
                 /*
@@ -51,7 +48,7 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
                 // var startUrl = $"file:///{appDirectory}app/chromely.html";
                 var config = ChromelyConfiguration
                                 .Create()
-                                .WithHostMode(WindowState.Maximize)
+                                .WithHostMode(WindowState.Normal)
                                 .WithHostTitle("chromely")
                                 .WithHostIconFile("chromely.ico")
                                 .WithAppArgs(args)
@@ -64,7 +61,7 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
                                 .UseDefaultWebsocketHandler(string.Empty, 8181, true);
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config)) 
                 {
                     // Register external url schemes
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/chromelyapps/Chromely", true));

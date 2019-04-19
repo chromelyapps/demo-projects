@@ -56,15 +56,15 @@ namespace Chromely.CefGlue.Winapi.Demo
                                 .WithHostSize(1200, 700)
                                 .WithAppArgs(args)
                                 .WithHostSize(1200, 700)
-                               // .WithLogFile("logs\\chromely.cef_new.log")
+                                // .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
-                              //  .UseDefaultLogger("logs\\chromely_new.log")
+                                //  .UseDefaultLogger("logs\\chromely_new.log")
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com");
-                                // .UseDefaultWebsocketHandler(string.Empty, 8181, true);
+                // .UseDefaultWebsocketHandler(string.Empty, 8181, true);
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = CefGlue.ChromelyWindow.Create(config))
                 {
                     // Register external url schemes
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/chromelyapps/Chromely", true));

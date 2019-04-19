@@ -35,7 +35,7 @@ class Program
                        .WithCommandLineArg("disable-smooth-scrolling", "1")
                        .WithCommandLineArg("no-sandbox", "1");
 
-      using (var window = new CefGlueBrowserWindow(config))
+      using (var window = ChromelyWindow.Create(config))
       {
          return window.Run(args);
       }
@@ -91,7 +91,7 @@ class Program
                                 .WithCommandLineArg("disable-smooth-scrolling", "1")
                                 .WithCommandLineArg("no-sandbox", "1");
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schems
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/mattkol/Chromely", true));
@@ -187,7 +187,7 @@ class Program
                                .WithCommandLineArg("disable-smooth-scrolling", "1")
                                .WithCommandLineArg("no-sandbox", "1");
   
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     window.RegisterEventHandler<FrameLoadStartEventArgs>(CefEventKey.FrameLoadStart, OnWebBrowserFrameLoadStart);
                     window.RegisterEventHandler<FrameLoadEndEventArgs>(CefEventKey.FrameLoadEnd, OnWebBrowserFrameLoadEnd);
@@ -317,7 +317,7 @@ class Program
                               .WithCommandLineArg("disable-smooth-scrolling", "1")
                               .WithCommandLineArg("no-sandbox", "1");
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Scan assemblies for Controller routes 
                     window.ScanAssemblies();

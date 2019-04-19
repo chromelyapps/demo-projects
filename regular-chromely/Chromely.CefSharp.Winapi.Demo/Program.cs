@@ -15,7 +15,6 @@ namespace Chromely.CefSharp.Winapi.Demo
 
     using Chromely.CefSharp.Winapi.BrowserWindow;
     using Chromely.Core;
-    using Chromely.Core.Helpers;
     using Chromely.Core.Host;
     using Chromely.Core.Infrastructure;
 
@@ -68,15 +67,15 @@ namespace Chromely.CefSharp.Winapi.Demo
                                 .WithHostIconFile("chromely.ico")
                                 .WithAppArgs(args)
                                 .WithHostSize(1200, 700)
-                              //  .WithLogFile("logs\\chromely.cef_new.log")
+                                //  .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(Core.Infrastructure.LogSeverity.Info)
                                 .UseDefaultLogger()
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
-                                .UseDefautJsHandler("boundControllerAsync", true);
+                                .UseDefaultJsHandler("boundControllerAsync", true);
 
-                using (var window = new CefSharpBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schemes
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/chromelyapps/Chromely", true));

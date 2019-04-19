@@ -26,7 +26,7 @@ class Program
                       .WithHostSize(1000, 600)
                       .WithStartUrl(startUrl);
 
-      using (var window = new CefGlueBrowserWindow(config))
+      using (var window = ChromelyWindow.Create(config))
       {
          return window.Run(args);
       }
@@ -73,7 +73,7 @@ class Program
                                 .RegisterEventHandler<StatusMessageEventArgs>(CefEventKey.StatusMessage, OnWebBrowserStatusMessage)
                                 .UseDefaultWebsocketHandler(string.Empty, 8181, true);
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schems
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/mattkol/Chromely", true));
@@ -160,7 +160,7 @@ class Program
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
                                 .UseDefaultWebsocketHandler(string.Empty, 8181, true);
   
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     window.RegisterEventHandler<FrameLoadStartEventArgs>(CefEventKey.FrameLoadStart, OnWebBrowserFrameLoadStart);
                     window.RegisterEventHandler<FrameLoadEndEventArgs>(CefEventKey.FrameLoadEnd, OnWebBrowserFrameLoadEnd);
@@ -281,7 +281,7 @@ class Program
 
                               .RegisterWebsocketHandler(address: string.Empty, port: 8181, onloadstartserver: true, sockeHandler: new CustomWebsocketHandler());
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Scan assemblies for Controller routes 
                     window.ScanAssemblies();

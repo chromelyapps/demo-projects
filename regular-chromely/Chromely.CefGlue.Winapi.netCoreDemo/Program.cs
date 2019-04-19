@@ -58,6 +58,7 @@ namespace Chromely.CefGlue.Winapi.netCoreDemo
                                 .WithHostSize(1200, 700)
                                 .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
+                    .WithFramelessHost()
                                 .WithLogSeverity(LogSeverity.Info)
                                 .UseDefaultLogger("logs\\chromely_new.log")
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
@@ -71,7 +72,7 @@ namespace Chromely.CefGlue.Winapi.netCoreDemo
                                 // .WithCustomSetting(CefSettingKeys.BrowserSubprocessPath, full_path_to_subprocess)
                                 .WithCustomSetting(CefSettingKeys.SingleProcess, true);
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schemes
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/chromelyapps/Chromely", true));

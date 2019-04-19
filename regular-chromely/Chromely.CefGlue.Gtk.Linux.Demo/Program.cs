@@ -27,7 +27,6 @@ namespace Chromely.CefGlue.Gtk.Linux.Demo
         {
             try
             {
-                HostHelpers.SetupDefaultExceptionHandlers();
                 var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
                 /*
@@ -72,7 +71,7 @@ namespace Chromely.CefGlue.Gtk.Linux.Demo
                                 .WithCommandLineArg("disable-smooth-scrolling", "1")
                                 .WithCommandLineArg("no-sandbox", "1");
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schemes
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/chromelyapps/Chromely", true));

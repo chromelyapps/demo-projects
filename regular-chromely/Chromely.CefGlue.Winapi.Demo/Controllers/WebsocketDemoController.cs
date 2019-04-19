@@ -13,7 +13,8 @@ namespace Chromely.CefGlue.Winapi.Demo.Controllers
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Chromely.CefGlue.Winapi.Browser.ServerHandlers;
+
+    using Chromely.CefGlue.Browser.ServerHandlers;
     using Chromely.Core.Infrastructure;
     using Chromely.Core.RestfulService;
 
