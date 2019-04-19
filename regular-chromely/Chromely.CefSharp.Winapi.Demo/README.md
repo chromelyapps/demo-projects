@@ -66,7 +66,7 @@ class Program
                                 .UseDefaultLogger()
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
-                                .UseDefautJsHandler("boundControllerAsync", true)
+                                .UseDefaultJsHandler("boundControllerAsync", true)
                                 .RegisterEventHandler<FrameLoadStartEventArgs>(CefEventKey.FrameLoadStart, OnWebBrowserFrameLoadStart)
                                 .RegisterEventHandler<FrameLoadEndEventArgs>(CefEventKey.FrameLoadEnd, OnWebBrowserFrameLoadEnd)
                                 .RegisterEventHandler<ConsoleMessageEventArgs>(CefEventKey.ConsoleMessage, OnWebBrowserConsoleMessage)
@@ -155,7 +155,7 @@ class Program
                                 .UseDefaultLogger()
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
-                                .UseDefautJsHandler("boundControllerAsync", true)
+                                .UseDefaultJsHandler("boundControllerAsync", true)
 
                 using (var window = ChromelyWindow.Create(config))
                 {
