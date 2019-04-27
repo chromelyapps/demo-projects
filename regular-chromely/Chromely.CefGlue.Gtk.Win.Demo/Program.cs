@@ -56,6 +56,7 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
                                 .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
+                                .WithGtkHostApi()
                                 .UseDefaultLogger("logs\\chromely_new.log")
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
