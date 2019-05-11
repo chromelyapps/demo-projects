@@ -32,19 +32,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Chromely.CefGlue.Winapi" Version="4.0.70" />
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
     <PackageReference Include="WinApi" Version="4.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Chromely.CefGlue">
-      <HintPath>..\libs\Chromely.CefGlue.dll</HintPath>
-    </Reference>
-    <Reference Include="Chromely.CefGlue.Winapi">
-      <HintPath>..\libs\Chromely.CefGlue.Winapi.dll</HintPath>
-    </Reference>
-    <Reference Include="Chromely.Core">
-      <HintPath>..\libs\Chromely.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
