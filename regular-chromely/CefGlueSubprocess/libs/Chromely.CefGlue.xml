@@ -2054,6 +2054,26 @@
             Initializes a new instance of the <see cref="T:Chromely.CefGlue.Browser.Handlers.CefGlueRequestHandler"/> class.
             </summary>
         </member>
+        <member name="M:Chromely.CefGlue.Browser.Handlers.CefGlueRequestHandler.OnBeforeResourceLoad(Xilium.CefGlue.CefBrowser,Xilium.CefGlue.CefFrame,Xilium.CefGlue.CefRequest,Xilium.CefGlue.CefRequestCallback)">
+            <summary>
+            The on before resource load.
+            </summary>
+            <param name="browser">
+            The browser.
+            </param>
+            <param name="frame">
+            The frame.
+            </param>
+            <param name="request">
+            The request.
+            </param>
+            <param name="callback">
+            The callback.
+            </param>
+            <returns>
+            The <see cref="T:Xilium.CefGlue.CefReturnValue"/>.
+            </returns>
+        </member>
         <member name="M:Chromely.CefGlue.Browser.Handlers.CefGlueRequestHandler.OnBeforeBrowse(Xilium.CefGlue.CefBrowser,Xilium.CefGlue.CefFrame,Xilium.CefGlue.CefRequest,System.Boolean,System.Boolean)">
             <summary>
             The on before browse.
@@ -2948,15 +2968,14 @@
             </returns>
         </member>
         <member name="T:Chromely.CefGlue.Loader.CefLoader">
-             <summary>
-             Loads the necessary CEF runtime files from opensource.spotify.com
-             Inherits detailed version information from cefbuilds/index page.
-            
-             Note:
-             Keep this class in a separate nuget package
-             due to additional reference to ICSharpCode.SharpZipLib.
-             Not everyone will be glad about this. 
-             </summary>
+            <summary>
+            Loads the necessary CEF runtime files from opensource.spotify.com
+            Inherits detailed version information from cefbuilds/index page.
+            Note:
+            Keep this class in a separate nuget package
+            due to additional reference to ICSharpCode.SharpZipLib.
+            Not everyone will be glad about this. 
+            </summary>
         </member>
         <member name="P:Chromely.CefGlue.Loader.CefLoader.DownloadTimeoutMinutes">
             <summary>
@@ -3100,7 +3119,7 @@
             The Subprocess.
             </summary>
         </member>
-        <member name="M:Chromely.CefGlue.Subprocess.Subprocess.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Chromely.CefGlue.Subprocess.Subprocess.#ctor(System.String[])">
             <summary>
             Initializes a new instance of the <see cref="T:Chromely.CefGlue.Subprocess.Subprocess"/> class.
             </summary>
