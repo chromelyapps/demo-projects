@@ -77,9 +77,6 @@
     <None Update="app\pages\websocketdemo.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Chromely.CefGlue.Win.Subprocess_x64.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Chromely.CefGlue.Win.Subprocess_x86.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -2067,7 +2067,7 @@
             Global IOC container implementation.
             </summary>
         </member>
-        <member name="F:Chromely.Core.Infrastructure.IoC.mContainer">
+        <member name="F:Chromely.Core.Infrastructure.IoC._container">
             <summary>
             The default Chromely container.
             </summary>

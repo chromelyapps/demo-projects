@@ -2054,26 +2054,6 @@
             Initializes a new instance of the <see cref="T:Chromely.CefGlue.Browser.Handlers.CefGlueRequestHandler"/> class.
             </summary>
         </member>
-        <member name="M:Chromely.CefGlue.Browser.Handlers.CefGlueRequestHandler.OnBeforeResourceLoad(Xilium.CefGlue.CefBrowser,Xilium.CefGlue.CefFrame,Xilium.CefGlue.CefRequest,Xilium.CefGlue.CefRequestCallback)">
-            <summary>
-            The on before resource load.
-            </summary>
-            <param name="browser">
-            The browser.
-            </param>
-            <param name="frame">
-            The frame.
-            </param>
-            <param name="request">
-            The request.
-            </param>
-            <param name="callback">
-            The callback.
-            </param>
-            <returns>
-            The <see cref="T:Xilium.CefGlue.CefReturnValue"/>.
-            </returns>
-        </member>
         <member name="M:Chromely.CefGlue.Browser.Handlers.CefGlueRequestHandler.OnBeforeBrowse(Xilium.CefGlue.CefBrowser,Xilium.CefGlue.CefFrame,Xilium.CefGlue.CefRequest,System.Boolean,System.Boolean)">
             <summary>
             The on before browse.
@@ -2912,6 +2892,42 @@
             The custom settings.
             </param>
         </member>
+        <member name="T:Chromely.CefGlue.ChromelyConfigurationExtension">
+            <summary>
+            The chromely configuration extension.
+            </summary>
+        </member>
+        <member name="M:Chromely.CefGlue.ChromelyConfigurationExtension.UseDefaultSubprocess(Chromely.Core.ChromelyConfiguration,System.Boolean)">
+            <summary>
+            The use default subprocess.
+            </summary>
+            <param name="configuration">
+            The configuration.
+            </param>
+            <param name="useDefaultSubprocess">
+            The use default subprocess.
+            </param>
+            <returns>
+            The <see cref="T:Chromely.Core.ChromelyConfiguration"/>.
+            </returns>
+        </member>
+        <member name="M:Chromely.CefGlue.ChromelyConfigurationExtension.UseDefaultWebsocketHandler(Chromely.Core.ChromelyConfiguration,System.String,System.Int32,System.Boolean)">
+            <summary>
+            The use default websocket handler.
+            </summary>
+            <param name="address">
+            The address.
+            </param>
+            <param name="port">
+            The port.
+            </param>
+            <param name="onLoadStartServer">
+            The onLoadStartServer.
+            </param>
+            <returns>
+            The <see cref="T:Chromely.Core.ChromelyConfiguration"/>.
+            </returns>
+        </member>
         <member name="T:Chromely.CefGlue.ChromelyWindow">
             <summary>
             Factory class to create the application window
@@ -3114,6 +3130,34 @@
             The <see cref="T:System.String"/>.
             </returns>
         </member>
+        <member name="T:Chromely.CefGlue.Subprocess.DefaultSubprocessExe">
+            <summary>
+            The default subprocess exe.
+            </summary>
+        </member>
+        <member name="P:Chromely.CefGlue.Subprocess.DefaultSubprocessExe.FulPath">
+            <summary>
+            Gets the ful path.
+            </summary>
+        </member>
+        <member name="P:Chromely.CefGlue.Subprocess.DefaultSubprocessExe.ResourcePath">
+            <summary>
+            Gets the resource path.
+            </summary>
+        </member>
+        <member name="M:Chromely.CefGlue.Subprocess.DefaultSubprocessExe.LoadFileFromResource(System.String)">
+            <summary>
+            The load file from resource.
+            </summary>
+            <param name="fullPath">
+            The full path.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+            <exception cref="T:System.NotImplementedException">
+            </exception>
+        </member>
         <member name="T:Chromely.CefGlue.Subprocess.Subprocess">
             <summary>
             The Subprocess.
@@ -3172,6 +3216,32 @@
             </summary>
             <returns>
             The <see cref="T:Xilium.CefGlue.CefRenderProcessHandler"/>.
+            </returns>
+        </member>
+        <member name="T:Chromely.CefGlue.Subprocess.SubprocessParams">
+            <summary>
+            The subprocess params.
+            </summary>
+        </member>
+        <member name="P:Chromely.CefGlue.Subprocess.SubprocessParams.CustomSchemes">
+            <summary>
+            Gets or sets the custom schemes.
+            </summary>
+        </member>
+        <member name="P:Chromely.CefGlue.Subprocess.SubprocessParams.CommandLineArgs">
+            <summary>
+            Gets or sets the command line args.
+            </summary>
+        </member>
+        <member name="M:Chromely.CefGlue.Subprocess.SubprocessParams.Parse(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            The parse.
+            </summary>
+            <param name="subprocessArgs">
+            The subprocess args.
+            </param>
+            <returns>
+            The <see cref="T:Chromely.CefGlue.Subprocess.SubprocessParams"/>.
             </returns>
         </member>
         <member name="T:Chromely.CefGlue.WebsocketMessageSender">
