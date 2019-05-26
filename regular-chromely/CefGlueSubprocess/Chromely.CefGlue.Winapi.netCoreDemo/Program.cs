@@ -58,7 +58,7 @@ namespace Chromely.CefGlue.Winapi.netCoreDemo
                                 .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
-                                .WithDefaultSubprocess()
+                                .UseDefaultSubprocess()
                                 .UseDefaultLogger("logs\\chromely_new.log")
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")

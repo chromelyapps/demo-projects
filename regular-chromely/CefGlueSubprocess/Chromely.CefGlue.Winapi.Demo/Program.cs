@@ -56,7 +56,7 @@ namespace Chromely.CefGlue.Winapi.Demo
                                 .WithHostSize(1200, 700)
                                 .WithAppArgs(args)
                                 .WithHostSize(1200, 700)
-                                .WithDefaultSubprocess()
+                                .UseDefaultSubprocess()
                                 //  .WithFramelessHost()
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
