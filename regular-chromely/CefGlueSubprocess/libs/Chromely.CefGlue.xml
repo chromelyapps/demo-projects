@@ -87,14 +87,14 @@
             The host base.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.BrowserWindow.HostBase.mMainView">
+        <member name="F:Chromely.CefGlue.BrowserWindow.HostBase._mainView">
             <summary>
-            The m main view.
+            The main view.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.BrowserWindow.HostBase.mWindowCreated">
+        <member name="F:Chromely.CefGlue.BrowserWindow.HostBase._windowCreated">
             <summary>
-            The Wwindow created.
+            The window created.
             </summary>
         </member>
         <member name="M:Chromely.CefGlue.BrowserWindow.HostBase.#ctor(Chromely.Core.ChromelyConfiguration)">
@@ -332,14 +332,14 @@
             The action.
             </param>
         </member>
-        <member name="P:Chromely.CefGlue.BrowserWindow.HostBase.ActionTask.Action">
-            <summary>
-            Gets or sets the action.
-            </summary>
-        </member>
         <member name="M:Chromely.CefGlue.BrowserWindow.HostBase.ActionTask.Execute">
             <summary>
             The execute.
+            </summary>
+        </member>
+        <member name="P:Chromely.CefGlue.BrowserWindow.HostBase.ActionTask.Action">
+            <summary>
+            Gets or sets the action.
             </summary>
         </member>
         <member name="T:Chromely.CefGlue.BrowserWindow.IWindow">
@@ -349,7 +349,7 @@
         </member>
         <member name="P:Chromely.CefGlue.BrowserWindow.IWindow.Browser">
             <summary>
-            Reference to the browser.
+            Gets a reference to the browser.
             </summary>
         </member>
         <member name="M:Chromely.CefGlue.BrowserWindow.IWindow.CenterToScreen">
@@ -407,12 +407,17 @@
             The CefGlue app.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueApp.mRenderProcessHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueApp._renderProcessHandler">
             <summary>
             The render process handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueApp.mHostConfig">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueApp._browserProcessHandler">
+            <summary>
+            The browser process handler.
+            </summary>
+        </member>
+        <member name="F:Chromely.CefGlue.Browser.CefGlueApp._hostConfig">
             <summary>
             The host config.
             </summary>
@@ -452,29 +457,37 @@
             The <see cref="T:Xilium.CefGlue.CefRenderProcessHandler"/>.
             </returns>
         </member>
+        <member name="M:Chromely.CefGlue.Browser.CefGlueApp.GetBrowserProcessHandler">
+            <summary>
+            The get browser process handler.
+            </summary>
+            <returns>
+            The <see cref="T:Xilium.CefGlue.CefBrowserProcessHandler"/>.
+            </returns>
+        </member>
         <member name="T:Chromely.CefGlue.Browser.CefGlueBrowser">
             <summary>
             The CefGlue browser.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser.mHostConfig">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser._hostConfig">
             <summary>
             The host config.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser.mSettings">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser._settings">
             <summary>
             The CefBrowserSettings object.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser.mClient">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser._client">
             <summary>
             The CefGlueClient object.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser.mWebsocketStarted">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueBrowser._websocketStarted">
             <summary>
-            The m websocket started.
+            The websocket started.
             </summary>
         </member>
         <member name="M:Chromely.CefGlue.Browser.CefGlueBrowser.#ctor(System.Object,Chromely.Core.ChromelyConfiguration,Xilium.CefGlue.CefBrowserSettings)">
@@ -747,62 +760,62 @@
             The CefGlue client.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mLifeSpanHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._lifeSpanHandler">
             <summary>
             The life span handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mLoadHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._loadHandler">
             <summary>
             The load handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mRequestHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._requestHandler">
             <summary>
             The request handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mDisplayHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._displayHandler">
             <summary>
             The display handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mContextMenuHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._contextMenuHandler">
             <summary>
             The context menu handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mFocusHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._focusHandler">
             <summary>
             The focus handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mKeyboardHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._keyboardHandler">
             <summary>
             The keyboard handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mJsDialogHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._jsDialogHandler">
             <summary>
             The Javascript dialog handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mDialogHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._dialogHandler">
             <summary>
             The dialog handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mDragHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._dragHandler">
             <summary>
             The drag handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mDownloadHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._downloadHandler">
             <summary>
             The download handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.CefGlueClient.mFindHandler">
+        <member name="F:Chromely.CefGlue.Browser.CefGlueClient._findHandler">
             <summary>
             The find handler.
             </summary>
@@ -1401,7 +1414,7 @@
             The CefGlue frame handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.FrameHandlers.CefGlueFrameHandler.mBrowser">
+        <member name="F:Chromely.CefGlue.Browser.FrameHandlers.CefGlueFrameHandler._browser">
             <summary>
             The browser.
             </summary>
@@ -1453,6 +1466,19 @@
                 </see>
                 .
             </returns>
+        </member>
+        <member name="T:Chromely.CefGlue.Browser.Handlers.CefGlueBrowserProcessHandler">
+            <summary>
+            The cef glue browser process handler.
+            </summary>
+        </member>
+        <member name="M:Chromely.CefGlue.Browser.Handlers.CefGlueBrowserProcessHandler.OnBeforeChildProcessLaunch(Xilium.CefGlue.CefCommandLine)">
+            <summary>
+            The on before child process launch.
+            </summary>
+            <param name="commandLine">
+            The command line.
+            </param>
         </member>
         <member name="T:Chromely.CefGlue.Browser.Handlers.CefGlueContextMenuHandler">
             <summary>
@@ -1563,7 +1589,7 @@
             The CefGlue display handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueDisplayHandler.mBrowser">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueDisplayHandler._browser">
             <summary>
             The m_browser.
             </summary>
@@ -1651,22 +1677,22 @@
             The CefGlue http scheme handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler.mChromelyResponse">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler._chromelyResponse">
             <summary>
             The ChromelyResponse object.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler.mResponseBytes">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler._responseBytes">
             <summary>
             The response in bytes.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler.mCompleted">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler._completed">
             <summary>
             The completed flag.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler.mTotalBytesRead">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueHttpSchemeHandler._totalBytesRead">
             <summary>
             The total bytes read.
             </summary>
@@ -1776,7 +1802,7 @@
             The CefGlue life span handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueLifeSpanHandler.mBrowser">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueLifeSpanHandler._browser">
             <summary>
             The CefGlueBrowser object.
             </summary>
@@ -1859,7 +1885,7 @@
             The CefGlue load handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueLoadHandler.mBrowser">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueLoadHandler._browser">
             <summary>
             The CefGlueBrowser object.
             </summary>
@@ -2104,22 +2130,22 @@
             The CefGlue resource scheme handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler.mFileBytes">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler._fileBytes">
             <summary>
             The file read in bytes.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler.mMime">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler._mime">
             <summary>
             The mime type.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler.mCompleted">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler._completed">
             <summary>
             The completed flag.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler.mTotalBytesRead">
+        <member name="F:Chromely.CefGlue.Browser.Handlers.CefGlueResourceSchemeHandler._totalBytesRead">
             <summary>
             The total bytes read.
             </summary>
@@ -2239,22 +2265,22 @@
             The default server backlog.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.mlockObj">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler._lockObj">
             <summary>
             The lock obj.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.mWebsocketHandler">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler._websocketHandler">
             <summary>
-            The m websocket handler.
+            The websocket handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.mCompleteCallback">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler._completeCallback">
             <summary>
-            The m complete callback.
+            The complete callback.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.mServer">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler._server">
             <summary>
             The m server.
             </summary>
@@ -2501,22 +2527,22 @@
             The action task.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1.mAddress">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1._address">
             <summary>
-            The m address.
+            The address.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1.mPort">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1._port">
             <summary>
-            The m port.
+            The port.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1.mCompletionCallback">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1._completionCallback">
             <summary>
-            The m completion callback.
+            The completion callback.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1.mAction">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask1._action">
             <summary>
             The action.
             </summary>
@@ -2548,17 +2574,17 @@
             The action task.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask2.mPort">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask2._port">
             <summary>
-            The m port.
+            The port.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask2.mCompletionCallback">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask2._completionCallback">
             <summary>
-            The m completion callback.
+            The completion callback.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask2.mAction">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask2._action">
             <summary>
             The action.
             </summary>
@@ -2587,12 +2613,12 @@
             The action task.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask3.mCompletionCallback">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask3._completionCallback">
             <summary>
-            The m completion callback.
+            The completion callback.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask3.mAction">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask3._action">
             <summary>
             The action.
             </summary>
@@ -2618,12 +2644,12 @@
             The action task.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask4.mFlag">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask4._flag">
             <summary>
-            The m flag.
+            The flag.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask4.mAction">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.CefGlueServerHandler.ActionTask4._action">
             <summary>
             The action.
             </summary>
@@ -2833,9 +2859,9 @@
             The request info.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.RequestInfo.mMessageType">
+        <member name="F:Chromely.CefGlue.Browser.ServerHandlers.RequestInfo._messageType">
             <summary>
-            The m message type.
+            The message type.
             </summary>
         </member>
         <member name="M:Chromely.CefGlue.Browser.ServerHandlers.RequestInfo.#ctor(System.String)">
@@ -2915,6 +2941,60 @@
             <summary>
             The use default websocket handler.
             </summary>
+            <param name="configuration">
+            The configuration.
+            </param>
+            <param name="address">
+            The address.
+            </param>
+            <param name="port">
+            The port.
+            </param>
+            <param name="onLoadStartServer">
+            The onLoadStartServer.
+            </param>
+            <returns>
+            The <see cref="T:Chromely.Core.ChromelyConfiguration"/>.
+            </returns>
+        </member>
+        <member name="M:Chromely.CefGlue.ChromelyConfigurationExtension.RegisterMessageRouterHandler(Chromely.Core.ChromelyConfiguration,System.Object)">
+            <summary>
+            Registers message router handler.
+            </summary>
+            <param name="configuration">
+            The configuration.
+            </param>
+            <param name="messageRouterHandler">
+            The chromely message router handler.
+            </param>
+            <returns>
+            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
+            </returns>
+        </member>
+        <member name="M:Chromely.CefGlue.ChromelyConfigurationExtension.RegisterMessageRouterHandler(Chromely.Core.ChromelyConfiguration,Chromely.Core.ChromelyMessageRouter)">
+            <summary>
+            Registers message router handler.
+            </summary>
+            <param name="configuration">
+            The configuration.
+            </param>
+            <param name="messageRouterHandler">
+            The chromely message router.
+            </param>
+            <returns>
+            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
+            </returns>
+        </member>
+        <member name="M:Chromely.CefGlue.ChromelyConfigurationExtension.RegisterWebsocketHandler(Chromely.Core.ChromelyConfiguration,Chromely.Core.IChromelyWebsocketHandler,System.String,System.Int32,System.Boolean)">
+            <summary>
+            The register websocket handler.
+            </summary>
+            <param name="configuration">
+            The configuration.
+            </param>
+            <param name="socketHandler">
+            The socket handler.
+            </param>
             <param name="address">
             The address.
             </param>
@@ -2946,7 +3026,7 @@
             The frame handler extension.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.FrameHandler.mBrowser">
+        <member name="F:Chromely.CefGlue.FrameHandler._browser">
             <summary>
             The browser.
             </summary>
@@ -3155,8 +3235,6 @@
             <returns>
             The <see cref="T:System.String"/>.
             </returns>
-            <exception cref="T:System.NotImplementedException">
-            </exception>
         </member>
         <member name="T:Chromely.CefGlue.Subprocess.Subprocess">
             <summary>
@@ -3173,12 +3251,12 @@
             The Subprocess CefGlue app.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Subprocess.SubprocessCefGlueApp.mRenderProcessHandler">
+        <member name="F:Chromely.CefGlue.Subprocess.SubprocessCefGlueApp._renderProcessHandler">
             <summary>
             The render process handler.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Subprocess.SubprocessCefGlueApp.mSubprocessParams">
+        <member name="F:Chromely.CefGlue.Subprocess.SubprocessCefGlueApp._subprocessParams">
             <summary>
             
             </summary>
@@ -3459,9 +3537,9 @@
             The websocket server runner.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.WebsocketServerRunner.mServerHandler">
+        <member name="F:Chromely.CefGlue.WebsocketServerRunner._serverHandler">
             <summary>
-            The m server handler.
+            The server handler.
             </summary>
         </member>
         <member name="P:Chromely.CefGlue.WebsocketServerRunner.Address">

@@ -197,12 +197,12 @@
             The native window.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.NativeWindow.mHostConfig">
+        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.NativeWindow._hostConfig">
             <summary>
-            The m host config.
+            The host config.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.NativeWindow.mWindowProc">
+        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.NativeWindow._windowProc">
             <summary>
             WindowProc ref : prevent GC Collect
             </summary>
@@ -348,22 +348,17 @@
             The window.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window.mApplication">
+        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window._application">
             <summary>
             The host/app/window application.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window.mHostConfig">
+        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window._hostConfig">
             <summary>
             The host config.
             </summary>
         </member>
-        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window.mBrowser">
-            <summary>
-            The CefGlueBrowser object.
-            </summary>
-        </member>
-        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window.mBrowserWindowHandle">
+        <member name="F:Chromely.CefGlue.Winapi.BrowserWindow.Window._browserWindowHandle">
             <summary>
             The browser window handle.
             </summary>

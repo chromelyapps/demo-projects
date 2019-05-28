@@ -1,20 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DemoController.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
+//   Copyright (c) 2017-2019 Chromely Projects
 // </copyright>
 // <license>
 //      See the LICENSE.md file in the project root for more information.
 // </license>
-// --------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Chromely.Core.RestfulService;
 
 // ReSharper disable once StyleCop.SA1300
 namespace Chromely.Service.Demo
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using Chromely.Core.RestfulService;
-
     /// <summary>
     /// The demo controller.
     /// </summary>
@@ -41,8 +41,8 @@ namespace Chromely.Service.Demo
         /// </returns>
         private ChromelyResponse GetMovies(ChromelyRequest request)
         {
-            List<MovieInfo> movieInfos = new List<MovieInfo>();
-            string assemblyName = typeof(MovieInfo).Assembly.GetName().Name;
+            var movieInfos = new List<MovieInfo>();
+            var assemblyName = typeof(MovieInfo).Assembly.GetName().Name;
 
             movieInfos.Add(new MovieInfo(id: 1, title: "The Shawshank Redemption", year: 1994, votes: 678790, rating: 9.2, assembly: assemblyName));
             movieInfos.Add(new MovieInfo(id: 2, title: "The Godfather", year: 1972, votes: 511495, rating: 9.2, assembly: assemblyName));
@@ -51,8 +51,7 @@ namespace Chromely.Service.Demo
             movieInfos.Add(new MovieInfo(id: 5, title: "My Fair Lady", year: 1964, votes: 533848, rating: 8.9, assembly: assemblyName));
             movieInfos.Add(new MovieInfo(id: 6, title: "12 Angry Men", year: 1957, votes: 164558, rating: 8.9, assembly: assemblyName));
 
-            ChromelyResponse response = new ChromelyResponse(request.Id);
-            response.Data = movieInfos;
+            var response = new ChromelyResponse(request.Id) { Data = movieInfos };
             return response;
         }
 
@@ -83,7 +82,7 @@ namespace Chromely.Service.Demo
                 throw new Exception("Post data is null or invalid.");
             }
 
-            ChromelyResponse response = new ChromelyResponse(request.Id);
+            var response = new ChromelyResponse(request.Id);
             var postDataJson = request.PostData.EnsureJson();
             int rowsReceived = postDataJson.ArrayCount();
 

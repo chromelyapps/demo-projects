@@ -1,23 +1,21 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Program.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
+//   Copyright (c) 2017-2019 Chromely Projects
 // </copyright>
 // <license>
 //      See the LICENSE.md file in the project root for more information.
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using Chromely.Core;
+using Chromely.Core.Host;
+using Chromely.Core.Infrastructure;
+
 namespace Chromely.CefGlue.Winapi.Demo
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
-
-    using Chromely.CefGlue.Winapi.BrowserWindow;
-    using Chromely.Core;
-    using Chromely.Core.Host;
-    using Chromely.Core.Infrastructure;
-
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1400:AccessModifierMustBeDeclared", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     class Program
@@ -39,14 +37,14 @@ namespace Chromely.CefGlue.Winapi.Demo
                 // Options 2 - using local resource file handling with default/custom local scheme handler 
                 // Requires - (sample) UseDefaultResourceSchemeHandler("local", string.Empty)
                 //            or register new resource scheme handler - RegisterSchemeHandler("local", string.Empty,  new CustomResourceHandler())
-                // var startUrl = "local://app/chromely.html";
+                var startUrl = "local://app/chromely.html";
 
                 // Options 3 - using file protocol - using default/custom scheme handler for Ajax/Http requests
                 // Requires - (sample) UseDefaultResourceSchemeHandler("local", string.Empty)
                 //            or register new resource handler - RegisterSchemeHandler("local", string.Empty,  new CustomResourceHandler())
                 // Requires - (sample) UseDefaultHttpSchemeHandler("http", "chromely.com")
                 //            or register new http scheme handler - RegisterSchemeHandler("http", "test.com",  new CustomHttpHandler())
-                var startUrl = $"file:///{appDirectory}app/chromely.html";
+                // var startUrl = $"file:///{appDirectory}app/chromely.html";
                 var config = ChromelyConfiguration
                                 .Create()
                                 .WithHostMode(WindowState.Normal)
@@ -56,14 +54,13 @@ namespace Chromely.CefGlue.Winapi.Demo
                                 .WithHostSize(1200, 700)
                                 .WithAppArgs(args)
                                 .WithHostSize(1200, 700)
-                                .UseDefaultSubprocess()
                                 //  .WithFramelessHost()
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
-                                //  .UseDefaultLogger("logs\\chromely_new.log")
+                                .UseDefaultSubprocess()
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com");
-                // .UseDefaultWebsocketHandler(string.Empty, 8181, true);
+                                //.UseDefaultWebsocketHandler(string.Empty, 8181, true);
 
                 using (var window = CefGlue.ChromelyWindow.Create(config))
                 {

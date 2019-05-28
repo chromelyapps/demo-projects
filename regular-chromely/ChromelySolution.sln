@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Gtk.Linux.Demo", "Chromely.CefGlue.Gtk.Linux.Demo\Chromely.CefGlue.Gtk.Linux.Demo.csproj", "{C60F3486-8846-4690-87C0-0CB16136EBB3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.netCore.Subprocess", "Chromely.CefGlue.netCore.Subprocess\Chromely.CefGlue.netCore.Subprocess.csproj", "{4267A9BF-92C8-4516-8761-B9F6CA497077}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CefGlueSubprocess", "CefGlueSubprocess", "{EBEF1D40-CF86-43B6-A7D9-0F835783FAED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.Demo", "CefGlueSubprocess\Chromely.CefGlue.Winapi.Demo\Chromely.CefGlue.Winapi.Demo.csproj", "{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}"
@@ -82,16 +80,6 @@ Global
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x64.ActiveCfg = Release|x64
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x64.Build.0 = Release|x64
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x86.ActiveCfg = Release|x64
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Debug|x64.ActiveCfg = Debug|x64
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Debug|x64.Build.0 = Debug|x64
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Debug|x86.ActiveCfg = Debug|x86
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Debug|x86.Build.0 = Debug|x86
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Release|Any CPU.ActiveCfg = Release|x86
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Release|x64.ActiveCfg = Release|x64
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Release|x64.Build.0 = Release|x64
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Release|x86.ActiveCfg = Release|x86
-		{4267A9BF-92C8-4516-8761-B9F6CA497077}.Release|x86.Build.0 = Release|x86
 		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|x64.ActiveCfg = Debug|x64
 		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|x64.Build.0 = Debug|x64

@@ -413,20 +413,6 @@
             The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
             </returns>
         </member>
-        <member name="M:Chromely.Core.ChromelyConfiguration.UseDefaultJsHandler(System.String,System.Boolean)">
-            <summary>
-            Sets use default Javascript object handler flag.
-            </summary>
-            <param name="objectNameToBind">
-            The object name to bind.
-            </param>
-            <param name="registerAsync">
-            The register async.
-            </param>
-            <returns>
-            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
-            </returns>
-        </member>
         <member name="M:Chromely.Core.ChromelyConfiguration.UseDefaultWebsocketHandler(System.String,System.Int32,System.Boolean)">
             <summary>
             The use default websocket handler.
@@ -658,79 +644,6 @@
             The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
             </returns>
         </member>
-        <member name="M:Chromely.Core.ChromelyConfiguration.RegisterJsHandler(System.String,System.Object,System.Object,System.Boolean)">
-            <summary>
-            Registers Javascript object handler.
-            </summary>
-            <param name="javascriptMethod">
-            The javascript method.
-            </param>
-            <param name="boundObject">
-            The bound object.
-            </param>
-            <param name="boundingOptions">
-            The bounding options.
-            </param>
-            <param name="registerAsync">
-            The register async.
-            </param>
-            <returns>
-            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
-            </returns>
-        </member>
-        <member name="M:Chromely.Core.ChromelyConfiguration.RegisterJsHandler(Chromely.Core.ChromelyJsHandler)">
-            <summary>
-            Registers Javascript object handler.
-            </summary>
-            <param name="chromelyJsHandler">
-            The chromely js handler.
-            </param>
-            <returns>
-            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
-            </returns>
-        </member>
-        <member name="M:Chromely.Core.ChromelyConfiguration.RegisterMessageRouterHandler(System.Object)">
-            <summary>
-            Registers message router handler.
-            </summary>
-            <param name="messageRouterHandler">
-            The chromely message router handler.
-            </param>
-            <returns>
-            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
-            </returns>
-        </member>
-        <member name="M:Chromely.Core.ChromelyConfiguration.RegisterMessageRouterHandler(Chromely.Core.ChromelyMessageRouter)">
-            <summary>
-            Registers message router handler.
-            </summary>
-            <param name="messageRouterHandler">
-            The chromely message router.
-            </param>
-            <returns>
-            The <see cref="T:Chromely.Core.ChromelyConfiguration"/> object.
-            </returns>
-        </member>
-        <member name="M:Chromely.Core.ChromelyConfiguration.RegisterWebsocketHandler(Chromely.Core.IChromelyWebsocketHandler,System.String,System.Int32,System.Boolean)">
-            <summary>
-            The register websocket handler.
-            </summary>
-            <param name="socketHandler">
-            The socket handler.
-            </param>
-            <param name="address">
-            The address.
-            </param>
-            <param name="port">
-            The port.
-            </param>
-            <param name="onLoadStartServer">
-            The onLoadStartServer.
-            </param>
-            <returns>
-            The <see cref="T:Chromely.Core.ChromelyConfiguration"/>.
-            </returns>
-        </member>
         <member name="T:Chromely.Core.ChromelyConfigurationExtension">
             <summary>
             The chromely configuration extension.
@@ -792,6 +705,7 @@
             The chromely event handler.
             </summary>
             <typeparam name="T">
+            Handler type. 
             </typeparam>
         </member>
         <member name="M:Chromely.Core.ChromelyEventHandler`1.#ctor">
@@ -950,10 +864,14 @@
         </member>
         <member name="M:Chromely.Core.ChromelyRuntime.GetExpectedChromiumBuildNumber(Chromely.Core.ChromelyCefWrapper)">
             <summary>
-            
+            The get expected chromium build number.
             </summary>
-            <param name="wrapper"></param>
-            <returns></returns>
+            <param name="wrapper">
+            The wrapper.
+            </param>
+            <returns>
+            The <see cref="T:System.Int32"/>.
+            </returns>
         </member>
         <member name="P:Chromely.Core.ChromelyRuntime.Platform">
             <summary>
@@ -2266,7 +2184,7 @@
             Global logger implementation.
             </summary>
         </member>
-        <member name="F:Chromely.Core.Infrastructure.Log.mLogger">
+        <member name="F:Chromely.Core.Infrastructure.Log._logger">
             <summary>
             The logger object.
             </summary>
@@ -2431,22 +2349,22 @@
             The simple logger.
             </summary>
         </member>
-        <member name="F:Chromely.Core.Infrastructure.SimpleLogger.mFilename">
+        <member name="F:Chromely.Core.Infrastructure.SimpleLogger._filename">
             <summary>
             The filename.
             </summary>
         </member>
-        <member name="F:Chromely.Core.Infrastructure.SimpleLogger.mMaxSizeInKiloBytes">
+        <member name="F:Chromely.Core.Infrastructure.SimpleLogger._maxSizeInKiloBytes">
             <summary>
             The max size in kilo bytes.
             </summary>
         </member>
-        <member name="F:Chromely.Core.Infrastructure.SimpleLogger.mLogToConsole">
+        <member name="F:Chromely.Core.Infrastructure.SimpleLogger._logToConsole">
             <summary>
             The log to console flag.
             </summary>
         </member>
-        <member name="F:Chromely.Core.Infrastructure.SimpleLogger.mlockObj">
+        <member name="F:Chromely.Core.Infrastructure.SimpleLogger._lockObj">
             <summary>
             The lock obj.
             </summary>
@@ -3660,9 +3578,9 @@
             The route scanner.
             </summary>
         </member>
-        <member name="F:Chromely.Core.RestfulService.RouteScanner.mAssembly">
+        <member name="F:Chromely.Core.RestfulService.RouteScanner._assembly">
             <summary>
-            Gets or sets the mAssembly.
+            Gets or sets the _assembly.
             </summary>
         </member>
         <member name="M:Chromely.Core.RestfulService.RouteScanner.#ctor(System.Reflection.Assembly)">

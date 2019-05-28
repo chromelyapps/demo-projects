@@ -1,21 +1,20 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DemoController.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
+//   Copyright (c) 2017-2019 Chromely Projects
 // </copyright>
 // <license>
 //      See the LICENSE.md file in the project root for more information.
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Chromely.Core.RestfulService;
+
 // ReSharper disable once StyleCop.SA1300
 namespace Chromely.CefGlue.Winapi.netCoreDemo.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-
-    using Chromely.Core.RestfulService;
-
     /// <summary>
     /// The demo controller.
     /// </summary>

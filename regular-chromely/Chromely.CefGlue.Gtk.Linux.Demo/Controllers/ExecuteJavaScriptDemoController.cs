@@ -7,13 +7,13 @@
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using Chromely.Core.RestfulService;
+using LitJson;
+
 // ReSharper disable once StyleCop.SA1300
 namespace Chromely.CefGlue.Gtk.Linux.Demo.Controllers
 {
-    using System;
-    using Chromely.Core.RestfulService;
-    using LitJson;
-
     /// <summary>
     /// The demo controller.
     /// </summary>

@@ -1,23 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="WebsocketDemoController.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
+//   Copyright (c) 2017-2019 Chromely Projects
 // </copyright>
 // <license>
 //      See the LICENSE.md file in the project root for more information.
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Chromely.CefGlue.Browser.ServerHandlers;
+using Chromely.Core.Infrastructure;
+using Chromely.Core.RestfulService;
+
 // ReSharper disable once StyleCop.SA1300
 namespace Chromely.CefGlue.Gtk.Win.Demo.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
-    using Chromely.CefGlue.Browser.ServerHandlers;
-    using Chromely.Core.Infrastructure;
-    using Chromely.Core.RestfulService;
-
     /// <summary>
     /// The demo controller.
     /// </summary>
@@ -25,24 +24,24 @@ namespace Chromely.CefGlue.Gtk.Win.Demo.Controllers
     public class WebsocketDemoController : ChromelyController
     {
         /// <summary>
-        /// The m server sent messages.
+        /// The server sent messages.
         /// </summary>
-        private readonly List<string> mServerSentMessages;
+        private readonly List<string> _serverSentMessages;
 
         /// <summary>
-        /// The m seconds delay.
+        /// The seconds delay.
         /// </summary>
-        private readonly int mSecondsDelay;
+        private readonly int _secondsDelay;
 
         /// <summary>
-        /// The m receive from server.
+        /// The receive from server.
         /// </summary>
-        private bool mReceiveFromServer;
+        private bool _receiveFromServer;
 
         /// <summary>
-        /// The m receiver connection id.
+        /// The receiver connection id.
         /// </summary>
-        private int mReceiverConnectionId;
+        private int _receiverConnectionId;
 
 
         /// <summary>
@@ -50,11 +49,11 @@ namespace Chromely.CefGlue.Gtk.Win.Demo.Controllers
         /// </summary>
         public WebsocketDemoController()
         {
-            mReceiveFromServer = false;
-            mSecondsDelay = 5;
-            mReceiverConnectionId = 0;
+            _receiveFromServer = false;
+            _secondsDelay = 5;
+            _receiverConnectionId = 0;
 
-            mServerSentMessages = new List<string>
+            _serverSentMessages = new List<string>
             {
                 "https://github.com/chromelyapps/Chromely",
                 "Chromely Webscocket demo",
@@ -144,10 +143,10 @@ namespace Chromely.CefGlue.Gtk.Win.Demo.Controllers
         private ChromelyResponse StartReceivingFromServer(ChromelyRequest request)
         {
             var clientname = request.PostData?.ToString() ?? string.Empty;
-            mReceiverConnectionId = ConnectionNameMapper.GetConnectionId(clientname);
-            if (!mReceiveFromServer)
+            _receiverConnectionId = ConnectionNameMapper.GetConnectionId(clientname);
+            if (!_receiveFromServer)
             {
-                mReceiveFromServer = true;
+                _receiveFromServer = true;
                 SendMessagesToClient();
             }
 
@@ -171,7 +170,7 @@ namespace Chromely.CefGlue.Gtk.Win.Demo.Controllers
         /// </returns>
         private ChromelyResponse StopReceivingFromServer(ChromelyRequest request)
         {
-            mReceiveFromServer = false;
+            _receiveFromServer = false;
 
             return new ChromelyResponse(request.Id)
             {
@@ -192,14 +191,14 @@ namespace Chromely.CefGlue.Gtk.Win.Demo.Controllers
                 try
                 {
                     var index = 0;
-                    while (mReceiveFromServer)
+                    while (_receiveFromServer)
                     {
-                        var info = mServerSentMessages[index];
+                        var info = _serverSentMessages[index];
                         var data = $"{DateTime.Now}: {info}.";
-                        WebsocketMessageSender.Send(mReceiverConnectionId, data);
-                        System.Threading.Thread.Sleep(mSecondsDelay * 1000);
+                        WebsocketMessageSender.Send(_receiverConnectionId, data);
+                        System.Threading.Thread.Sleep(_secondsDelay * 1000);
                         index++;
-                        index = (index >= mServerSentMessages.Count) ? 0 : index;
+                        index = (index >= _serverSentMessages.Count) ? 0 : index;
                     }
                 }
                 catch (Exception exception)

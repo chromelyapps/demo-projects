@@ -1,25 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Program.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
+//   Copyright (c) 2017-2019 Chromely Projects
 // </copyright>
 // <license>
 //      See the LICENSE.md file in the project root for more information.
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using Chromely.CefSharp.Winapi.BrowserWindow;
+using Chromely.Core;
+using Chromely.Core.Host;
+using Chromely.Core.Infrastructure;
+
 namespace Chromely.CefSharp.Winapi.Demo
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
-
-    using Chromely.CefSharp.Winapi.BrowserWindow;
-    using Chromely.Core;
-    using Chromely.Core.Host;
-    using Chromely.Core.Infrastructure;
-
-    using global::CefSharp;
-
     /// <summary>
     /// The program.
     /// </summary>
@@ -67,9 +64,9 @@ namespace Chromely.CefSharp.Winapi.Demo
                                 .WithHostIconFile("chromely.ico")
                                 .WithAppArgs(args)
                                 .WithHostSize(1200, 700)
-                                //  .WithLogFile("logs\\chromely.cef_new.log")
+                              //  .WithFramelessHost()
                                 .WithStartUrl(startUrl)
-                                .WithLogSeverity(Core.Infrastructure.LogSeverity.Info)
+                                .WithLogSeverity(LogSeverity.Info)
                                 .UseDefaultLogger()
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")

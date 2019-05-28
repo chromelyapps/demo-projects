@@ -1,23 +1,21 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Program.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
+//   Copyright (c) 2017-2019 Chromely Projects
 // </copyright>
 // <license>
 //      See the LICENSE.md file in the project root for more information.
 // </license>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using Chromely.Core;
+using Chromely.Core.Host;
+using Chromely.Core.Infrastructure;
+
 namespace Chromely.CefGlue.Gtk.Win.Demo
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
-
-    using Chromely.CefGlue.Gtk.BrowserWindow;
-    using Chromely.Core;
-    using Chromely.Core.Host;
-    using Chromely.Core.Infrastructure;
-
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1400:AccessModifierMustBeDeclared", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     class Program
@@ -56,7 +54,6 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
                                 .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
-                                .WithGtkHostApi()
                                 .UseDefaultLogger("logs\\chromely_new.log")
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
