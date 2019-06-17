@@ -9,20 +9,20 @@
 
 namespace ChromelyAngularCefGlue
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
+    using Chromely.CefGlue;
     using Chromely.CefGlue.Winapi;
-    using Chromely.CefGlue.Winapi.BrowserWindow;
     using Chromely.Core;
     using Chromely.Core.Host;
     using Chromely.Core.Infrastructure;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
 
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1400:AccessModifierMustBeDeclared", Justification = "Reviewed. Suppression is OK here.")]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
-    class Program
+    public class Program
     {
-        static int Main(string[] args)
+        public static int Main(string[] args)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace ChromelyAngularCefGlue
                                               .UseDefaultResourceSchemeHandler("local", string.Empty)
                                               .UseDefaultHttpSchemeHandler("http", "chromely.com");
 
-                using (var window = new CefGlueBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schems
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/mattkol/Chromely", true));
@@ -73,7 +73,7 @@ namespace ChromelyAngularCefGlue
                     // string serviceAssembliesFolder = @"C:\ChromelyDlls";
                     // window.RegisterServiceAssemblies(serviceAssembliesFolder);
 
-                    // Scan assemblies for Controller routes 
+                    // Scan assemblies for Controller routes
                     window.ScanAssemblies();
 
                     return window.Run(args);
@@ -88,4 +88,3 @@ namespace ChromelyAngularCefGlue
         }
     }
 }
-

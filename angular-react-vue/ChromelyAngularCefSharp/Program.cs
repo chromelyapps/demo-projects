@@ -9,20 +9,20 @@
 
 namespace ChromelyAngularCefSharp
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
     using Chromely.CefSharp.Winapi;
     using Chromely.CefSharp.Winapi.BrowserWindow;
     using Chromely.Core;
     using Chromely.Core.Host;
     using Chromely.Core.Infrastructure;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Reflection;
 
     /// <summary>
     /// The program.
     /// </summary>
     [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1400:AccessModifierMustBeDeclared", Justification = "Reviewed. Suppression is OK here.")]
-    class Program
+    public class Program
     {
         /// <summary>
         /// The main.
@@ -33,7 +33,7 @@ namespace ChromelyAngularCefSharp
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        static int Main(string[] args)
+        public static int Main(string[] args)
         {
             try
             {
@@ -54,9 +54,9 @@ namespace ChromelyAngularCefSharp
                                               .UseDefaultLogger()
                                               .UseDefaultResourceSchemeHandler("local", string.Empty)
                                               .UseDefaultHttpSchemeHandler("http", "chromely.com")
-                                              .UseDefautJsHandler("boundControllerAsync", true);
+                                              .UseDefaultJsHandler("boundControllerAsync", true);
 
-                using (var window = new CefSharpBrowserWindow(config))
+                using (var window = ChromelyWindow.Create(config))
                 {
                     // Register external url schems
                     window.RegisterUrlScheme(new UrlScheme("https://github.com/mattkol/Chromely", true));
@@ -83,7 +83,7 @@ namespace ChromelyAngularCefSharp
                     // string serviceAssembliesFolder = @"C:\ChromelyDlls";
                     // window.RegisterServiceAssemblies(serviceAssembliesFolder);
 
-                    // Scan assemblies for Controller routes 
+                    // Scan assemblies for Controller routes
                     window.ScanAssemblies();
 
                     return window.Run(args);

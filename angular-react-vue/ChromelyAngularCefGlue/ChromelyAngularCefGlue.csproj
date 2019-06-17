@@ -26,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely.CefGlue.Winapi" Version="68.0.0.1" />
+    <PackageReference Include="Chromely.CefGlue" Version="4.0.70" />
+    <PackageReference Include="Chromely.CefGlue.Winapi" Version="4.0.70" />
+    <PackageReference Include="Chromely.Core" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

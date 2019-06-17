@@ -89,7 +89,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body, html {\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n}\r\n\r\n.centerBlock {\r\n    display: table;\r\n    margin: auto;\r\n}\r\n\r\n.show {\r\n    display: block !important;\r\n}\r\n\r\n.hidden {\r\n    display: none !important;\r\n    visibility: hidden !important;\r\n}\r\n\r\n.invisible {\r\n    visibility: hidden;\r\n}\r\n\r\n.modal-dialog {\r\n    width: 80%;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, "body, html {\n    height: 100%;\n    display: -ms-grid;\n    display: grid;\n}\n\n.centerBlock {\n    display: table;\n    margin: auto;\n}\n\n.show {\n    display: block !important;\n}\n\n.hidden {\n    display: none !important;\n    visibility: hidden !important;\n}\n\n.invisible {\n    visibility: hidden;\n}\n\n.modal-dialog {\n    width: 80%;\n}\n\n", ""]);
 
 // exports
 
@@ -104,7 +104,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\n", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", ""]);
 
 // exports
 
