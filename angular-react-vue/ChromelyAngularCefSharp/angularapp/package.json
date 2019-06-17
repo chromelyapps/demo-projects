@@ -5,16 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "devbuild": "ng build --base-href ./",
-    "prodbuild": "ng build --prod --base-href ./",
+    "build": "ng build --base-href ./",
+    "prod": "ng build --prod --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dist": "npm run build",
-    "deldist": "if exist ..\\dist (rmdir /S /Q ..\\dist)",
-    "copy": "xcopy dist ..\\dist  /i /s /r /y /c",
-    "debugbuild": "npm run devbuild && npm run deldist && npm run copy",
-    "releasebuild": "npm run prodbuild && npm run deldist && npm run copy"
+    "dist": "npm run build"
   },
   "private": true,
   "dependencies": {
