@@ -13,6 +13,7 @@ using System.Reflection;
 using Chromely.Core;
 using Chromely.Core.Host;
 using Chromely.Core.Infrastructure;
+using WinApi.User32;
 
 namespace Chromely.CefGlue.Winapi.Demo
 {
@@ -45,16 +46,25 @@ namespace Chromely.CefGlue.Winapi.Demo
                 // Requires - (sample) UseDefaultHttpSchemeHandler("http", "chromely.com")
                 //            or register new http scheme handler - RegisterSchemeHandler("http", "test.com",  new CustomHttpHandler())
                 // var startUrl = $"file:///{appDirectory}app/chromely.html";
+
+                // var windowStyle = new WindowCreationStyle();
+                // windowStyle.WindowStyles = WindowStyles.WS_OVERLAPPEDWINDOW | WindowStyles.WS_CLIPCHILDREN | WindowStyles.WS_CLIPSIBLINGS;
+                // windowStyle.WindowExStyles = WindowExStyles.WS_EX_APPWINDOW | WindowExStyles.WS_EX_WINDOWEDGE;
+
                 var config = ChromelyConfiguration
                                 .Create()
                                 .WithHostMode(WindowState.Normal)
                                 .WithHostTitle("chromely")
                                 .WithHostIconFile("chromely.ico")
                                 .WithAppArgs(args)
-                                .WithHostSize(1200, 700)
+                                .WithHostBounds(1200, 700)
+                                //.WithHostCustomStyle(windowStyle)
+                                //.WithHostFlag(HostFlagKey.CenterScreen, true | false - default true)
+                                //.WithHostFlag(HostFlagKey.Frameless, true | false -  default false)
+                                //.WithHostFlag(HostFlagKey.KioskMode, true | false - default false)
+                                //.WithHostFlag(HostFlagKey.NoResize, true | false - default false)
+                                //.WithHostFlag(HostFlagKey.NoMinMaxBoxes, true | false - default false)
                                 .WithAppArgs(args)
-                                .WithHostSize(1200, 700)
-                                //  .WithFramelessHost()
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)

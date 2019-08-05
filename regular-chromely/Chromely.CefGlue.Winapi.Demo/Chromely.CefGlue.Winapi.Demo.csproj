@@ -25,7 +25,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Chromely.CefGlue.Winapi" Version="4.0.70" />
+    <PackageReference Include="Chromely.CefGlue.Winapi" Version="4.0.70.1" />
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
     <PackageReference Include="WinApi" Version="4.0.0" />
   </ItemGroup>

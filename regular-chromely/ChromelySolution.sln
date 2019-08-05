@@ -13,12 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Gtk.Linux.Demo", "Chromely.CefGlue.Gtk.Linux.Demo\Chromely.CefGlue.Gtk.Linux.Demo.csproj", "{C60F3486-8846-4690-87C0-0CB16136EBB3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CefGlueSubprocess", "CefGlueSubprocess", "{EBEF1D40-CF86-43B6-A7D9-0F835783FAED}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.Demo", "CefGlueSubprocess\Chromely.CefGlue.Winapi.Demo\Chromely.CefGlue.Winapi.Demo.csproj", "{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.netCoreDemo", "CefGlueSubprocess\Chromely.CefGlue.Winapi.netCoreDemo\Chromely.CefGlue.Winapi.netCoreDemo.csproj", "{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,29 +74,9 @@ Global
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x64.ActiveCfg = Release|x64
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x64.Build.0 = Release|x64
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x86.ActiveCfg = Release|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|x64.ActiveCfg = Debug|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|x64.Build.0 = Debug|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Debug|x86.ActiveCfg = Debug|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Release|Any CPU.ActiveCfg = Release|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Release|x64.ActiveCfg = Release|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Release|x64.Build.0 = Release|x64
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2}.Release|x86.ActiveCfg = Release|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Debug|x64.ActiveCfg = Debug|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Debug|x64.Build.0 = Debug|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Debug|x86.ActiveCfg = Debug|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Release|Any CPU.ActiveCfg = Release|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Release|x64.ActiveCfg = Release|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Release|x64.Build.0 = Release|x64
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{DA1D4EEB-2709-4295-A45E-60CA6F0900D2} = {EBEF1D40-CF86-43B6-A7D9-0F835783FAED}
-		{B55B890E-87B0-4D49-8B56-52BC39EF2AC7} = {EBEF1D40-CF86-43B6-A7D9-0F835783FAED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {970C1133-7B56-4953-B1D8-AEA029C44561}

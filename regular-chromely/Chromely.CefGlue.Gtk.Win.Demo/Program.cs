@@ -44,13 +44,14 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
                 // Requires - (sample) UseDefaultHttpSchemeHandler("http", "chromely.com")
                 //            or register new http scheme handler - RegisterSchemeHandler("http", "test.com",  new CustomHttpHandler())
                 // var startUrl = $"file:///{appDirectory}app/chromely.html";
+
                 var config = ChromelyConfiguration
                                 .Create()
                                 .WithHostMode(WindowState.Normal)
                                 .WithHostTitle("chromely")
                                 .WithHostIconFile("chromely.ico")
                                 .WithAppArgs(args)
-                                .WithHostSize(1200, 700)
+                                .WithHostBounds(1200, 700)
                                 .WithLogFile("logs\\chromely.cef_new.log")
                                 .WithStartUrl(startUrl)
                                 .WithLogSeverity(LogSeverity.Info)
