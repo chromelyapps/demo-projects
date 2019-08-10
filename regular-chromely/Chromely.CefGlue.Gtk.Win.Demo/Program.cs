@@ -59,6 +59,8 @@ namespace Chromely.CefGlue.Gtk.Win.Demo
                                 .UseDefaultResourceSchemeHandler("local", string.Empty)
                                 .UseDefaultHttpSchemeHandler("http", "chromely.com")
                                 .UseDefaultWebsocketHandler(string.Empty, 8181, true);
+                // Temporary
+                config.HostApi = ChromelyHostApi.Gtk;
 
                 using (var window = ChromelyWindow.Create(config)) 
                 {
