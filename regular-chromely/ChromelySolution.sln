@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Gtk.Linux.Demo", "Chromely.CefGlue.Gtk.Linux.Demo\Chromely.CefGlue.Gtk.Linux.Demo.csproj", "{C60F3486-8846-4690-87C0-0CB16136EBB3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frameless_draggable_command", "frameless_draggable_command", "{9DCBC407-5A54-40D6-BB31-79E8FEA467A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefGlue.Winapi.Demo", "frameless_draggable_command\Chromely.CefGlue.Winapi.Demo\Chromely.CefGlue.Winapi.Demo.csproj", "{65D5ADBA-894F-45C7-9922-B632A5754810}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.CefSharp.Winapi.Demo", "frameless_draggable_command\Chromely.CefSharp.Winapi.Demo\Chromely.CefSharp.Winapi.Demo.csproj", "{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,9 +80,31 @@ Global
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x64.ActiveCfg = Release|x64
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x64.Build.0 = Release|x64
 		{C60F3486-8846-4690-87C0-0CB16136EBB3}.Release|x86.ActiveCfg = Release|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Debug|Any CPU.Build.0 = Debug|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Debug|x64.ActiveCfg = Debug|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Debug|x64.Build.0 = Debug|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Debug|x86.ActiveCfg = Debug|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Release|Any CPU.ActiveCfg = Release|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Release|x64.ActiveCfg = Release|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Release|x64.Build.0 = Release|x64
+		{65D5ADBA-894F-45C7-9922-B632A5754810}.Release|x86.ActiveCfg = Release|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Debug|Any CPU.Build.0 = Debug|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Debug|x64.ActiveCfg = Debug|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Debug|x64.Build.0 = Debug|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Debug|x86.ActiveCfg = Debug|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Release|Any CPU.ActiveCfg = Release|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Release|x64.ActiveCfg = Release|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Release|x64.Build.0 = Release|x64
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65D5ADBA-894F-45C7-9922-B632A5754810} = {9DCBC407-5A54-40D6-BB31-79E8FEA467A1}
+		{18F04079-55C1-4D17-8E3C-A3C91B5FA3BC} = {9DCBC407-5A54-40D6-BB31-79E8FEA467A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {970C1133-7B56-4953-B1D8-AEA029C44561}

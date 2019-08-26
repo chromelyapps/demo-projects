@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chromely</title>
+    <link rel="stylesheet" href="../Content/css/bootstrap.min.css">
+    <script src="../Content/js/jquery.min.js"></script>
+    <script src="../Content/js/tether.min.js"></script>
+    <script src="../Content/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="col-9 centerBlock">
+        <div class="row">
+            <h5>Command Demo</h5>
+        </div>
+        <div class="row">
+            <div class="row col-12">
+                <a href="http://command.com/democontroller/demo1" class="btn btn-primary btn-sm btn-block" role="button" style='margin: 5px;'>Demo 1 - click me!</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-12">
+                <a href="http://command.com/democontroller/demo2?item1=apple&item2=banana&item3=potato&item4=onion" class="btn btn-secondary btn-sm btn-block" role="button" style='margin: 5px;'>Demo 2 - click me!</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-12">
+                <a href="http://command.com/democontroller/demo3?fruits=apple&fruits=banana&vegetables=potato&vegetables=onion" class="btn btn-success btn-sm btn-block" role="button" style='margin: 5px;'>Demo 3 - click me!</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-12">
+                <a href="http://command.com/democontroller/demo4?name=Branch&products=[Journeys,Email,Universal%20Ads]" class="btn btn-info btn-sm btn-block" role="button" style='margin: 5px;'>Demo 4 - click me!</a>
+            </div>
+        </div>
+        <div class="row col-12" style="overflow-y: scroll; height:400px; width: auto;">
+            <table id="resulttable" class="table table-striped" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 100px;">Time</th>
+                        <th scope="col" style="width: 100px;">Path</th>
+                        <th scope="col">Query Parameters</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+<script>
+    function commandResult(res) {
+        var jsonData = JSON.parse(res);
+        var row = '<tr>';
+        row += '<td>' + currentDayTime() + '</td>';
+        row += '<td>' + jsonData.Path + '</td>';
+        row += '<td>' + jsonData.QueryParams + '</td>';
+        row += '</tr>';
+        $('#resulttable tr:last').after(row);
+    }
+
+    function currentDayTime() {
+        var currentdate = new Date();
+        return currentdate.getHours() + ":"
+            + currentdate.getMinutes() + ":"
+            + currentdate.getSeconds();
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
