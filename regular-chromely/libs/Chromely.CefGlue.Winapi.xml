@@ -645,6 +645,9 @@
             <summary>
             The get window styles.
             </summary>
+            <param name="customCreationStyle">
+            The custom style.
+            </param>
             <param name="state">
             The state.
             </param>

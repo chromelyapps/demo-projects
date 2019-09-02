@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chromely</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Content/css/nav_style.css">
+    <script src="Content/js/jquery.min.js"></script>
+    <script src="Content/js/tether.min.js"></script>
+    <script src="Content/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        html {
+            overflow-y: hidden;
+        }
+
+        body, html {
+            height: 100%;
+            display: grid;
+        }
+
+        .navbar {
+            height: 38px;
+            background-color: transparent;
+            background: transparent;
+            border-color: transparent;
+        }
+
+            .navbar li {
+                color: #000
+            }
+
+        .centerBlock {
+            display: table;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div>
+            <div id="window-title">
+                <img src="./Content/img/chromely_gray.png" width="22" height="22">
+                <span><h6>chromely</h6></span>
+            </div>
+
+            <div id="window-controls">
+                <div class="button" id="min-button">
+                    <a href="http://command.com/framelesscontroller/min"><span>&#xE921;</span></a>
+                </div>
+                <div class="button" id="max-button">
+                    <a href="http://command.com/framelesscontroller/max"><span>&#xE922;</span></a>
+                </div>
+                <div class="button" id="restore-button">
+                    <a href="http://command.com/framelesscontroller/restore"><span>&#xE923;</span></a>
+                </div>
+                <div class="button" id="close-button">
+                    <a href="http://command.com/framelesscontroller/close"><span>&#xE8BB;</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container centerBlock" style="margin-top: 60px;">
+
+        <!-- Home Page -->
+        <div id="homePage" class="col-12 centerBlock">
+            <div class="col-12">
+                <div class="centerBlock">
+                    <div class="row centerBlock">
+                        <img src="./Content/img/chromely_gray.png" class="img-rounded" alt="Cinque Terre" width="240" height="240">
+                    </div>
+                    <div class="row centerBlock">
+                        <span class="text-primary text-center"><h2>chromely</h2></span>
+                    </div>
+                    <div class="row centerBlock">
+                        <p class="text-muted text-center">Build .NET/.NET CORE HTML5 Desktop Apps</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12" style='padding:20px;'>
+                <div id="runButton" class="centerBlock">
+                    <div class="row centerBlock">
+                        <a href="https://github.com/chromelyapps/Chromely" class="btn btn-default" role="button" style='margin: 5px;'>more info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleRestoreMaxButton(max) {
+            var maxButton = document.getElementById('max-button');
+            var restoreButton = document.getElementById('restore-button');
+            if (max === 1) {
+                maxButton.style.display = "none";
+                restoreButton.style.display = "flex";
+            } else {
+                restoreButton.style.display = "none";
+                maxButton.style.display = "flex";
+            }
+        }
+    </script>
+</body>
+</html>

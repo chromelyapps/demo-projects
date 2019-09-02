@@ -2671,16 +2671,24 @@
             The is external.
             </param>
         </member>
-        <member name="M:Chromely.Core.Infrastructure.UrlScheme.#ctor(System.String,Chromely.Core.Infrastructure.UrlSchemeType)">
+        <member name="M:Chromely.Core.Infrastructure.UrlScheme.#ctor(System.String,Chromely.Core.Infrastructure.UrlSchemeType,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Chromely.Core.Infrastructure.UrlScheme"/> class.
             </summary>
-            <param name="url">
-            The url.
+            <param name="baseUrl">
+            The base url.
             </param>
             <param name="type">
             The is url scheme type.
             </param>
+            <param name="baseUrlStrict">
+            Sets true or false, if base url must be relative to the base url.
+            </param>
+        </member>
+        <member name="P:Chromely.Core.Infrastructure.UrlScheme.BaseUrl">
+            <summary>
+            Gets or sets the base url.
+            </summary>
         </member>
         <member name="P:Chromely.Core.Infrastructure.UrlScheme.Scheme">
             <summary>
@@ -2695,6 +2703,15 @@
         <member name="P:Chromely.Core.Infrastructure.UrlScheme.UrlSchemeType">
             <summary>
             Gets or sets url scheme type.
+            </summary>
+        </member>
+        <member name="P:Chromely.Core.Infrastructure.UrlScheme.BaseUrlStrict">
+            <summary>
+            Gets or sets a value indicating whether url must be relative to base.
+            Only valid for external url.
+            If base is http://a.com/me/you then 
+            http://a.com/me/you/they is valid but
+            http://a.com/me/they is not  valid
             </summary>
         </member>
         <member name="M:Chromely.Core.Infrastructure.UrlScheme.IsStandardScheme(System.String)">
@@ -3218,7 +3235,17 @@
             The command task runner.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Chromely.Core.RestfulService.CommandTaskRunner.RunAsync(System.String)" -->
+        <member name="M:Chromely.Core.RestfulService.CommandTaskRunner.RunAsync(System.String)">
+            <summary>
+            The run command async.
+            </summary>
+            <param name="url">
+            The url.
+            </param>
+            <returns>
+            The <see cref="T:System.Threading.Tasks.Task"/>.
+            </returns>
+        </member>
         <member name="M:Chromely.Core.RestfulService.CommandTaskRunner.GetQueryParameters(System.String)">
             <summary>
             The get query parameters.
