@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyAngularCefGlue", "ChromelyAngularCefGlue\ChromelyAngularCefGlue.csproj", "{81C6D3ED-B62E-49EC-886D-0140D6ACD0EF}"
 EndProject
-Project("{12f1ae00-4102-4b7c-84a5-6f63533433b5}") = "ChromelyAngularCefSharp", "ChromelyAngularCefSharp\ChromelyAngularCefSharp.csproj", "{15DCA414-80C7-415C-8DD7-D032054EB7BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyAngularCefSharp", "ChromelyAngularCefSharp\ChromelyAngularCefSharp.csproj", "{15DCA414-80C7-415C-8DD7-D032054EB7BE}"
 EndProject
-Project("{31f46184-da16-4acd-81bc-73aee672c45d}") = "ChromelyReactCefSharp", "ChromelyReactCefSharp\ChromelyReactCefSharp.csproj", "{A7012FC4-A631-4B62-957C-22E4668757D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyReactCefSharp", "ChromelyReactCefSharp\ChromelyReactCefSharp.csproj", "{A7012FC4-A631-4B62-957C-22E4668757D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromelyVueCefSharp", "ChromelyVueCefSharp\ChromelyVueCefSharp.csproj", "{A89DA9AB-D47A-41CF-BB8F-86776B85E32F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyVueCefSharp", "ChromelyVueCefSharp\ChromelyVueCefSharp.csproj", "{A89DA9AB-D47A-41CF-BB8F-86776B85E32F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyReactCefGlue", "ChromelyReactCefGlue\ChromelyReactCefGlue.csproj", "{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,12 @@ Global
 		{A89DA9AB-D47A-41CF-BB8F-86776B85E32F}.Release|Any CPU.ActiveCfg = Release|x64
 		{A89DA9AB-D47A-41CF-BB8F-86776B85E32F}.Release|x64.ActiveCfg = Release|x64
 		{A89DA9AB-D47A-41CF-BB8F-86776B85E32F}.Release|x64.Build.0 = Release|x64
+		{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}.Debug|x64.ActiveCfg = Debug|x64
+		{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}.Debug|x64.Build.0 = Debug|x64
+		{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}.Release|Any CPU.ActiveCfg = Release|x64
+		{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}.Release|x64.ActiveCfg = Release|x64
+		{762ADC29-1AED-4A6E-86D5-69B8ACC1FCB9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
