@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <Platforms>x64</Platforms>
+    <ApplicationIcon>chromely.ico</ApplicationIcon>
+    <AssemblyName>ChromelyReactCefGlue</AssemblyName>
+    <StartupObject>ChromelyReactCefGlue.Program</StartupObject>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="reactapp\node_modules\**" />
+    <EmbeddedResource Remove="reactapp\node_modules\**" />
+    <None Remove="reactapp\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="chromely.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chromely.CefGlue" Version="4.0.70.1" />
+    <PackageReference Include="Chromely.CefGlue.Winapi" Version="4.0.70.1" />
+    <PackageReference Include="Chromely.Core" Version="4.0.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+  </ItemGroup>
+
+  <Target Name="DependsOn" DependsOnTargets="ValidateChromelyApp">
+    <Message Text="Target : DependsOn" />
+  </Target>
+
+  <Target Name="ValidateChromelyApp" BeforeTargets="Build">
+    <Message Importance="High" Text="Checking if Node.js is installed.." />
+    <Exec Command="node --version" ContinueOnError="false">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Condition="'$(ErrorCode)' == '0'" Importance="High" Text="Node.js is installed!" />
+
+    <Message Importance="High" Text="Checking if node_modules exists.." />
+    <Message Importance="High" Text="Running npm install, node_modules not found! (this could take a while)" Condition="!Exists('$(ProjectDir)reactapp\node_modules')" />
+    <Exec Command="npm install --silent" Condition="!Exists('$(ProjectDir)reactapp\node_modules')" WorkingDirectory="reactapp" ContinueOnError="false" />
+  </Target>
+
+  <Target Name="DebugChromelyApp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
+    <Message Importance="High" Text="Building React App.." />
+    <Exec Command="npm run build" WorkingDirectory="reactapp" ContinueOnError="false" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+
+    <Message Importance="High" Text="Copying React App to debug folder.." />
+    <Exec Command="xcopy &quot;$(ProjectDir)reactapp\dist&quot; &quot;$(TargetDir)dist&quot;   /i /s /r /y /c" />
+  </Target>
+
+  <Target Name="ReleaseChromelyApp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
+    <Exec Command="npm run prod" WorkingDirectory="reactapp" ContinueOnError="true" ConsoleToMSBuild="false">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+  </Target>
+
+  <Target Name="FilterCopyLocalItems" AfterTargets="ResolveLockFileCopyLocalProjectDeps">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)' != 'Chromely.CefGlue' AND '%(Filename)' != 'Chromely.CefGlue.Winapi' AND '%(Filename)' != 'Chromely.Core'  AND '%(Filename)' != 'Microsoft.Extensions.Configuration'  AND '%(Filename)' != 'Microsoft.Extensions.Configuration.Binder'  AND '%(Filename)' != 'Microsoft.Extensions.Configuration.Json'  AND '%(Filename)' != 'Microsoft.Extensions.DependencyInjection'" />
+    </ItemGroup>
+  </Target>
+
+</Project>
