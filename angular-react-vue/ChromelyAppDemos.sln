@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromelyAngular", "ChromelyAngular\ChromelyAngular.csproj", "{6001309D-CCAF-4B01-A9D1-3FD123FF3D30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromelyReact", "ChromelyReact\ChromelyReact.csproj", "{86A000C0-E833-4DEE-9CD7-4D07515F31F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromelyVue", "ChromelyVue\ChromelyVue.csproj", "{43141D33-4A27-4A15-93EC-6E3204ECE401}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6001309D-CCAF-4B01-A9D1-3FD123FF3D30}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6001309D-CCAF-4B01-A9D1-3FD123FF3D30}.Release|Any CPU.ActiveCfg = Release|x64
+		{86A000C0-E833-4DEE-9CD7-4D07515F31F0}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{86A000C0-E833-4DEE-9CD7-4D07515F31F0}.Release|Any CPU.ActiveCfg = Release|x64
+		{43141D33-4A27-4A15-93EC-6E3204ECE401}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{43141D33-4A27-4A15-93EC-6E3204ECE401}.Release|Any CPU.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B7FF5D6-E8FF-4D51-BB1E-3A4ECC2B2931}
+	EndGlobalSection
+EndGlobal
