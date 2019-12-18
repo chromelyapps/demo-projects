@@ -1,0 +1,80 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <!-- <RuntimeIdentifier>linux-x64</RuntimeIdentifier>-->
+    <!-- <RuntimeIdentifier>osx-x64</RuntimeIdentifier>-->
+    <Platforms>x64</Platforms>
+    <!-- <ApplicationIcon>chromely.ico</ApplicationIcon>-->
+    <AssemblyName>chromely_angular</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chromely" Version="5.0.77-pre01" />
+    <PackageReference Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="angularapp\node_modules\**" />
+    <EmbeddedResource Remove="angularapp\node_modules\**" />
+    <None Remove="angularapp\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Chromely.External.Controllers.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="chromely.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="chromelyconfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="DependsOn" DependsOnTargets="ValidateChromelyApp">
+    <Message Text="Target : DependsOn" />
+  </Target>
+
+  <Target Name="ValidateChromelyApp" BeforeTargets="Build">
+    <Message Importance="High" Text="Checking if Node.js is installed.." />
+    <Exec Command="node --version" ContinueOnError="false">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Condition="'$(ErrorCode)' == '0'" Importance="High" Text="Node.js is installed!" />
+
+    <Message Importance="High" Text="Checking if node_modules exists.." />
+    <Message Importance="High" Text="Running npm install, node_modules not found! (this could take a while)" Condition="!Exists('$(ProjectDir)angularapp\node_modules')" />
+    <Exec Command="npm install --silent" Condition="!Exists('$(ProjectDir)angularapp\node_modules')" WorkingDirectory="angularapp" ContinueOnError="false" />
+  </Target>
+
+  <Target Name="DebugChromelyApp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">
+    <Message Importance="High" Text="Building Angular App.." />
+    <Exec Command="npm run build" WorkingDirectory="angularapp" ContinueOnError="false" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+
+    <Message Importance="High" Text="Copying Angular App to debug folder.." />
+    <Exec Command="xcopy &quot;$(ProjectDir)angularapp\dist&quot; &quot;$(TargetDir)dist&quot;   /i /s /r /y /c" />
+  </Target>
+
+  <Target Name="ReleaseChromelyApp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
+    <Exec Command="npm run build" WorkingDirectory="angularapp" ContinueOnError="true" ConsoleToMSBuild="false">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+  </Target>
+
+</Project>

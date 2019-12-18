@@ -50,7 +50,7 @@ class Home extends Component {
                           </div>
 
                           <div>
-                              <span className="text-primary text-center"><h2>chromely</h2></span>
+                              <span className="text-primary text-center"><h2>chromely react</h2></span>
                           </div>
                           <div>
                               <p className="text-muted text-center">Build .NET/.NET CORE HTML5 Desktop Apps</p>

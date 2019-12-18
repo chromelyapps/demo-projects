@@ -12,7 +12,7 @@ class BoundActiveRow extends React.Component {
     return (
     <li className="list-group-item d-flex justify-content-between align-items-center"> 
       <div className="custom-control custom-switch">
-        <input type="checkbox" className="custom-control-input"  id={this.props.item.Id + 'CheckboxTodoItem'} unchecked onClick={() => this.props.switchOnOffTodoItem(itemId)}/>
+        <input type="checkbox" className="custom-control-input"  id={this.props.item.Id + 'CheckboxTodoItem'} unchecked onClick={() => this.props.toggleTodoItem(itemId)}/>
         <label className="custom-control-label" for={this.props.item.Id + 'CheckboxTodoItem'}>{this.props.item.Todo}</label>
         </div>
         <span className="badge badge-secondary badge-pill"><a href='javascript:void(0);' onClick={() => this.props.deleteTodoItem(itemId)}>X</a></span>
@@ -27,7 +27,7 @@ class BoundCompletedRow extends React.Component {
     return (
     <li className="list-group-item d-flex justify-content-between align-items-center"> 
       <div className="custom-control custom-switch">
-        <input type="checkbox" className="custom-control-input"  id={this.props.item.Id + 'CheckboxTodoItem'} checked onClick={() => this.props.switchOnOffTodoItem(itemId)}/>
+        <input type="checkbox" className="custom-control-input"  id={this.props.item.Id + 'CheckboxTodoItem'} checked onClick={() => this.props.toggleTodoItem(itemId)}/>
         <label className="custom-control-label" for={this.props.item.Id + 'CheckboxTodoItem'}><del>{this.props.item.Todo}</del></label>
         </div>
         <span className="badge badge-secondary badge-pill"><a href='javascript:void(0);' onClick={() => this.props.deleteTodoItem(itemId)}>X</a></span>
@@ -100,7 +100,7 @@ class TodoList extends Component {
     }
   }
 
-  switchOnOffTodoItem(itemId) {
+  toggleTodoItem(itemId) {
     const { todoItemsList } = this.state;
     var dictList = todoItemsList;
     var todoItem = dictList[itemId];
@@ -114,7 +114,7 @@ class TodoList extends Component {
     this.setState({todoItemsList: dictList});
   }
 
-  switchOnOffAllTodoItems(event) {
+  toggleAllTodoItems(event) {
     event.preventDefault();
 
     const { checkedAll } = this.state;
@@ -141,7 +141,7 @@ class TodoList extends Component {
                               <div className="input-group-prepend">
                                   <span className="input-group-text">
                                       <div className="custom-control custom-switch">
-                                          <input type="checkbox" className="custom-control-input" id="checkboxSelectAllTodoItems" onClick={this.switchOnOffAllTodoItems} />
+                                          <input type="checkbox" className="custom-control-input" id="checkboxSelectAllTodoItems" onClick={this.toggleAllTodoItems} />
                                           <label className="custom-control-label" for="checkboxSelectAllTodoItems"></label>
                                         </div>
                                   </span>
@@ -157,10 +157,10 @@ class TodoList extends Component {
                 <ul className="list-group">
                 {todoItemsList.map((value, index) => {
                   if (value.Completed == 1) {
-                  return <BoundCompletedRow switchOnOffTodoItem={this.switchOnOffTodoItem} deleteTodoItem={this.deleteTodoItem}  item={value}/>;
+                  return <BoundCompletedRow toggleTodoItem={this.toggleTodoItem} deleteTodoItem={this.deleteTodoItem}  item={value}/>;
                   }
                   else {
-                    return <BoundActiveRow switchOnOffTodoItem={this.switchOnOffTodoItem} deleteTodoItem={this.deleteTodoItem} item={value}/>;
+                    return <BoundActiveRow toggleTodoItem={this.toggleTodoItem} deleteTodoItem={this.deleteTodoItem} item={value}/>;
                   }
                 })}
                 </ul>
