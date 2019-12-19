@@ -13,7 +13,7 @@
                                         </div>
                                   </span>
                           </div>
-                          <input type="text" class="form-control" v-model="todoText" @keyup.enter.native="todoAddItem"   placeholder="What needs to be done?" style="font-size: 24px; text-align: center;" />
+                          <input type="text" class="form-control" v-model="todoText" v-on:keyup.enter="todoAddItem"   placeholder="What needs to be done?" style="font-size: 24px; text-align: center;" />
                       </div>
                   </div>
           </div>
@@ -26,8 +26,8 @@
                   <div  v-for="item in todoItemsList" :key="item.Id">
                     <li class="list-group-item d-flex justify-content-between align-items-center"> 
                       <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input"  id="{{item.CheckboxId}}" {{item.ItemChecked}} @click="{{item.ItemToggeFunction}}"/>
-                        <label class="custom-control-label" for="{{item.CheckboxId}}">{{ item.TodoStartTage }}{{ item.Todo }}{{ item.TodoEndTage }}</label>
+                        <input type="checkbox" class="custom-control-input"  id="{{item.CheckboxId}}" item.ItemChecked  @click="() => { toggleTodoItem(item.Id) }"/>
+                        <label class="custom-control-label" for="{{item.CheckboxId}}">item.TodoStartTage {{ item.Todo }} item.TodoEndTage</label>
                         </div>
                         <span class="badge badge-secondary badge-pill"><a href='javascript:void(0);' @click="{{item.ItemDeleteFunction}}">X</a></span>
                     </li>
@@ -116,17 +116,21 @@ export default class TodoList extends Vue {
         };
 
         dictList[todoItem.Id] = tempItem;
+           console.log("todoItem.Id:" + todoItem.Id);
      };
 
     this.todoItemsList = dictList;
+           console.log("todoItemsList:" + this.todoItemsList);
   }
 
   todoAddItem() {
-    console.log("this.todoText:" + this.todoText);
     this.getTodoList("add", "", this.todoText, 0);
+    this.todoText = "";
   }
 
   toggleTodoItem(itemId: string) {
+        console.log("itemId:" + itemId);
+
     var dictList = this.todoItemsList;
     var todoItem = dictList[itemId];
     var completed = todoItem.Completed == 1 ? 0 : 1;

@@ -29,10 +29,10 @@ export class TmdbComponent implements OnInit {
    }
 
     ngOnInit() {
-    this.getMovies('popular', '');
+       this.getMovies('popular', '');
     }  
 
-    searchMovies() {
+    searchMovies(event) {
       this.getMovies('search', this._searchText);
     }
     

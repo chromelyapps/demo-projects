@@ -49,8 +49,8 @@ class TodoList extends Component {
 
     this.todoTextChange = this.todoTextChange.bind(this);
     this.todoAddItem = this.todoAddItem.bind(this);
-    this.switchOnOffTodoItem = this.switchOnOffTodoItem.bind(this);
-    this.switchOnOffAllTodoItems = this.switchOnOffAllTodoItems.bind(this);
+    this.toggleTodoItem = this.toggleTodoItem.bind(this);
+    this.toggleAllTodoItems = this.toggleAllTodoItems.bind(this);
     this.deleteTodoItem = this.deleteTodoItem.bind(this);
   }
 

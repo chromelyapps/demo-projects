@@ -56,7 +56,7 @@ export default class Home extends Vue {
   chromelyVersion = '';
 
  mounted() {
-    chromelyService.messageRouterGetJson('/info', null, this.getInfoCallback, this);
+    chromelyService.messageRouterGetJson('/info', null, this.getInfoCallback);
  }
 
   getInfoCallback(res: any) {
