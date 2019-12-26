@@ -31,7 +31,7 @@ After downloading the source code - either by cloning or direct download, you ne
  
 - Configuration
 
-The [configuration file](https://github.com/chromelyapps/demo-projects/blob/master/regular-chromely/CrossPlatDemo/chromelyconfig.json) is for Windows by default. This needs to be changed for Linux and MacOS please select [appropriate one](https://github.com/chromelyapps/demo-projects/tree/master/regular-chromely/CrossPlatDemo/config). The other alternative is to delete the configuration file and it will fall back to using the [default config object](https://github.com/chromelyapps/Chromely/blob/1a358986894377da8cffe87e00ce0d5893db690b/src/Chromely.Core/Configuration/DefaultConfiguration.cs#L98). 
+The [configuration file](https://github.com/chromelyapps/demo-projects/blob/master/regular-chromely/CrossPlatDemo/chromelyconfig.json) is for Windows by default. This needs to be changed for Linux and MacOS please select [appropriate one](https://github.com/chromelyapps/demo-projects/tree/master/regular-chromely/CrossPlatDemo/config) - ensure to rename to chromelyconfig.json. The other alternative is to delete the configuration file and it will fall back to using the [default config object](https://github.com/chromelyapps/Chromely/blob/1a358986894377da8cffe87e00ce0d5893db690b/src/Chromely.Core/Configuration/DefaultConfiguration.cs#L98). 
 
 There is also [config file option](https://github.com/chromelyapps/demo-projects/blob/master/regular-chromely/CrossPlatDemo/config/config_option.json) that shows how to select options for configuation file.
 
