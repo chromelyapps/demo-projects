@@ -1,4 +1,4 @@
-<div class="container-fluid">
+ <div class="container-fluid">
     
     <div class="row col-12 justify-content-center">
             <div class="col-8">
@@ -6,7 +6,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                     <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="checkboxToggleAllTodoItems" unchecked (click)="toggleAllTodoItems()">
+                                            <input type="checkbox" class="custom-control-input" id="checkboxToggleAllTodoItems"  [checked]="_checkedAll" (change)="_checkedAll = !_checkedAll" (click)="toggleAllTodoItems()">
                                             <label class="custom-control-label" for="checkboxToggleAllTodoItems"></label>
                                           </div>
                             </span>
@@ -24,8 +24,8 @@
                     <div *ngFor="let item of _todoItemsList">
                       <li class="list-group-item d-flex justify-content-between align-items-center"> 
                         <div class="custom-control custom-switch">
-                          <input type="checkbox" class="custom-control-input"  id="{{item.CheckboxId}}" item.ItemChecked (click)="toggleTodoItem(item.Id)"/>
-                          <label class="custom-control-label" for="{{item.CheckboxId}}" [innerHTML]="item.Todo"></label>
+                          <input type="checkbox" class="custom-control-input"  id="{{item.CheckboxId}}" [checked]="item.ItemChecked" (click)="toggleTodoItem(item)"/>
+                          <label class="custom-control-label" for="{{item.CheckboxId}}" [innerHTML]="item.TodoHtml"></label>
                           </div>
                           <span class="badge badge-secondary badge-pill"><a href='javascript:void(0);' (click)="deleteTodoItem(item.Id)">X</a></span>
                       </li>

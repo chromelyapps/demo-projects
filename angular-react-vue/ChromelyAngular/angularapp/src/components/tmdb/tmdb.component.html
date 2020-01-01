@@ -28,29 +28,29 @@
        </div>
    
        <!-- Movies List  -->
-       <div class="container">
-        <div class="row" *ngFor="let item of _moviesList">
-            <div class="col-sm-6 col-lg-3 mb-3">
+       <div class="moviesCointainer container-fluid">
+            <div class="card-columns">
+                <div *ngFor="let item of _moviesList">
 
-                <div class="card h-100">
-                    <div class="row no-gutters">
-                    <div class="col-md-12 text-center">
-                        <img src="{{item.PosterUrl}}" alt="..." title="{{ item.Title }}" style="width: 100%;" />
-                        </div>
-                        <div class="col-md-12">
-                            <div class="card-body">
-                            <h4 class="card-title text-info">{{ item.Title }}</h4>
-                            <h6 class="card-subtitle text-muted">{{ item.ReleaseDate }}</h6>
-                            <p class="card-text mt-4"><b>Popularity</b>: {{ item.Popularity }}<br /><b>Vote Count</b>:  {{ item.VoteCount }} <br /><b>Vote Average</b>:  {{ item.VoteAverage }}
-                            <br /><br /><a href="{{HomePage}}">Homepage</a></p>
+                    <!-- Card -->
+                    <div class="card">
+                            <div class="row no-gutters">
+                            <div class="col-md-12 text-center">
+                                <img src="{{item.PosterUrl}}" alt="..." title="{{ item.Title }}" style="width: 100%;" />
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                    <h4 class="card-title text-info">{{ item.Title }}</h4>
+                                    <h6 class="card-subtitle text-muted">{{ item.ReleaseDate }}</h6>
+                                    <p class="card-text mt-4"><b>Popularity</b>: {{ item.Popularity }}<br /><b>Vote Count</b>:  {{ item.VoteCount }} <br /><b>Vote Average</b>:  {{ item.VoteAverage }}
+                                    <br /><br /><a href="{{item.HomePage}}">Homepage</a></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
                 </div>
-
             </div>
-       </div>
-
        </div>
    
        <!-- End Moves List -->

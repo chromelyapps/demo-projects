@@ -15,6 +15,12 @@
         <li class="nav-item">
           <a class="nav-link"><router-link to="/">home</router-link></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link"><router-link to="/tmdbmovies">tmdb movies</router-link></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><router-link to="/todolist">todo list</router-link></a>
+        </li>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">basics</a>
             <div class="dropdown-menu dropdown-menu-right">

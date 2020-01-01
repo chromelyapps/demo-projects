@@ -116,7 +116,7 @@ class AjaxXhrDemo extends Component {
                        
         {/* Header ---------- */} 
         <div className="row col-12">
-            <h1>AJax XHR Demo</h1>
+            <h1>Ajax XHR Demo</h1>
         </div>
 
         {/* Nav ---------- */} 

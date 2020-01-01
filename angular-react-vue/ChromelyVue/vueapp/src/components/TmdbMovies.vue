@@ -24,23 +24,30 @@
         </div>
 
 
-    <div class="container">
-        <div class="row">
+       <div class="moviesCointainer container-fluid">
+            <div class="card-columns">
+               <div  v-for="item in movieListResult"  v-bind:key="item.Id">
 
-            <div  v-for="item in movieListResult"  v-bind:key="item.id">
-                <div class="col-sm-6 col-lg-3 mb-3">
-                    <div class="card h-100">
-                        <div class="row no-gutters">
+                    <!-- Card -->
+                    <div class="card">
+                            <div class="row no-gutters">
                             <div class="col-md-12 text-center">
-                                <p>{{ item.Overview }} </p>
+                                <img v-bind:src="item.PosterUrl" alt="..." title="{{ item.Title }}" style="width: 100%;" />
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                    <h4 class="card-title text-info">{{ item.Title }}</h4>
+                                    <h6 class="card-subtitle text-muted">{{ item.ReleaseDate }}</h6>
+                                    <p class="card-text mt-4"><b>Popularity</b>: {{ item.Popularity }}<br /><b>Vote Count</b>:  {{ item.VoteCount }} <br /><b>Vote Average</b>:  {{ item.VoteAverage }}
+                                    <br /><br /><a v-bind:href="item.HomePage">Homepage</a></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </div>
-
-        </div>
-    </div>
+       </div>
 
 
     </div>
@@ -103,7 +110,6 @@ export default class TmdbMovies extends Vue {
         const parameters: Dict = {};
         parameters["name"] = reqType;
         parameters["query"] = queryValue;
-        console.log(parameters);
         chromelyService.messageRouterGetJson('/tmdbmoviescontroller/movies', parameters, this.onGetMoviesCallback);
     }
 
@@ -113,7 +119,6 @@ export default class TmdbMovies extends Vue {
     }
 
     parseArrayResult(data: any) {
-                console.log("data:" + data);
         var dataArray = [];
         for (var i = 0; i < data.length; i++) {
             var tempItem = {
@@ -135,3 +140,8 @@ export default class TmdbMovies extends Vue {
 }
 </script>
 
+<style>
+.moviesCointainer {
+  padding-top: 1em;
+  }
+</style>

@@ -4,8 +4,9 @@ import { ChromelyService } from './../../services/chromely.service';
 type  TodoItem = {
   Id: string;
   Todo: string;
+  TodoHtml: string;
   Completed: number;
-  ItemChecked: string;
+  ItemChecked: boolean;
   CheckboxId: string;
 };
 
@@ -19,12 +20,11 @@ type Dict2 = { [key: string]: TodoItem };
 })
 export class TodoListComponent {
 
-  _checkedAll: number;
+  _checkedAll: boolean;
   _todoItemsList: Array<TodoItem>;
-  _localTodoItemsList: Dict2 = {};
 
   constructor(private _chromelyService: ChromelyService, private _zone: NgZone) {
-    this._checkedAll = 0;
+    this._checkedAll = false;
     this._todoItemsList = new Array<TodoItem>();
  }
 
@@ -50,13 +50,14 @@ export class TodoListComponent {
 
         var todoItem = res[i];
         
-        var itemChecked = todoItem.Completed == 1 ? "checked" : "unchecked";
+        var itemChecked = todoItem.Completed == 1;
         var delTagStart = todoItem.Completed == 1 ? "<del>" : "";
         var delTagEnd = todoItem.Completed == 1 ? "</del>" : "";
 
         var tempItem = {
           Id: todoItem.Id,
-          Todo: delTagStart + todoItem.Todo + delTagEnd,
+          Todo: todoItem.Todo,
+          TodoHtml: delTagStart + todoItem.Todo + delTagEnd,
           Completed:todoItem.Completed,
           ItemChecked: itemChecked,
           CheckboxId: todoItem.Id + "CheckboxTodoItem"
@@ -66,7 +67,6 @@ export class TodoListComponent {
         tempList.push(tempItem);
     };
 
-    this._localTodoItemsList = dictList;
     this._todoItemsList = tempList;
   }
 
@@ -75,28 +75,24 @@ export class TodoListComponent {
     event.target.value = "";
   }
 
-  toggleTodoItem(itemId: string) {
-    var todoItem = this._localTodoItemsList[itemId];
-    var completed = todoItem.Completed == 1 ? 0 : 1;
-    this._localTodoItemsList[itemId].Completed = completed;
+  toggleTodoItem(item: any) {
+    item.ItemChecked = !item.ItemChecked;
+    var itemId = item.Id;
+    this._checkedAll = false;
+
+    var completed = item.ItemChecked ? 1 : 0;
+    var delTagStart = item.ItemChecked ? "<del>" : "";
+    var delTagEnd = item.ItemChecked ? "</del>" : "";
+    item.TodoHtml = delTagStart + item.Todo + delTagEnd;
 
     var url = "http://command.com/todolistcontroller/toggleactive?id=" + itemId + "&completed=" + completed.toString();
     console.log(url);
     this._chromelyService.openExternalUrl(url);
-
-    const tempList = new Array<TodoItem>();
-    for (let key in this._localTodoItemsList) {
-        let value = this._localTodoItemsList[key];
-        tempList.push(value);
-    }
-
-    this._todoItemsList = tempList;
   }
 
   toggleAllTodoItems() {
-    var newCheckedAll = this._checkedAll == 1 ? 0 : 1;
+    var newCheckedAll = this._checkedAll ? 0 : 1;
     this.getTodoList("toggleall", "", "", newCheckedAll);
-    this._checkedAll = newCheckedAll;
   }
 
   deleteTodoItem(itemId: string) {

@@ -8,8 +8,8 @@
                               <div class="input-group-prepend">
                                   <span class="input-group-text">
                                       <div class="custom-control custom-switch">
-                                          <input type="checkbox" class="custom-control-input" id="checkboxSelectAllTodoItems" @click="toggleAllTodoItems" />
-                                          <label class="custom-control-label" for="checkboxSelectAllTodoItems"></label>
+                                          <input type="checkbox" class="custom-control-input"  id="checkboxSelectAllTodoItems" v-model="checkedAll" @click="toggleAllTodoItems" />
+                                          <label class="custom-control-label"  for="checkboxSelectAllTodoItems"></label>
                                         </div>
                                   </span>
                           </div>
@@ -26,10 +26,10 @@
                   <div  v-for="item in todoItemsList" :key="item.Id">
                     <li class="list-group-item d-flex justify-content-between align-items-center"> 
                       <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input"  id="{{item.CheckboxId}}" item.ItemChecked  @click="() => { toggleTodoItem(item.Id) }"/>
-                        <label class="custom-control-label" for="{{item.CheckboxId}}">item.TodoStartTage {{ item.Todo }} item.TodoEndTage</label>
+                        <input type="checkbox" class="custom-control-input"  v-bind:id="item.CheckboxId" v-bind:checked="item.ItemChecked" @click="() => { toggleTodoItem(item) }"/>
+                        <label class="custom-control-label" v-bind:for="item.CheckboxId" v-html="item.TodoHtml"></label>
                         </div>
-                        <span class="badge badge-secondary badge-pill"><a href='javascript:void(0);' @click="{{item.ItemDeleteFunction}}">X</a></span>
+                        <span class="badge badge-secondary badge-pill"><a href='javascript:void(0);' @click="() => { deleteTodoItem(item.Id) }">X</a></span>
                     </li>
                   </div>
 
@@ -64,13 +64,10 @@ var chromelyService = require('../services/ChromelyService');
 type  TodoItem = {
     Id: string;
     Todo: string;
+    TodoHtml: string,
     Completed: number;
-    ItemChecked: string,
-    TodoStartTage: string,
-    TodoEndTage: string,
-    CheckboxId: string,
-    ItemToggeFunction: string,
-    ItemDeleteFunction: string
+    ItemChecked: boolean,
+    CheckboxId: string
 };
 
 type Dict1 = { [key: string]: string };
@@ -80,7 +77,7 @@ type Dict2 = { [key: string]: TodoItem };
 export default class TodoList extends Vue {
 
     todoText = '';
-    checkedAll = 0;
+    checkedAll = false;
     todoItemsList: Dict2 = {};
 
   getTodoList(reqType:string, id:string, todo:string, completed: number) {
@@ -99,28 +96,24 @@ export default class TodoList extends Vue {
 
         var todoItem = res[i];
         
-        var itemChecked = todoItem.Completed == 1 ? "checked" : "unchecked";
+        var itemChecked = todoItem.Completed == 1 ? true : false;
         var delTagStart = todoItem.Completed == 1 ? "<del>" : "";
         var delTagEnd = todoItem.Completed == 1 ? "</del>" : "";
 
         var tempItem = {
-          Id: todoItem.Id,
+          Key: todoItem.Id,
+          Id: todoItem.Id + "",
           Todo: todoItem.Todo,
+          TodoHtml: delTagStart + todoItem.Todo + delTagEnd,
           Completed:todoItem.Completed,
           ItemChecked: itemChecked,
-          TodoStartTage:delTagStart,
-          TodoEndTage:delTagEnd,
-          CheckboxId: todoItem.Id + "CheckboxTodoItem",
-          ItemToggeFunction: "toggleTodoItem('" + todoItem.Id + ": string')",
-          ItemDeleteFunction: "deleteTodoItem('" + todoItem.Id + ": string')"
+          CheckboxId:"CheckboxTodoItem" + res[i].Id
         };
 
         dictList[todoItem.Id] = tempItem;
-           console.log("todoItem.Id:" + todoItem.Id);
      };
 
     this.todoItemsList = dictList;
-           console.log("todoItemsList:" + this.todoItemsList);
   }
 
   todoAddItem() {
@@ -128,32 +121,35 @@ export default class TodoList extends Vue {
     this.todoText = "";
   }
 
-  toggleTodoItem(itemId: string) {
-        console.log("itemId:" + itemId);
+  toggleTodoItem(item: any) {
+    item.ItemChecked = !item.ItemChecked;
+    this.checkedAll = false;
+    
+    var completed = item.ItemChecked ? 1 : 0;
+    var delTagStart = item.ItemChecked ? "<del>" : "";
+    var delTagEnd = item.ItemChecked ? "</del>" : "";
+    item.TodoHtml = delTagStart + item.Todo + delTagEnd;
 
+    var itemId = item.Id;
     var dictList = this.todoItemsList;
     var todoItem = dictList[itemId];
-    var completed = todoItem.Completed == 1 ? 0 : 1;
     dictList[itemId].Completed = completed;
 
     var url = "http://command.com/todolistcontroller/toggleactive?id=" + itemId + "&completed=" + completed.toString();
-    console.log(url);
     chromelyService.openExternalUrl(url);
 
     this.todoItemsList = dictList;
   }
 
   toggleAllTodoItems() {
-    var newCheckedAll = this.checkedAll == 1 ? 0 : 1;
+       console.log("this.checkedAll:" + this.checkedAll);
+    var newCheckedAll = this.checkedAll ? 0 : 1;
     this.getTodoList("toggleall", "", "", newCheckedAll);
-    this.checkedAll = newCheckedAll;
   }
 
   deleteTodoItem(itemId: string) {
     this.getTodoList("delete", itemId, "", 0);
   }
-
-
 }
 </script>
 

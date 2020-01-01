@@ -149,7 +149,7 @@ export default class MessageRouterDemo extends Vue {
     }
 
     messageRouterGet2Run() {
-          chromelyService.messageRouterGetJson('/democontroller/movies', null, this.messageRouterGet2Callback);
+          chromelyService.messageRouterGetJson('/externalcontroller/movies', null, this.messageRouterGet2Callback);
     }
 
     messageRouterPostRun() {
