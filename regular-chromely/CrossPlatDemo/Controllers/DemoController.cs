@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using Chromely.CefGlue;
-using Chromely.Core;
+using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 
 namespace CrossPlatDemo.Controllers

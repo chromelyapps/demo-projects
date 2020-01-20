@@ -9,8 +9,8 @@
 
 using System;
 using System.Text.Json;
-using Chromely.Core;
-using Chromely.Core.Infrastructure;
+using Chromely.Core.Configuration;
+using Chromely.Core.Logging;
 using Chromely.Core.Network;
 
 namespace CrossPlatDemo.Controllers

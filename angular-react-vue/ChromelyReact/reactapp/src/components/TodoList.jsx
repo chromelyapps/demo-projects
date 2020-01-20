@@ -44,7 +44,7 @@ class TodoList extends Component {
     this.state = {
       todoText: '',
       todoItemsList: [],
-      checkedAll: 0
+      checkedAll: false
     };
 
     this.todoTextChange = this.todoTextChange.bind(this);
@@ -97,6 +97,8 @@ class TodoList extends Component {
       const { todoText } = this.state;
       this.getTodoList("add", "", todoText, 0);
       this.setState({todoText: ''});
+
+      this.setState({checkedAll: false});
     }
   }
 
@@ -118,7 +120,7 @@ class TodoList extends Component {
     event.preventDefault();
 
     const { checkedAll } = this.state;
-    var newCheckedAll = checkedAll == 1 ? 0 : 1;
+    var newCheckedAll = checkedAll ? 0 : 1;
     this.setState({checkedAll: newCheckedAll});
     this.getTodoList("toggleall", "", "", newCheckedAll);
   }
@@ -141,7 +143,7 @@ class TodoList extends Component {
                               <div className="input-group-prepend">
                                   <span className="input-group-text">
                                       <div className="custom-control custom-switch">
-                                          <input type="checkbox" className="custom-control-input" id="checkboxSelectAllTodoItems" onClick={this.toggleAllTodoItems} />
+                                          <input type="checkbox" className="custom-control-input" id="checkboxSelectAllTodoItems" checked={this.state.checkedAll} onClick={this.toggleAllTodoItems} />
                                           <label className="custom-control-label" for="checkboxSelectAllTodoItems"></label>
                                         </div>
                                   </span>

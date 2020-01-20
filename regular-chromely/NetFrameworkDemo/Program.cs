@@ -11,6 +11,11 @@ namespace NetFrameworkDemo
         [STAThread]
         static void Main(string[] args)
         {
+            /* For embedded (assembly) resources
+             * var config = DefaultConfiguration.CreateForRuntimePlatform();
+             * config.StartUrl = "assembly://app/chromely.html";
+             */
+
             AppBuilder
                .Create()
                .UseApp<DemoChromelyApp>()

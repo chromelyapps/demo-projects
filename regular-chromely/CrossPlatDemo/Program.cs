@@ -8,15 +8,21 @@ namespace CrossPlatDemo
 {
     class Program
     {
-        [STAThread]
+       [STAThread]
         static void Main(string[] args)
         {
+            /* For embedded (assembly) resources
+             * var config = DefaultConfiguration.CreateForRuntimePlatform();
+             * config.StartUrl = "assembly://app/chromely.html";
+             */
+
             AppBuilder
             .Create()
             .UseApp<DemoChromelyApp>()
             .Build()
             .Run(args);
         }
+
     }
 
     public class DemoChromelyApp : BasicChromelyApp

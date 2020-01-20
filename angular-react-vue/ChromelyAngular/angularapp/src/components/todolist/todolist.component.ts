@@ -73,6 +73,7 @@ export class TodoListComponent {
   addTodoItem(event) {
     this.getTodoList("add", "", event.target.value, 0);
     event.target.value = "";
+    this._checkedAll = false;
   }
 
   toggleTodoItem(item: any) {

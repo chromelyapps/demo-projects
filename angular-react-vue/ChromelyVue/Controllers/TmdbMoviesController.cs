@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Chromely.CefGlue;
 using Chromely.Core;
+using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 
 namespace ChromelyVue.Controllers

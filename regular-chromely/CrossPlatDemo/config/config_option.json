@@ -2,6 +2,7 @@
   "startUrl:loadType": [
     "absolute",
     "localResource",
+    "assemblyResource",
     "fileprotocol"
   ],
   "windowState": [

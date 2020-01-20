@@ -119,6 +119,7 @@ export default class TodoList extends Vue {
   todoAddItem() {
     this.getTodoList("add", "", this.todoText, 0);
     this.todoText = "";
+    this.checkedAll = false;
   }
 
   toggleTodoItem(item: any) {

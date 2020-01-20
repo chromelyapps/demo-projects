@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <PublishSingleFile>true</PublishSingleFile>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <!-- <RuntimeIdentifier>linux-x64</RuntimeIdentifier>-->
@@ -21,11 +21,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely" Version="5.0.77-pre01" />
     <PackageReference Include="System.Buffers" Version="4.5.0" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Chromely">
+      <HintPath>..\libs\Chromely.dll</HintPath>
+    </Reference>
+    <Reference Include="Chromely.CefGlue">
+      <HintPath>..\libs\Chromely.CefGlue.dll</HintPath>
+    </Reference>
+    <Reference Include="Chromely.Core">
+      <HintPath>..\libs\Chromely.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  
   <ItemGroup>
     <Compile Remove="angularapp\node_modules\**" />
     <EmbeddedResource Remove="angularapp\node_modules\**" />
