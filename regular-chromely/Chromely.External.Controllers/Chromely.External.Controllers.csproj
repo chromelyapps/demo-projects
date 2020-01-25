@@ -7,46 +7,21 @@
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
-  
-  <ItemGroup>
+
+    <ItemGroup>
     <Reference Include="Chromely.Core">
       <HintPath>..\libs\Chromely.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
-
+  
   <ItemGroup>
-    <None Remove="app\chromely.html" />
-    <None Remove="app\Content\css\bootstrap.min.css" />
-    <None Remove="app\Content\img\chromely.png" />
-    <None Remove="app\Content\img\chromely_gray.png" />
-    <None Remove="app\Content\js\bootstrap.min.js" />
-    <None Remove="app\Content\js\jquery.min.js" />
-    <None Remove="app\Content\js\popper.min.js" />
-    <None Remove="app\Content\js\tether.min.js" />
-    <None Remove="app\pages\ajaxdemo.html" />
-    <None Remove="app\pages\home.html" />
-    <None Remove="app\pages\javascriptdemo.html" />
-    <None Remove="app\pages\messagerouterdemo.html" />
-    <None Remove="app\pages\tmdbmovies.html" />
-    <None Remove="app\pages\todolist.html" />
+    <None Remove="appresources\**" />
+    <None Remove="app\**" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <EmbeddedResource Include="app\chromely.html" />
-    <EmbeddedResource Include="app\Content\css\bootstrap.min.css" />
-    <EmbeddedResource Include="app\Content\img\chromely.png" />
-    <EmbeddedResource Include="app\Content\img\chromely_gray.png" />
-    <EmbeddedResource Include="app\Content\js\bootstrap.min.js" />
-    <EmbeddedResource Include="app\Content\js\jquery.min.js" />
-    <EmbeddedResource Include="app\Content\js\popper.min.js" />
-    <EmbeddedResource Include="app\Content\js\tether.min.js" />
-    <EmbeddedResource Include="app\pages\ajaxdemo.html" />
-    <EmbeddedResource Include="app\pages\home.html" />
-    <EmbeddedResource Include="app\pages\javascriptdemo.html" />
-    <EmbeddedResource Include="app\pages\messagerouterdemo.html" />
-    <EmbeddedResource Include="app\pages\tmdbmovies.html" />
-    <EmbeddedResource Include="app\pages\todolist.html" />
+    <EmbeddedResource Include="appresources\**" />
+    <EmbeddedResource Include="app\**" />
   </ItemGroup>
 
 </Project>

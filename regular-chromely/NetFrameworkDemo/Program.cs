@@ -1,6 +1,7 @@
 ﻿using System;
 using Chromely;
 using Chromely.Core;
+using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 using NetFrameworkDemo.Controllers;
 
@@ -11,9 +12,11 @@ namespace NetFrameworkDemo
         [STAThread]
         static void Main(string[] args)
         {
-            /* For embedded (assembly) resources
+            /* For local and embedded (assembly) resources
              * var config = DefaultConfiguration.CreateForRuntimePlatform();
-             * config.StartUrl = "assembly://app/chromely.html";
+             * config.StartUrl = "app://app/chromely.html" // local;
+             * config.StartUrl = "assembly://app/chromely.html // assembly";
+             * config.StartUrl = "mixassembly://app/chromely.html // mixed - local + assembly";
              */
 
             AppBuilder

@@ -93,9 +93,10 @@
                 completed = 1;
             } else {
                 labelText.innerHTML = labelText.innerText;
-                var checkBox = document.getElementById("checkboxSelectAllTodoItems");
-                checkBox.checked = false;
             }
+
+            var allItemsSwictchCheckBox = document.getElementById("checkboxSelectAllTodoItems");
+            allItemsSwictchCheckBox.checked = false;
 
             var url = "http://command.com/todolistcontroller/toggleactive?id=" + itemId + "&completed=" + completed.toString();
             var link = document.createElement('a');
@@ -108,7 +109,10 @@
     <script>
     $(document).ready(function(){
         $("#textTodoItem").on("keyup",function(e){
-            if(e.which == 13){
+            if (e.which == 13) {
+                var allItemsSwictchCheckBox = document.getElementById("checkboxSelectAllTodoItems");
+                allItemsSwictchCheckBox.checked = false;
+
                 var text = document.getElementById("textTodoItem");
                 getTodoList("add", "", text.value, 0);
                 document.getElementById("textTodoItem").value = "";

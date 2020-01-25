@@ -76,12 +76,7 @@
     }
   ],
   "commandLineArgs": [
-    {
-      "name": "disable-gpu",
-      "value": "1"
-    }
   ],
   "commandLineOptions": [
-    "disable-gpu"
   ]
 }
