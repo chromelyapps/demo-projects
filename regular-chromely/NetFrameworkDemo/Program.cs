@@ -27,7 +27,7 @@ namespace NetFrameworkDemo
         }
     }
 
-    public class DemoChromelyApp : BasicChromelyApp
+    public class DemoChromelyApp : ChromelyBasicApp
     {
         public override void Configure(IChromelyContainer container)
         {

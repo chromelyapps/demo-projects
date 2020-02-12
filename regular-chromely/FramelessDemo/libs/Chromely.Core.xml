@@ -223,6 +223,9 @@
         <member name="P:Chromely.Core.Configuration.WindowOptions.WindowState">
             <summary>Gets or sets the WindowState of the window.</summary>
         </member>
+        <member name="P:Chromely.Core.Configuration.WindowOptions.FramelessOption">
+            <summary>Gets or sets the FramelessOption of the borderless window.</summary>
+        </member>
         <member name="M:Chromely.Core.Defaults.DefaultCommandTaskRunner.GetQueryParameters(System.String)">
             <summary>
             The get query parameters.

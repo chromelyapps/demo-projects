@@ -5,13 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Chromely.Core" Version="5.0.0-pre04" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
-  </ItemGroup>
-
-    <ItemGroup>
-    <Reference Include="Chromely.Core">
-      <HintPath>..\libs\Chromely.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   
   <ItemGroup>

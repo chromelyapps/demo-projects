@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chromely</name>
+    </assembly>
+    <members>
+        <member name="F:Chromely.Native.GConnectFlags.GConnectAfter">
+            <summary>
+            whether the handler should be called before or after the default handler of the signal.
+            </summary>
+        </member>
+        <member name="F:Chromely.Native.GConnectFlags.GConnectSwapped">
+            <summary>
+            whether the instance and data should be swapped when calling the handler; see g_signal_connect_swapped() for an example.
+            </summary>
+        </member>
+        <member name="F:Chromely.Native.RECT.Left">
+            <summary>
+            The left.
+            // x position of upper-left corner
+            </summary>
+        </member>
+        <member name="F:Chromely.Native.RECT.Top">
+            <summary>
+            The top.
+            // y position of upper-left corner
+            </summary>
+        </member>
+        <member name="F:Chromely.Native.RECT.Right">
+            <summary>
+            The right.
+            // x position of lower-right corner
+            </summary>
+        </member>
+        <member name="F:Chromely.Native.RECT.Bottom">
+            <summary>
+            The bottom.
+            y position of lower-right corner
+            </summary>
+        </member>
+        <member name="M:Chromely.Native.WinAPIHost.AllowKeyboardInput(System.Boolean,System.Boolean,PInvoke.Net.Keyboard.VirtualKeyStates)">
+            <summary>Determines whether the specified keyboard input should be allowed to be processed by the system.</summary>
+            <remarks>Helps block unwanted keys and key combinations that could exit the app, make system changes, etc.</remarks>
+        </member>
+        <member name="M:Chromely.Native.WinAPIHost.DetachKeyboardHook">
+            <summary>
+            Detach the keyboard hook; call during shutdown to prevent calls as we unload
+            </summary>
+        </member>
+        <member name="T:Chromely.Windows.ChromelyWindow">
+            <summary>
+            The CefGlue browser host/window/app.
+            </summary>
+        </member>
+        <member name="M:Chromely.Windows.ChromelyWindow.Close">
+            <summary>
+            The close.
+            </summary>
+        </member>
+        <member name="M:Chromely.Windows.ChromelyWindow.Exit">
+            <summary>
+            The exit.
+            </summary>
+        </member>
+        <member name="M:Chromely.Windows.ChromelyWindow.Initialize">
+            <summary>
+            The platform initialize.
+            </summary>
+        </member>
+        <member name="M:Chromely.Windows.ChromelyWindow.Run">
+            <summary>
+            The platform quit message loop.
+            </summary>
+        </member>
+        <member name="M:Chromely.Windows.ChromelyWindow.ExitWindow">
+            <summary>
+            The platform quit message loop.
+            </summary>
+        </member>
+        <member name="M:Chromely.Windows.ChromelyWindow.CreateMainView">
+            <summary>
+            The create main view.
+            </summary>
+            <returns>
+            The <see cref="T:Chromely.Windows.Window"/>.
+            </returns>
+        </member>
+        <member name="P:Chromely.Windows.Window.HostHandle">
+            <summary>
+            Gets the window handle.
+            </summary>
+        </member>
+    </members>
+</doc>

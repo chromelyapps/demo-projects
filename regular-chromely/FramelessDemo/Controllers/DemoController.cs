@@ -1,24 +1,39 @@
-﻿using Chromely.Core.Network;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="DemoController.cs" company="Chromely Projects">
+//   Copyright (c) 2017-2019 Chromely Projects
+// </copyright>
+// <license>
+//      See the LICENSE.md file in the project root for more information.
+// </license>
+// --------------------------------------------------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
+using Chromely.CefGlue;
+using Chromely.Core.Configuration;
+using Chromely.Core.Network;
 
-namespace Chromely.External.Controllers
+namespace FramelessDemo.Controllers
 {
     /// <summary>
     /// The demo controller.
     /// </summary>
-    [ControllerProperty(Name = "DemoController", Route = "externalcontroller")]
+    [ControllerProperty(Name = "DemoController", Route = "democontroller")]
     public class DemoController : ChromelyController
     {
+        private readonly IChromelyConfiguration _config;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DemoController"/> class.
         /// </summary>
-        public DemoController()
+        public DemoController(IChromelyConfiguration config)
         {
-            RegisterGetRequest("/externalcontroller/movies", GetMovies);
-            RegisterPostRequest("/externalcontroller/movies", SaveMovies);
+            _config = config;
+
+            RegisterGetRequest("/democontroller/movies", GetMovies);
+            RegisterPostRequest("/democontroller/movies", SaveMovies);
         }
 
         #region HttpAttributes
@@ -37,16 +52,15 @@ namespace Chromely.External.Controllers
 
         #endregion
 
-        #region CustomAttributes
+        #region CommandAttributes
 
-        [Command(Route = "/externalcontroller/testcommand/one")]
-        public void CommandTestOne(IDictionary<string, string> queryParameters)
+        [Command(Route = "/democontroller/showdevtools")]
+        public void ShowDevTools(IDictionary<string, string> queryParameters)
         {
-        }
-
-        [Command(Route = "/externalcontroller/testcommand/two")]
-        public void CommandTestTwo(IDictionary<string, string> queryParameters)
-        {
+            if (_config != null && !string.IsNullOrWhiteSpace(_config.DevToolsUrl))
+            {
+                BrowserLauncher.Open(_config.Platform, _config.DevToolsUrl);
+            }
         }
 
         #endregion

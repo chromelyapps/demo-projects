@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Chromely</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Content/css/nav_style.css">
+    <script src="Content/js/jquery.min.js"></script>
+    <script src="Content/js/popper.min.js"></script>
+    <script src="Content/js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+        body {
+            overflow: hidden;
+        }
+
+        .navbar {
+            overflow-y: hidden;
+            background-color: transparent;
+            background: transparent;
+            border-color: transparent;
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .navbar.navbar-default {
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+         }
+
+         .navbar.navbar-default .navbar-collapse {
+            border: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .navbar li {
+                color: #000
+         }
+
+        iframe, object, embed {
+            max-width: 100%;
+        }
+
+        .titlebar {
+            -webkit-app-region: drag;
+            -webkit-user-select: none;
+            position: absolute;
+            top: 0px;
+            left: 50px;
+            width: 100%;
+            height: 32px;
+        }
+
+        .titlebar-button {
+            -webkit-app-region: no-drag;
+            position: absolute;
+            top: 0px;
+            width: 140px;
+            height: 32px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            $('#nav-content a').on('click', function (e) {
+                e.preventDefault()
+                var url = $(this).attr("data-url"); // the remote url for content
+                if (url) {
+                    demoframe.src = url;
+                }
+            });
+        });
+
+        function frameCommand(type) {
+            var url = "http://command.com/window/" + type;
+            var link = document.createElement('a');
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        function showDevTools() {
+            var url = "http://command.com/democontroller/showdevtools";
+            var link = document.createElement('a');
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        function toggleRestoreMaxButton(max) {
+            var maxButton = document.getElementById('max-button');
+            var restoreButton = document.getElementById('restore-button');
+            if (max === 1) {
+                maxButton.style.display = "none";
+                restoreButton.style.display = "flex";
+            } else {
+                restoreButton.style.display = "none";
+                maxButton.style.display = "flex";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div>
+            <div id="window-title">
+                <img src="./Content/img/chromely_gray.png" width="22" height="22">
+                <span><h6>chromely</h6></span>
+            </div>
+
+            <div id="window-controls">
+                <div class="button" id="min-button">
+                    <a onclick="frameCommand('minimize')"><span>&#xE921;</span></a>
+                </div>
+                <div class="button" id="max-button">
+                    <a onclick="frameCommand('maximize')"><span>&#xE922;</span></a>
+                </div>
+                <div class="button" id="restore-button">
+                    <a onclick="frameCommand('restore')"><span>&#xE923;</span></a>
+                </div>
+                <div class="button" id="close-button">
+                    <a onclick="frameCommand('close')"><span>&#xE8BB;</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse justify-content-end" id="nav-content">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home" data-url="./pages/home.html">home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#movies" data-url="./pages/tmdbmovies.html">tmdb movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#todo" data-url="./pages/todolist.html">todo list</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">basics</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="" #messagerouterdemo" data-url="./pages/messagerouterdemo.html">Message Router Demo</a>
+                            <a class="dropdown-item" href="#ajaxdemo" data-url="./pages/ajaxdemo.html">Ajax Demo</a>
+                            <a class="dropdown-item" href="#javascriptdemo" data-url="./pages/javascriptdemo.html">Execute JavaScript Demo</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#html5tests" data-url="https://html5test.com/">HTML5 Tests</a>
+                            <a class="dropdown-item" href="#html6tests" data-url="http://html6test.com/">HTML6 Tests</a>
+                            <a class="dropdown-item" href="#shakatests" data-url="https://shaka-player-demo.appspot.com/demo/#asset=https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd;lang=en-US;build=uncompiled">Google Shaka Support Tests</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" onclick="showDevTools()">Show DevTools</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="text-center m-0  d-flex flex-column justify-content-center">
+                    <iframe id="demoframe" name="alldemoframe" src="./pages/home.html" width="100%" height="800" frameborder="0" allowfullscreen />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Initialize Bootstrap functionality -->
+    <script>
+        // Initialize tooltip component
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        // Initialize popover component
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+</body>
+</html>

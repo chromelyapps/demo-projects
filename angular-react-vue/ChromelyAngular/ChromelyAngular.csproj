@@ -21,20 +21,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Chromely" Version="5.0.77-pre04" />
+    <PackageReference Include="Chromely.CefGlue" Version="5.0.77-pre04" />
+    <PackageReference Include="Chromely.Core" Version="5.0.0-pre04" />
     <PackageReference Include="System.Buffers" Version="4.5.0" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Chromely">
-      <HintPath>..\libs\Chromely.dll</HintPath>
-    </Reference>
-    <Reference Include="Chromely.CefGlue">
-      <HintPath>..\libs\Chromely.CefGlue.dll</HintPath>
-    </Reference>
-    <Reference Include="Chromely.Core">
-      <HintPath>..\libs\Chromely.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   
   <ItemGroup>

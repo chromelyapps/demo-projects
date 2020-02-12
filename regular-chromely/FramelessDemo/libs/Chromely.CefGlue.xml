@@ -770,7 +770,20 @@
             The no javascript access.
             </param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Chromely.CefGlue.Browser.EventParams.BeforePopupEventArgs.#ctor(Xilium.CefGlue.CefFrame,System.String,System.String)" -->
+        <member name="M:Chromely.CefGlue.Browser.EventParams.BeforePopupEventArgs.#ctor(Xilium.CefGlue.CefFrame,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chromely.CefGlue.Browser.EventParams.BeforePopupEventArgs"/> class.
+            </summary>
+            <param name="frame">
+            The frame.
+            </param>
+            <param name="targetUrl">
+            The target url.
+            </param>
+            <param name="targetFrameName">
+            The target frame name.
+            </param>
+        </member>
         <member name="P:Chromely.CefGlue.Browser.EventParams.BeforePopupEventArgs.NoJavascriptAccess">
             <summary>
             Gets or sets a value indicating whether no javascript access.
