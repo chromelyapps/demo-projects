@@ -1,23 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using Chromely;
 using Chromely.Core;
 using Chromely.Core.Configuration;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace web_chromely_mvc {
     public class Program {
 
         /// <summary> Main entry-point for this application. </summary>
         /// <param name="args"> The arguments to pass in. </param>
+        [STAThread]
         public static void Main(string[] args) {
 
             // Get the urls in use so we can pass them to chromely
@@ -31,20 +27,20 @@ namespace web_chromely_mvc {
                 // not when Chromely launches itself as a child process
                 // TODO is there a cleaner way / argument we can check for other than something like "--no-sandbox"
                 if (!args.Contains("--no-sandbox")) {
-                    CreateHostBuilder(args).UseUrls(appurls).Build().Start();
+                    CreateWebHostBuilder(args).UseUrls(appurls).Build().Start();
                 }
                 ChromelyBootstrap(args, appurls);
 
             } else {
                 // This is called when we just run as a website without Chromely
-                CreateHostBuilder(args).UseUrls(appurls).Build().Run();
+                CreateWebHostBuilder(args).UseUrls(appurls).Build().Run();
             }
         }
 
         /// <summary> Creates host builder. </summary>
         /// <param name="args"> The arguments to pass in. </param>
         /// <returns> The new webhost builder. </returns>
-        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
