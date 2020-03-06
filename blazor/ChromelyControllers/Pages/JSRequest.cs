@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 
-namespace BlazorControllers.Pages
+namespace ChromelyControllers.Pages
 {
     public class JSRequest
     {

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)wwwroot&quot; &quot;$(SolutionDir)\BlazorControllersDemo\bin\x64\Debug\netcoreapp3.1\win-x64\app&quot;   /i /s /r /y /c&#xD;&#xA;xcopy &quot;$(TargetDir)dist&quot; &quot;$(SolutionDir)\BlazorControllersDemo\bin\x64\Debug\netcoreapp3.1\win-x64\app&quot;   /i /s /r /y /c&#xD;&#xA;" />
+    <Exec Command="xcopy &quot;$(ProjectDir)wwwroot&quot; &quot;$(SolutionDir)\ChromelyControllersDemo\bin\x64\Debug\netcoreapp3.1\win-x64\app&quot;   /i /s /r /y /c&#xD;&#xA;xcopy &quot;$(TargetDir)dist&quot; &quot;$(SolutionDir)\ChromelyControllersDemo\bin\x64\Debug\netcoreapp3.1\win-x64\app&quot;   /i /s /r /y /c&#xD;&#xA;" />
   </Target>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using BlazorControllersDemo.Controllers;
+﻿using ChromelyControllersDemo.Controllers;
 using Chromely;
 using Chromely.Core;
 using Chromely.Core.Configuration;
@@ -7,7 +7,7 @@ using Chromely.Core.Infrastructure;
 using Chromely.Core.Network;
 using System;
 
-namespace BlazorControllersDemo
+namespace ChromelyControllersDemo
 {
     class Program
     {
@@ -15,7 +15,7 @@ namespace BlazorControllersDemo
         static void Main(string[] args)
         {
             var config = DefaultConfiguration.CreateForRuntimePlatform();
-            config.WindowOptions.Title = "chromely blazor";
+            config.WindowOptions.Title = "chromely controller demo";
             config.UrlSchemes.Add(new UrlScheme(DefaultSchemeName.RESOURCE, "http", "app", string.Empty, UrlSchemeType.Resource, false));
             config.StartUrl = "http://app/index.html";
 

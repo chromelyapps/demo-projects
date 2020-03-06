@@ -13,7 +13,7 @@ using Chromely.Core.Configuration;
 using Chromely.Core.Logging;
 using Chromely.Core.Network;
 
-namespace BlazorControllersDemo.Controllers
+namespace ChromelyControllersDemo.Controllers
 {
     /// <summary>
     /// The demo controller.

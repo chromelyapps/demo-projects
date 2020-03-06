@@ -3,26 +3,25 @@
 @using System.Text.Json;
 @using Chromely.Core;
 @using Chromely.CefGlue;
+@inject IJSRuntime JSRuntime
 
 @{
-    RenderFragment template = @<p>Hello C# Corner Reader!</p>;
     RenderFragment<Result> ItemTemplate = (movieItem) => @<div class='col-sm-6 col-lg-3 mb-3'>
-    <div class='card h-100'>
-        <div class='row no-gutters'>
-            <div class='col-md-12 text-center'>
-                <img src='https://image.tmdb.org/t/p/original@(movieItem.poster_path)' alt='...' style='width: 100%;' title='@movieItem.overview'>
-            </div>
-            <div class='col-md-12'>
-                <div class='card-body'>
-                    <h4 class='card-title text-info'>@movieItem.original_title</h4>
-                    <h6 class='card-subtitle text-muted'>@movieItem.release_date</h6>
-                    <p class='card-text mt-4'>
-                        <b>Popularity</b>: @movieItem.popularity<br><b>Vote Count</b>: " + @movieItem.vote_count<br><b>Vote Average</b>: @movieItem.vote_average
-                        <br><br><a href="#" @onclick="@(() => LaunchHomepage(movieItem.id))">Homepage</a>
-                    </p>
+        <div class='card h-100'>
+            <div class='row no-gutters'>
+                <div class='col-md-12 text-center'>
+                    <img src='https://image.tmdb.org/t/p/original@(movieItem.poster_path)' alt='...' style='width: 100%;' title='@movieItem.overview'>
+                </div>
+                <div class='col-md-12'>
+                    <div class='card-body'>
+                        <h4 class='card-title text-info'>@movieItem.original_title</h4>
+                        <h6 class='card-subtitle text-muted'>@movieItem.release_date</h6>
+                        <p class='card-text mt-4'>
+                            <b>Popularity</b>: @movieItem.popularity<br><b>Vote Count</b>: " + @movieItem.vote_count<br><b>Vote Average</b>: @movieItem.vote_average
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>;
 }
@@ -47,7 +46,7 @@
                 <!-- -->
                 <div class="form-group row justify-content-end col-12">
                     <div>
-                        <input id="textSearchMovies" type="text" class="form-control" placeholder="Search Movies" style="width:auto;">
+                        <input @bind="_searchQuery" type="text" class="form-control" placeholder="Search Movies" style="width:auto;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-sm" @onclick="SearchMovies">Search</button>
                 </div>
@@ -74,12 +73,10 @@
 
 </div>
 
-
-
 @code {
 
     private List<Result> _movieList;
-    private static ChromelyPlatform _platform = ChromelyRuntime.Platform;
+    private string _searchQuery;
     private const string TmdbBaseUrl = "https://api.themoviedb.org/3/";
 
     private const string ChromelyTmdbApiKey = "4f457e870e91b76e02292d52a46fc445";
@@ -105,8 +102,11 @@
         }
     }
 
-    public async Task GetTmdbMovies(string name)
+    private async Task GetTmdbMovies(string name)
     {
+        _movieList = new List<Result>();
+        StateHasChanged();
+
         var result = await GetMoviesAsync(name, "");
         if (result != null)
         {
@@ -115,10 +115,12 @@
         }
     }
 
-    public async Task SearchMovies()
+    private async Task SearchMovies()
     {
-        var query = "";
-        var result = await GetMoviesAsync("search", query);
+        _movieList = new List<Result>();
+        StateHasChanged();
+
+        var result = await GetMoviesAsync("search", _searchQuery);
         if (result != null)
         {
             _movieList = result.results;
@@ -126,21 +128,7 @@
         }
     }
 
-    public async Task LaunchHomepage(int movieid)
-    {
-        if (movieid <= 0)
-        {
-            return;
-        }
-
-        var movie = await GetTmdbMovieAsync(movieid.ToString());
-        if (movie != null && !string.IsNullOrWhiteSpace(movie.homepage))
-        {
-            BrowserLauncher.Open(_platform, movie.homepage);
-        }
-    }
-
-    public async Task<TmdMoviesInfo> GetMoviesAsync(string name, string query)
+    private async Task<TmdMoviesInfo> GetMoviesAsync(string name, string query)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -220,7 +208,7 @@
 
     #region Model
 
-    public class Result
+    private class Result
     {
         public double popularity { get; set; }
         public int vote_count { get; set; }
@@ -256,7 +244,7 @@
         }
     }
 
-    public class TmdMoviesInfo
+    private class TmdMoviesInfo
     {
         public int page { get; set; }
         public int total_results { get; set; }
@@ -264,7 +252,7 @@
         public List<Result> results { get; set; }
     }
 
-    public class TmdMovie
+    private class TmdMovie
     {
         public int id { get; set; }
         public string homepage { get; set; }

@@ -13,7 +13,7 @@ namespace BlazorComponentsDemo
         static void Main(string[] args)
         {
             var config = DefaultConfiguration.CreateForRuntimePlatform();
-            config.WindowOptions.Title = "chromely blazor";
+            config.WindowOptions.Title = "blazor component demo";
             config.UrlSchemes.Add(new UrlScheme(DefaultSchemeName.RESOURCE, "http", "app", string.Empty, UrlSchemeType.Resource, false));
             config.StartUrl = "http://app/index.html";
 

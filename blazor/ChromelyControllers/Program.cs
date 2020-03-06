@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Blazor.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BlazorControllers
+namespace ChromelyControllers
 {
     public class Program
     {

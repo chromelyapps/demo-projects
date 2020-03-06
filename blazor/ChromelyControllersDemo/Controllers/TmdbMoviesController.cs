@@ -8,7 +8,7 @@ using Chromely.CefGlue;
 using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 
-namespace BlazorControllersDemo.Controllers
+namespace ChromelyControllersDemo.Controllers
 {
     [ControllerProperty(Name = "TmdbMoviesController", Route = "tmdbmoviescontroller")]
     public class TmdbMoviesController : ChromelyController

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Chromely.Core.Network;
 
-namespace BlazorControllersDemo.Controllers
+namespace ChromelyControllersDemo.Controllers
 {
     [ControllerProperty(Name = "TodoListController", Route = "todolistcontroller")]
     public class TodoListController : ChromelyController

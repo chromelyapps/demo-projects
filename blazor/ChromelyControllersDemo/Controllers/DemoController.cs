@@ -15,7 +15,7 @@ using Chromely.CefGlue;
 using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 
-namespace BlazorControllersDemo.Controllers
+namespace ChromelyControllersDemo.Controllers
 {
     /// <summary>
     /// The demo controller.
