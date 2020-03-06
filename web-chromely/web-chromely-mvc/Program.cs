@@ -26,7 +26,7 @@ namespace web_chromely_mvc {
                 // But only do this when the parent process is launched initially
                 // not when Chromely launches itself as a child process
                 // TODO is there a cleaner way / argument we can check for other than something like "--no-sandbox"
-                if (!args.Contains("--no-sandbox")) {
+                if (!args.Contains("--ignore-certificate-errors")) {
                     CreateWebHostBuilder(args).UseUrls(appurls).Build().Start();
                 }
                 ChromelyBootstrap(args, appurls);

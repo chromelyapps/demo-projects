@@ -11,6 +11,11 @@ Something to be aware of is that a Chromely application will launch itself to op
 So therefore we need to make sure the CreateWebHostBuilder only runs once not multiple times during launch.
 See the Startup.cs for examples.
 
+## Console window
+
+In order to avoid seeing a console window in addition to the gui window.
+This should just be a case of setting the "Output Type" from "Console Application" to "Windows Application"
+
 ## wwwroot files
 
 With some templates there is a wwwroot directory which contains static content such as compiled javascript files.
