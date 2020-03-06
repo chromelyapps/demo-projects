@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-chromely-mvc", "web-chromely-mvc\web-chromely-mvc.csproj", "{735E1CCE-764C-4B6F-B7C4-04F868878084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-chromely-mvc", "web-chromely-mvc\web-chromely-mvc.csproj", "{735E1CCE-764C-4B6F-B7C4-04F868878084}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-chromely-vuetify2", "web-chromely-vuetify2\web-chromely-vuetify2.csproj", "{3ED1FBA3-61D9-421D-BD89-450A5CCA97F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED1FBA3-61D9-421D-BD89-450A5CCA97F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED1FBA3-61D9-421D-BD89-450A5CCA97F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED1FBA3-61D9-421D-BD89-450A5CCA97F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED1FBA3-61D9-421D-BD89-450A5CCA97F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
