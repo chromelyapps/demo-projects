@@ -94,6 +94,7 @@
         if (todoItem != null)
         {
             GetOrUpdateList(RequestType.ToggleItemComplete, todoItem);
+            _allItemsChecked = false;
             StateHasChanged();
         }
     }
@@ -105,7 +106,7 @@
 
     private void TogleTodoAllItems()
     {
-        UpdateList("toggleall", 0, "", 0);
+        UpdateList("toggleall", 0, "", _allItemsChecked ? 0 : 1);
     }
 
     private void UpdateList(string type, int id, string todo, int completed)
@@ -197,7 +198,7 @@
 
 
                 case RequestType.ToggleAll:
-                    _todoItemList.ForEach(x => x.Completed = x.Completed == 1 ? 0 : 1);
+                    _todoItemList.ForEach(x => x.Completed = todoItem.Completed);
                     return _todoItemList.OrderByDescending(x => x.Id).ToList();
 
                 case RequestType.ToggleItemComplete:

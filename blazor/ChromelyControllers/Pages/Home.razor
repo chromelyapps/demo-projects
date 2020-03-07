@@ -28,13 +28,13 @@
                     <div class="container col-8 justify-content-center">
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <p><b>Chromely Main Objective</b>: @divObjective</p>
+                                <p><b>Chromely Main Objective</b>: @_divObjective</p>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <p><b>Platforms</b>: @divPlatform</p>
+                                <p><b>Platforms</b>: @_divPlatform</p>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <p><b>Chromium - CefGlue Version</b>: @divVersion</p>
+                                <p><b>Chromium - CefGlue Version</b>: @_divVersion</p>
                             </li>
                         </ul>
                     </div>
@@ -55,9 +55,9 @@
 
 @code {
 
-    private string divObjective = string.Empty;
-    private string divPlatform = string.Empty;
-    private string divVersion = string.Empty;
+    private string _divObjective = string.Empty;
+    private string _divPlatform = string.Empty;
+    private string _divVersion = string.Empty;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -66,12 +66,13 @@
         {
             var jsRequest = new JSRequest();
             jsRequest.Url = "/info";
+            jsRequest.JSInvokeId = "HomeCallback";
             var dotNetReference = DotNetObjectReference.Create(this);
             JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
         }
     }
 
-    [JSInvokable("MessageRouterCallback")]
+    [JSInvokable("HomeCallback")]
     public void MessageRouterResponse(string respose)
     {
         var options = new JsonSerializerOptions();
@@ -79,9 +80,9 @@
         options.AllowTrailingCommas = true;
         var data = JsonSerializer.Deserialize<Dictionary<string, string>>(respose, options);
 
-        divObjective = data["divObjective"];
-        divPlatform = data["divPlatform"];
-        divVersion = data["divVersion"];
+        _divObjective = data["divObjective"];
+        _divPlatform = data["divPlatform"];
+        _divVersion = data["divVersion"];
 
         StateHasChanged();
     }

@@ -5,7 +5,13 @@ namespace ChromelyControllers.Pages
 {
     public class JSRequest
     {
+        public JSRequest()
+        {
+            Parameters = new Dictionary<string, string>();
+        }
+
         public string Url { get; set; }
+        public string JSInvokeId { get; set; }
         public IDictionary<string, string> Parameters { get; set; }
         public object PostData { get; set; }
 

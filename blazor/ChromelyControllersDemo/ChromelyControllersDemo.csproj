@@ -37,6 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Chromely.External.Controllers.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="chromely.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

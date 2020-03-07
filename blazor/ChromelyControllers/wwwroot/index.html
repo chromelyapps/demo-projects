@@ -44,7 +44,7 @@
                 onSuccess: (response) => {
                     var jsonData = JSON.parse(response);
                     if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
-                        if (dotNetObject) dotNetObject.invokeMethodAsync('MessageRouterCallback', JSON.stringify(jsonData.Data));
+                        if (dotNetObject) dotNetObject.invokeMethodAsync(requestObj.JSInvokeId, JSON.stringify(jsonData.Data));
                     } else {
                         console.log("An error occurs during message routing. With ur:" + url + ". Response received:" + response);
                     }
@@ -69,7 +69,7 @@
                 onSuccess: (response) => {
                     var jsonData = JSON.parse(response);
                     if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
-                        if (dotNetObject) dotNetObject.invokeMethodAsync('MessageRouterCallback', JSON.stringify(jsonData.Data));
+                        if (dotNetObject) dotNetObject.invokeMethodAsync(requestObj.JSInvokeId, JSON.stringify(jsonData.Data));
                     } else {
                         console.log("An error occurs during message routing. With ur:" + url + ". Response received:" + response);
                     }
