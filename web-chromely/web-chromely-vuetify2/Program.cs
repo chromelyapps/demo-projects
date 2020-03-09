@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using Chromely;
+using Chromely.CefGlue.Browser;
 using Chromely.Core;
 using Chromely.Core.Configuration;
 
@@ -32,7 +33,8 @@ namespace Web.Chromely.Vuetify2 {
                 // Setup the Web Host Builder to listen on a port
                 // But only do this when the parent process is launched initially
                 // not when Chromely launches itself as a child process
-                if (!args.Contains("--ignore-certificate-errors")) {
+                var proctype = ClientAppUtils.GetProcessType(args);
+                if (proctype == ProcessType.Browser) {
                     CreateWebHostBuilder(config, args).UseUrls(appurls).Build().Start();
                 }
                 ChromelyBootstrap(args, appurls);
