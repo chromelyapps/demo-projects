@@ -1,0 +1,90 @@
+﻿@page "/"
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-12">
+            <div class="text-center m-0  d-flex flex-column justify-content-center">
+                <div>
+                    <div class="row justify-content-center">
+                        <div class="justify-content-right">
+                            <img src="../Content/img/chromely_gray.png" class="img-rounded" alt="Cinque Terre" width="240" height="240">
+                        </div>
+                        <div class="justify-content-left">
+                            <img src="../Content/img/blazor.png" class="img-rounded" alt="Cinque Terre" width="240" height="240">
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-primary text-center"><h2>chromely blazor</h2></span>
+                    </div>
+                    <div>
+                        <p class="text-muted text-center">Build .NET/.NET CORE HTML5 Desktop Apps</p>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div class="container col-8 justify-content-center">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <p><b>Chromely Main Objective</b>: @_divObjective</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <p><b>Platforms</b>: @_divPlatform</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <p><b>Chromium - CefGlue Version</b>: @_divVersion</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div>
+                        <a href="https://github.com/chromelyapps/Chromely" class="btn btn-default" role="button" style='margin: 5px;'>more info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private string _divObjective = string.Empty;
+    private string _divPlatform = string.Empty;
+    private string _divVersion = string.Empty;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            var jsRequest = new JSRequest();
+            jsRequest.Url = "/info";
+            jsRequest.JSInvokeId = "HomeCallback";
+            var dotNetReference = DotNetObjectReference.Create(this);
+            JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
+        }
+    }
+
+    [JSInvokable("HomeCallback")]
+    public void MessageRouterResponse(string respose)
+    {
+        var options = new JsonSerializerOptions();
+        options.ReadCommentHandling = JsonCommentHandling.Skip;
+        options.AllowTrailingCommas = true;
+        var data = JsonSerializer.Deserialize<Dictionary<string, string>>(respose, options);
+
+        _divObjective = data["divObjective"];
+        _divPlatform = data["divPlatform"];
+        _divVersion = data["divVersion"];
+
+        StateHasChanged();
+    }
+
+}

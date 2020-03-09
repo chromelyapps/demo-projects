@@ -1,0 +1,262 @@
+﻿@page "/tmdbmovies"
+
+@using System.Text.Json;
+@using Chromely.Core;
+@using Chromely.CefGlue;
+@inject IJSRuntime JSRuntime
+
+@{
+    RenderFragment<Result> ItemTemplate = (movieItem) => @<div class='col-sm-6 col-lg-3 mb-3'>
+        <div class='card h-100'>
+            <div class='row no-gutters'>
+                <div class='col-md-12 text-center'>
+                    <img src='https://image.tmdb.org/t/p/original@(movieItem.poster_path)' alt='...' style='width: 100%;' title='@movieItem.overview'>
+                </div>
+                <div class='col-md-12'>
+                    <div class='card-body'>
+                        <h4 class='card-title text-info'>@movieItem.original_title</h4>
+                        <h6 class='card-subtitle text-muted'>@movieItem.release_date</h6>
+                        <p class='card-text mt-4'>
+                            <b>Popularity</b>: @movieItem.popularity<br><b>Vote Count</b>: " + @movieItem.vote_count<br><b>Vote Average</b>: @movieItem.vote_average
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>;
+}
+
+<div class="container justify-content-center">
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- -->
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("latest"))">latest</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("latest"))">popular</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("toprated"))">top rated</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("nowplaying"))">now playing</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("upcoming"))">upcoming</button>
+                </div>
+                <!-- -->
+            </div>
+            <div class="col">
+
+                <!-- -->
+                <div class="form-group row justify-content-end col-12">
+                    <div>
+                        <input @bind="_searchQuery" type="text" class="form-control" placeholder="Search Movies" style="width:auto;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" @onclick="SearchMovies">Search</button>
+                </div>
+                <!-- -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Movies List  -->
+    <div class="container">
+        <div class="row">
+            @if (_movieList == null)
+            {
+                _movieList = new List<Result>();
+            }
+            @foreach (var item in _movieList)
+            {
+                @ItemTemplate(item)
+            }
+        </div>
+    </div>
+
+    <!-- End Moves List -->
+
+</div>
+
+@code {
+
+    private List<Result> _movieList;
+    private string _searchQuery;
+    private const string TmdbBaseUrl = "https://api.themoviedb.org/3/";
+
+    private const string ChromelyTmdbApiKey = "4f457e870e91b76e02292d52a46fc445";
+
+    private static string TmdbLatestUrl(string apiKey = ChromelyTmdbApiKey) => $"movie/latest?api_key={apiKey}&language=en-US";
+    private static string TmdbPopularUrl(string apiKey = ChromelyTmdbApiKey) => $"movie/popular?api_key={apiKey}&language=en-US&page=1";
+    private static string TmdbTopRatedUrl(string apiKey = ChromelyTmdbApiKey) => $"movie/top_rated?api_key={apiKey}&language=en-US&page=1";
+    private static string TmdbNowPlayingUrl(string apiKey = ChromelyTmdbApiKey) => $"movie/now_playing?api_key={apiKey}&language=en-US&page=1";
+    private static string TmdbUpcomingUrl(string apiKey = ChromelyTmdbApiKey) => $"movie/upcoming?api_key={apiKey}&language=en-US&page=1";
+    private static string TmdbSearchUrl(string queryValue, string apiKey = ChromelyTmdbApiKey) => $"search/movie?api_key={apiKey}&query={queryValue}&language=en-US&page=1&include_adult=false";
+    private static string TmdbGetMovieUrl(string movieId, string apiKey = ChromelyTmdbApiKey) => $"movie/{movieId}?api_key={apiKey}";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var result = await GetMoviesAsync("popular", "");
+            if (result != null)
+            {
+                _movieList = result.results;
+                StateHasChanged();
+            }
+        }
+    }
+
+    private async Task GetTmdbMovies(string name)
+    {
+        _movieList = new List<Result>();
+        StateHasChanged();
+
+        var result = await GetMoviesAsync(name, "");
+        if (result != null)
+        {
+            _movieList = result.results;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SearchMovies()
+    {
+        _movieList = new List<Result>();
+        StateHasChanged();
+
+        var result = await GetMoviesAsync("search", _searchQuery);
+        if (result != null)
+        {
+            _movieList = result.results;
+            StateHasChanged();
+        }
+    }
+
+    private async Task<TmdMoviesInfo> GetMoviesAsync(string name, string query)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return new TmdMoviesInfo();
+        }
+
+        if (name.Equals("search") && string.IsNullOrWhiteSpace(query))
+        {
+            return new TmdMoviesInfo();
+        }
+
+        var paramUrl = string.Empty;
+        switch (name.ToLower())
+        {
+            case "latest":
+                paramUrl = TmdbLatestUrl();
+                break;
+            case "popular":
+                paramUrl = TmdbPopularUrl();
+                break;
+            case "toprated":
+                paramUrl = TmdbTopRatedUrl();
+                break;
+            case "nowplaying":
+                paramUrl = TmdbNowPlayingUrl();
+                break;
+            case "upcoming":
+                paramUrl = TmdbUpcomingUrl();
+                break;
+            case "search":
+                paramUrl = TmdbSearchUrl(query);
+                break;
+        }
+
+        return await GetTmdbMovieListAsync(paramUrl);
+    }
+
+    private async Task<TmdMoviesInfo> GetTmdbMovieListAsync(string paramUrl)
+    {
+        var baseAddress = new Uri(TmdbBaseUrl);
+        using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+        {
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json");
+
+            using (var response = await httpClient.GetAsync(paramUrl))
+            {
+                string responseData = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions();
+                options.ReadCommentHandling = JsonCommentHandling.Skip;
+                options.AllowTrailingCommas = true;
+
+                return JsonSerializer.Deserialize<TmdMoviesInfo>(responseData, options);
+            }
+        }
+    }
+
+    private async Task<TmdMovie> GetTmdbMovieAsync(string movieId)
+    {
+        var baseAddress = new Uri(TmdbBaseUrl);
+        using (var httpClient = new HttpClient { BaseAddress = baseAddress })
+        {
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json");
+
+            using (var response = await httpClient.GetAsync(TmdbGetMovieUrl(movieId)))
+            {
+                string responseData = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions();
+                options.ReadCommentHandling = JsonCommentHandling.Skip;
+                options.AllowTrailingCommas = true;
+
+                return JsonSerializer.Deserialize<TmdMovie>(responseData, options);
+            }
+        }
+    }
+
+    #region Model
+
+    private class Result
+    {
+        public double popularity { get; set; }
+        public int vote_count { get; set; }
+        public bool video { get; set; }
+        public string poster_path { get; set; }
+        public int id { get; set; }
+        public bool adult { get; set; }
+        public string backdrop_path { get; set; }
+        public string original_language { get; set; }
+        public string original_title { get; set; }
+        public List<int> genre_ids { get; set; }
+        public string title { get; set; }
+        public double vote_average { get; set; }
+        public string overview { get; set; }
+        private string _releaseDate;
+
+        public string release_date
+        {
+            get
+            {
+                DateTime dateTime;
+                if (DateTime.TryParse(_releaseDate, out dateTime))
+                {
+                    return string.Format("{0:dddd, MMMM d, yyyy}", dateTime);
+                }
+
+                return _releaseDate;
+            }
+            set
+            {
+                _releaseDate = value;
+            }
+        }
+    }
+
+    private class TmdMoviesInfo
+    {
+        public int page { get; set; }
+        public int total_results { get; set; }
+        public int total_pages { get; set; }
+        public List<Result> results { get; set; }
+    }
+
+    private class TmdMovie
+    {
+        public int id { get; set; }
+        public string homepage { get; set; }
+    }
+
+    #endregion Model
+}  

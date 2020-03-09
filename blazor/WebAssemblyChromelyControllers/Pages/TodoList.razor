@@ -1,0 +1,193 @@
+﻿@page "/todolist"
+
+@using System.Text.Json;
+@inject IJSRuntime JSRuntime
+
+@{
+    RenderFragment<TodoItem> ItemTemplate = (todoItem) => @<li class='list-group-item d-flex justify-content-between align-items-center'>
+        <div class='custom-control custom-switch'>
+            <input type='checkbox' class='custom-control-input' id='@(todoItem.Id)CheckboxTodoItem' checked="@(todoItem.Completed == 1)" @onclick="@(() => ToggleTodoItem(todoItem.Id))">
+            <label id='@(todoItem.Id)LabelTodoItem' class='custom-control-label' for='@(todoItem.Id)CheckboxTodoItem'>@((MarkupString)(todoItem.TodoMarkup))</label>
+        </div>
+        <span class='badge badge-secondary badge-pill'><a  href='javascript:void(0);' @onclick="@(() => DeleteTodoItem(todoItem.Id))">X</a></span>
+    </li>;
+}
+
+<div class="container-fluid">
+
+    <div class="row col-12 justify-content-center">
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="checkboxSelectAllTodoItems" @bind="_allItemsChecked" @onclick="TogleTodoAllItems">
+                            <label class="custom-control-label" for="checkboxSelectAllTodoItems"></label>
+                        </div>
+                    </span>
+                </div>
+                <input type="text" @bind="_newTodoItem" @onkeyup="AddNewTodoItem" class="form-control" placeholder="What needs to be done?" style="font-size: 24px; text-align: center;">
+            </div>
+        </div>
+    </div>
+
+    <!-- TODO Items List  -->
+    <div class="row col-12 justify-content-center">
+        <div class='col-8'>
+            <ul id='listGroupId' class='list-group'>
+                @if (_todoUIItemList == null)
+                {
+                    _todoUIItemList = new List<TodoItem>();
+                }
+                @foreach (var item in _todoUIItemList)
+                {
+                    @ItemTemplate(item)
+                }
+            </ul>
+        </div>
+    </div>
+    <!-- End TODO Items List  -->
+
+    <div class="row col-12 justify-content-center">
+        <div class="col-8">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <label>Chromely TODO List</label>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("all"))">All</button>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("allactive"))">Active</button>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("allcompleted"))">Completed</button>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("clearcompleted"))">Clear completed</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    private string _newTodoItem;
+    private bool _allItemsChecked;
+    private List<TodoItem> _todoUIItemList = new List<TodoItem>();
+
+    private void AddNewTodoItem(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            UpdateList("add", 0, _newTodoItem, 0);
+            _newTodoItem = string.Empty;
+        }
+    }
+
+    private void GetTodoList(string reqType)
+    {
+        UpdateList(reqType, 0, "", 0);
+    }
+
+    private void ToggleTodoItem(int id)
+    {
+        TodoItem todoItem = _todoUIItemList.FirstOrDefault(x => x.Id == id);
+        if (todoItem != null)
+        {
+            todoItem.Completed = todoItem.Completed == 1 ? 0 : 1;
+            var url = "http://command.com/todolistcontroller/toggleactive?id=" + id + "&completed=" + todoItem.Completed.ToString();
+            JSRuntime.InvokeVoidAsync("MessageRouter.OpenExternalUrl", url);
+
+            _allItemsChecked = false;
+
+            StateHasChanged();
+        }
+    }
+
+    private void DeleteTodoItem(int id)
+    {
+        UpdateList("delete", id, "", 0);
+    }
+
+    private void TogleTodoAllItems()
+    {
+        UpdateList("toggleall", 0, "", _allItemsChecked ? 0 : 1);
+    }
+
+    private void UpdateList(string type, int id, string todo, int completed)
+    {
+        var jsRequest = new JSRequest();
+        jsRequest.Parameters["name"] = type;
+        jsRequest.Parameters["id"] = id.ToString();
+        jsRequest.Parameters["todo"] = todo;
+        jsRequest.Parameters["completed"] = completed.ToString();
+        jsRequest.Url = "/todolistcontroller/items";
+        jsRequest.JSInvokeId = "TodoCallback";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
+    }
+
+    [JSInvokable("TodoCallback")]
+    public void UpdateListResponse(string respose)
+    {
+        _todoUIItemList = new List<TodoItem>();
+
+        try
+        {
+            var options = new JsonSerializerOptions();
+            options.ReadCommentHandling = JsonCommentHandling.Skip;
+            options.AllowTrailingCommas = true;
+            _todoUIItemList = JsonSerializer.Deserialize<List<TodoItem>>(respose, options);
+        }
+        catch (Exception exception)
+        {
+            System.Console.WriteLine($"{exception.Message} - {exception.StackTrace}");
+        }
+
+        StateHasChanged();
+    }
+
+    #region Models
+
+    private class TodoItem
+    {
+        public TodoItem()
+        {
+            Id = 0;
+            Todo = string.Empty;
+            Completed = 0;
+            CreatedDate = DateTime.UtcNow;
+        }
+
+        public TodoItem(int id, string todo, int completed)
+        {
+            Id = id;
+            Todo = todo;
+            Completed = completed;
+            CreatedDate = DateTime.UtcNow;
+        }
+
+        public int Id { get; set; }
+
+        public string Todo { get; set; }
+
+        public int Completed { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string TodoMarkup
+        {
+            get
+            {
+                var delTagStart = Completed == 1 ? "<del>" : "";
+                var delTagEnd = Completed == 1 ? "</del>" : "";
+                return $"{delTagStart}{Todo}{delTagEnd}";
+            }
+        }
+
+        public bool Valid
+        {
+            get
+            {
+                return Id > 0 && !string.IsNullOrWhiteSpace(Todo);
+            }
+        }
+    }
+
+    #endregion Models
+}
