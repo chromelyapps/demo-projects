@@ -9,24 +9,24 @@ This can be useful when you want to just adapt an existing website with as littl
 
 This example is based on the standard Visual Studio new asp .net core website mvc template but also includes the ability to launch via Chromely
 
-### web-chromely-vuetify2
+### web-chromely-bootstrap4
 
-This is a more advanced single page application example using webpack, typescript, vuetify, chromely.
-For the launch profile select Web.Chromely.Vuetify2 to run as a website, or Chromely to run as a Chromely application.
+This is a more advanced single page application example using webpack, typescript, bootstrap4, chromely.
+For the launch profile select Web.Chromely.Bootstrap4 to run as a website, or Chromely to run as a Chromely application.
 
 This supports debugging / breakpoints within typescript.
-(make sure to select Chrome as the browser, and Web.Chromely.Vuetify2 as the launch profile to launch as a website to debug).
+(make sure to select Chrome as the browser, and Web.Chromely.Bootstrap4 as the launch profile to launch as a website to debug).
 Hot page reloading (the typescript / vue / client side code can be edited on the fly while debugging as a website and it should auto reload).
 
 To install the npm packages
 ```
-cd web-chromely-vuetify2\ClientApp
+cd web-chromely-bootstrap4\ClientApp
 npm install
 ```
 
 To force a rebuild of the webpack files (this should be auto triggered on change via webpack)
 ```
-cd web-chromely-vuetify2\ClientApp
+cd web-chromely-bootstrap4\ClientApp
 npm run build dev
 ```
 

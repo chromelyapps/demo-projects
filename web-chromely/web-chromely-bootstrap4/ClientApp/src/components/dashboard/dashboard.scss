@@ -1,0 +1,34 @@
+@import 'foundation/settings';
+@import 'foundation/site';
+
+.app-dashboard {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-dashboard-body {
+    flex: 1 1 auto;
+    display: flex;
+}
+
+.app-dashboard-body-content {
+    transition: all $offcanvas-transition-length $offcanvas-transition-timing;
+    overflow-y: auto;
+    flex: 1 1 0;
+    padding: 20px;
+    background-color: $white;
+}
+
+// Make sure the body is resized when the menu is visible for non-mobile
+@include breakpoint(medium only) {
+    .off-canvas-content.is-open-left.has-transition-push {
+        margin-right: $navbar-width;
+    }
+}
+
+@include breakpoint(large) {
+    .off-canvas-content.is-open-left.has-transition-push {
+        margin-right: $navbar-width;
+    }
+}

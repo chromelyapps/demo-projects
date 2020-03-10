@@ -1,0 +1,21 @@
+{
+  "profiles": {
+    "Web.Chromely.Bootstrap4": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_CHROMELY": "false"
+      },
+      "applicationUrl": "http://localhost:1111/"
+    },
+    "Chromely": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:1111/"
+    }
+  }
+}
