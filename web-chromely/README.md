@@ -18,16 +18,16 @@ This supports debugging / breakpoints within typescript.
 (make sure to select Chrome as the browser, and Web.Chromely.Vuetify2 as the launch profile to launch as a website to debug).
 Hot page reloading (the typescript / vue / client side code can be edited on the fly while debugging as a website and it should auto reload).
 
-To install the npm packages (I'm using pnpm as an example here as it saves on disk space)
+To install the npm packages
 ```
 cd web-chromely-vuetify2\ClientApp
-pnpm install
+npm install
 ```
 
 To force a rebuild of the webpack files (this should be auto triggered on change via webpack)
 ```
 cd web-chromely-vuetify2\ClientApp
-pnpm run build dev
+npm run build dev
 ```
 
 ## Notes
