@@ -1,0 +1,7 @@
+
+// Example of a prebuilt custom theme
+// Note we can't use the ~ notation here as that's normally substituted via webpack / scss-loader
+
+@import "customvars";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "customtheme";

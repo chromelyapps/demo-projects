@@ -1,0 +1,25 @@
+
+.sidebar {
+    margin-left: -266px;
+    transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s;
+    transition: margin-left 0.25s, margin-right 0.25s, width 0.25s, flex 0.25s, -ms-flex 0.25s;
+
+    @media (max-width: 991.98px) {
+        position: fixed;
+        z-index: 1019;
+        width: 200px;
+        height: calc(100vh - 55px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .sidebar-mobile-show {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 576px) {
+    .sidebar-desktop-show {
+        margin-left: 0;
+    }
+}

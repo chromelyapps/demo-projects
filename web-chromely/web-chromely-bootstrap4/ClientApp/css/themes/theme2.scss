@@ -1,0 +1,6 @@
+// This is an example of loading the needed scss from the cyborg bootswatch theme
+// And any needed scss from bootstrap
+
+@import "~bootswatch/dist/cyborg/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/cyborg/bootswatch";
