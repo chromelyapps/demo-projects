@@ -12,6 +12,18 @@ To get started with these demos please visit [Chromely Apps](https://github.com/
 
 ### Running the Demos
 
+**Notes**
+
+
+- Only the [CrossPlatDemo](https://github.com/chromelyapps/demo-projects/tree/master/regular-chromely/CrossPlatDemo) is ready out-of-the-box for all platforms. 
+
+- All other demos are Windows-ready by default. You can run them, but may require a bit of knowlege on how those frameworks work. 
+
+    - For Angular/React/Vue using start url - [local://dist/index.html](https://github.com/chromelyapps/demo-projects/blob/a844ab6dfc2ca581f22c4dd709a132daca6a930e/angular-react-vue/ChromelyAngular/chromelyconfig.json#L4) it uses **xcopy** (on Windows to copy the dist folder to bin/exe folder) since it may be different for other platforms, you may have to copy the dist folder manually or replace **xcopy** functionality.
+
+    - For Blazor demos, **xcopy** is also used in [PostBuildEvent](https://github.com/chromelyapps/demo-projects/blob/a844ab6dfc2ca581f22c4dd709a132daca6a930e/blazor/WebAssemblyChromelyControllers/WebAssemblyChromelyControllers.csproj#L16). This may require replacement too (or manual copy) for Linux and MacOS.
+
+
 To run the demos in different platforms - Windows, Linux and MacOS may require a few tweaks.
 
 Assumptions:
