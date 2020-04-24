@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely" Version="5.0.77.1" />
-    <PackageReference Include="Chromely.CefGlue" Version="5.0.77" />
-    <PackageReference Include="Chromely.Core" Version="5.0.0" />
+	<PackageReference Include="Chromely" Version="5.0.77.3" />
   </ItemGroup>
 
   <ItemGroup>

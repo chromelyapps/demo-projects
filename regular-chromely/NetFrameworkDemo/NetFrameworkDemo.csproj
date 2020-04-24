@@ -27,9 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely" Version="5.0.77.1" />
-    <PackageReference Include="Chromely.CefGlue" Version="5.0.77" />
-    <PackageReference Include="Chromely.Core" Version="5.0.0" />
+    <PackageReference Include="Chromely" Version="5.0.77.3" />
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
