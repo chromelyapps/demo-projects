@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Chromely" Version="5.0.77.3" />
+	<PackageReference Include="Chromely" Version="5.0.79" />
   </ItemGroup>
 
   <ItemGroup>

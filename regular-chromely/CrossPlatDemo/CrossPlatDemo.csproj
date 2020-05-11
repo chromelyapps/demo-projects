@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely" Version="5.0.77.3" />
+    <PackageReference Include="Chromely" Version="5.0.79" />
     <PackageReference Include="System.Buffers" Version="4.5.0" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
