@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely" Version="5.0.81.2"/>
+    <PackageReference Include="Chromely" Version="5.0.83"/>
     <PackageReference Include="Microsoft.Packaging.Tools.Trimming" Version="1.1.0-preview1-26619-01" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
