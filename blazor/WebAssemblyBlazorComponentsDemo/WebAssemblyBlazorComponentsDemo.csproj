@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Chromely" Version="5.0.81"/>
+	<PackageReference Include="Chromely" Version="5.0.81.1"/>
   </ItemGroup>
 
   <ItemGroup>
