@@ -12,20 +12,12 @@
 
   <ItemGroup>
     <PackageReference Include="CefSharp.Common" Version="83.4.20" />
+    <PackageReference Include="Chromely.CefSharp" Version="5.1.83-pre01" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.5" />
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Chromely.CefSharp">
-      <HintPath>..\libs\Chromely.CefSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Chromely.Core">
-      <HintPath>..\libs\Chromely.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
