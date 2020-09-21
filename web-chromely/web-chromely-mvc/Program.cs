@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using Chromely;
-using Chromely.CefGlue.Browser;
+using Chromely.Browser;
 using Chromely.Core;
 using Chromely.Core.Configuration;
 using Microsoft.AspNetCore;
@@ -67,7 +67,7 @@ namespace web_chromely_mvc {
 
             AppBuilder
                 .Create()
-                .UseConfiguration<DefaultConfiguration>(config)
+                .UseConfig<DefaultConfiguration>(config)
                 .UseApp<ChromelyBasicApp>()
                 .Build()
                 .Run(args);

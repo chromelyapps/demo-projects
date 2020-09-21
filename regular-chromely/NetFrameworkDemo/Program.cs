@@ -1,9 +1,14 @@
-﻿using System;
+﻿// Copyright © 2017-2020 Chromely Projects. All rights reserved.
+// Use of this source code is governed by MIT license that can be found in the LICENSE file.
+
 using Chromely;
 using Chromely.Core;
 using Chromely.Core.Configuration;
-using Chromely.Core.Network;
-using NetFrameworkDemo.Controllers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Text.Json;
 
 namespace NetFrameworkDemo
 {
@@ -12,30 +17,80 @@ namespace NetFrameworkDemo
         [STAThread]
         static void Main(string[] args)
         {
-            /* For local and embedded (assembly) resources
-             * var config = DefaultConfiguration.CreateForRuntimePlatform();
-             * config.StartUrl = "app://app/chromely.html" // local;
-             * config.StartUrl = "assembly://app/chromely.html // assembly";
-             * config.StartUrl = "mixassembly://app/chromely.html // mixed - local + assembly";
-             */
+            //var config = DefaultConfiguration.CreateForRuntimePlatform();
+            //config.StartUrl = "https://google.com";
+            //config.StartUrl = "local://app/index.html";
+
+            // Frameless/draggable
+            //config.StartUrl = "local://app/index_frameless.html";
+
+            // config.StartUrl = "local://app/index_draggable.html";
+            // config.WindowOptions.FramelessOption.UseWebkitAppRegions = true;
 
             AppBuilder
-               .Create()
-               .UseApp<DemoChromelyApp>()
-               .Build()
-               .Run(args);
+            .Create()
+            //.UseConfig<DefaultConfiguration>(config)
+            //.UseWindow<DemoWindow>()
+            .UseApp<DemoApp>()
+            .Build()
+            .Run(args);
         }
     }
 
-    public class DemoChromelyApp : ChromelyBasicApp
+    public class CustomDisplayHandler : Xilium.CefGlue.CefDisplayHandler
     {
-        public override void Configure(IChromelyContainer container)
+    }
+
+    public class DemoApp : ChromelyBasicApp
+    {
+        public override void ConfigureServices(ServiceCollection services)
         {
-            base.Configure(container);
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(DemoController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(ExecuteJavaScriptDemoController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(TmdbMoviesController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(TodoListController));
+            base.ConfigureServices(services);
+            services.AddLogging(configure => configure.AddConsole());
+            services.AddLogging(configure => configure.AddFile("Logs/serilog-{Date}.txt"));
+
+            services.AddSingleton<Xilium.CefGlue.CefDisplayHandler, CustomDisplayHandler>();
+
+            /*
+            // Optional - adding custom handler
+            services.AddSingleton<CefDragHandler, CustomDragHandler>();
+            */
+
+            /*
+            // Optional- using config section to register IChromelyConfiguration
+            // This just shows how it can be used, developers can use custom classes to override this approach
+            //
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json");
+
+            var configuration = builder.Build();
+            var config = DefaultConfiguration.CreateFromConfigSection(configuration);
+            services.AddSingleton<IChromelyConfiguration>(config);
+            */
+
+            /* Optional
+            var options = new JsonSerializerOptions();
+            options.ReadCommentHandling = JsonCommentHandling.Skip;
+            options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.AllowTrailingCommas = true;
+            services.AddSingleton<JsonSerializerOptions>(options);
+            */
+
+            RegisterControllerAssembly(services, typeof(DemoApp).Assembly);
+        }
+    }
+
+    // Windows only
+    public class Demo2App : ChromelyFramelessApp
+    {
+        public override void ConfigureServices(ServiceCollection services)
+        {
+            base.ConfigureServices(services);
+            services.AddLogging(configure => configure.AddConsole());
+            services.AddLogging(configure => configure.AddFile("Logs/serilog-{Date}.txt"));
+
+            RegisterControllerAssembly(services, typeof(DemoApp).Assembly);
         }
     }
 }

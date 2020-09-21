@@ -1,11 +1,14 @@
-﻿using System;
+﻿// Copyright © 2017-2020 Chromely Projects. All rights reserved.
+// Use of this source code is governed by MIT license that can be found in the LICENSE file.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Chromely.Core.Network;
 
-namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
+namespace WebAssemblyChromelyControllersDemo.Controllers
 {
-    [ControllerProperty(Name = "TodoListController", Route = "todolistcontroller")]
+    [ControllerProperty(Name = "TodoListController")]
     public class TodoListController : ChromelyController
     {
         private static readonly object _lockObj = new object();
@@ -19,8 +22,8 @@ namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
 
         #region HttpAttributes
 
-        [HttpGet(Route = "/todolistcontroller/items")]
-        public ChromelyResponse GetTodoItems(ChromelyRequest request)
+        [RequestAction(RouteKey = "/todolistcontroller/items")]
+        public IChromelyResponse GetTodoItems(IChromelyRequest request)
         {
             var parameters = request.Parameters as IDictionary<string, string>;
             var name = string.Empty;
@@ -84,7 +87,7 @@ namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
 
         #region CustomAttributes
 
-        [Command(Route = "/todolistcontroller/toggleactive")]
+        [CommandAction(RouteKey = "/todolistcontroller/toggleactive")]
         public void ToggleActive(IDictionary<string, string> queryParameters)
         {
             var id = string.Empty;

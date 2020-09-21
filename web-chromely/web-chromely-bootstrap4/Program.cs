@@ -8,9 +8,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using Chromely;
-using Chromely.CefGlue.Browser;
 using Chromely.Core;
 using Chromely.Core.Configuration;
+using Chromely.Browser;
 
 namespace Web.Chromely.Bootstrap4 {
 
@@ -100,7 +100,7 @@ namespace Web.Chromely.Bootstrap4 {
 
             AppBuilder
                 .Create()
-                .UseConfiguration<DefaultConfiguration>(config)
+                .UseConfig<DefaultConfiguration>(config)
                 .UseApp<ChromelyBasicApp>()
                 .Build()
                 .Run(args);

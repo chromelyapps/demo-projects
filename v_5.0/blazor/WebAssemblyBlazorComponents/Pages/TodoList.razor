@@ -1,0 +1,269 @@
+﻿@page "/todolist"
+
+@using System.Text.Json;
+@using Chromely.Core;
+@using Chromely.CefGlue;
+
+@{
+    RenderFragment<TodoItem> ItemTemplate = (todoItem) => @<li class='list-group-item d-flex justify-content-between align-items-center'>
+        <div class='custom-control custom-switch'>
+            <input type='checkbox' class='custom-control-input' id='@(todoItem.Id)CheckboxTodoItem' checked="@(todoItem.Completed == 1)"  @onclick="@(() => ToggleTodoItem(todoItem.Id))">
+            <label id='@(todoItem.Id)LabelTodoItem' class='custom-control-label' for='@(todoItem.Id)CheckboxTodoItem'>@((MarkupString)(todoItem.TodoMarkup))</label>
+        </div>
+        <span class='badge badge-secondary badge-pill'><a href='javascript:void(0);' @onclick="@(() => DeleteTodoItem(todoItem.Id))">X</a></span>
+    </li>;
+}
+
+<div class="container-fluid">
+
+    <div class="row col-12 justify-content-center">
+        <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="checkboxSelectAllTodoItems" @bind="_allItemsChecked" @onclick="TogleTodoAllItems">
+                            <label class="custom-control-label" for="checkboxSelectAllTodoItems"></label>
+                        </div>
+                    </span>
+                </div>
+                <input type="text" @bind="_newTodoItem" @onkeyup="AddNewTodoItem" class="form-control" placeholder="What needs to be done?" style="font-size: 24px; text-align: center;">
+            </div>
+        </div>
+    </div>
+
+    <!-- TODO Items List  -->
+    <div class="row col-12 justify-content-center">
+        <div class='col-8'>
+            <ul id='listGroupId' class='list-group'>
+                @if (_todoUIItemList == null)
+                {
+                    _todoUIItemList = new List<TodoItem>();
+                }
+                @foreach (var item in _todoUIItemList)
+                {
+                    @ItemTemplate(item)
+                }
+            </ul>
+        </div>
+    </div>
+    <!-- End TODO Items List  -->
+
+    <div class="row col-12 justify-content-center">
+        <div class="col-8">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <label>Chromely TODO List</label>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("all"))">All</button>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("allactive"))">Active</button>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("allcompleted"))">Completed</button>
+                    <button type="button" class="btn btn-link" @onclick="@(() => GetTodoList("clearcompleted"))">Clear completed</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    private string _newTodoItem;
+    private bool _allItemsChecked;
+    private static readonly object _lockObj = new object();
+    private List<TodoItem> _todoUIItemList = new List<TodoItem>();
+    private List<TodoItem> _todoItemList = new List<TodoItem>();
+    private const int StartId = 1000;
+
+    private void AddNewTodoItem(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            UpdateList("add", 0, _newTodoItem, 0);
+            _newTodoItem = string.Empty;
+        }
+    }
+
+    private void GetTodoList(string reqType)
+    {
+        UpdateList(reqType, 0, "", 0);
+    }
+
+    private void ToggleTodoItem(int id)
+    {
+        TodoItem todoItem = _todoItemList.FirstOrDefault(x => x.Id == id);
+        if (todoItem != null)
+        {
+            GetOrUpdateList(RequestType.ToggleItemComplete, todoItem);
+            _allItemsChecked = false;
+            StateHasChanged();
+        }
+    }
+
+    private void DeleteTodoItem(int id)
+    {
+        UpdateList("delete", id, "", 0);
+    }
+
+    private void TogleTodoAllItems()
+    {
+        UpdateList("toggleall", 0, "", _allItemsChecked ? 0 : 1);
+    }
+
+    private void UpdateList(string type, int id, string todo, int completed)
+    {
+
+        _todoUIItemList = GetTodoItems(type, id, todo, completed);
+        StateHasChanged();
+    }
+
+    private List<TodoItem> GetTodoItems(string type, int id, string todo, int completed)
+    {
+        var todoItems = new List<TodoItem>();
+        if (string.IsNullOrWhiteSpace(type))
+        {
+            return todoItems;
+        }
+
+        TodoItem todoItem = new TodoItem(id, todo, completed);
+        switch (type.ToLower())
+        {
+            case "add":
+                todoItems = GetOrUpdateList(RequestType.Add, todoItem);
+                break;
+            case "delete":
+                todoItems = GetOrUpdateList(RequestType.Delete, todoItem);
+                break;
+            case "all":
+                todoItems = GetOrUpdateList(RequestType.All, todoItem);
+                break;
+            case "allactive":
+                todoItems = GetOrUpdateList(RequestType.AllActive, todoItem);
+                break;
+            case "allcompleted":
+                todoItems = GetOrUpdateList(RequestType.AllCompleted, todoItem);
+                break;
+            case "clearcompleted":
+                todoItems = GetOrUpdateList(RequestType.ClearCompleted, todoItem);
+                break;
+            case "toggleall":
+                todoItems = GetOrUpdateList(RequestType.ToggleAll, todoItem);
+                break;
+        }
+
+        return todoItems;
+    }
+
+
+    private List<TodoItem> GetOrUpdateList(RequestType requestType, TodoItem todoItem)
+    {
+        lock (_lockObj)
+        {
+            _todoItemList = _todoItemList ?? new List<TodoItem>();
+            switch (requestType)
+            {
+                case RequestType.Add:
+                    int nextId = !_todoItemList.Any() ? StartId : _todoItemList.Select(x => x.Id).Max() + 1;
+                    todoItem.Id = nextId;
+                    if (todoItem != null && todoItem.Valid)
+                    {
+                        _todoItemList.Add(todoItem);
+                        return _todoItemList.OrderByDescending(x => x.Id).ToList();
+                    }
+                    break;
+
+                case RequestType.Delete:
+                    if (todoItem != null && todoItem.Id > 0)
+                    {
+                        var itemToRemove = _todoItemList.FirstOrDefault(x => x.Id == todoItem.Id);
+                        if (itemToRemove != null)
+                        {
+                            _todoItemList.Remove(itemToRemove);
+                            return _todoItemList.OrderByDescending(x => x.Id).ToList();
+                        }
+                    }
+                    break;
+
+                case RequestType.All:
+                    return _todoItemList.OrderByDescending(x => x.Id).ToList();
+
+                case RequestType.AllActive:
+                    return _todoItemList.Where(aa => aa.Completed == 0).OrderByDescending(x => x.Id).ToList();
+
+                case RequestType.AllCompleted:
+                    return _todoItemList.Where(aa => aa.Completed == 1).OrderByDescending(x => x.Id).ToList();
+
+                case RequestType.ClearCompleted:
+                    _todoItemList.RemoveAll(x => x.Completed == 1);
+                    return _todoItemList.OrderByDescending(x => x.Id).ToList();
+
+
+                case RequestType.ToggleAll:
+                    _todoItemList.ForEach(x => x.Completed = todoItem.Completed);
+                    return _todoItemList.OrderByDescending(x => x.Id).ToList();
+
+                case RequestType.ToggleItemComplete:
+                    var itemToToggle = _todoItemList.FirstOrDefault(x => x.Id == todoItem.Id);
+                    if (itemToToggle != null)
+                    {
+                        itemToToggle.Completed = todoItem.Completed == 1 ? 0: 1;
+                    }
+                    return null;
+            }
+        }
+
+        return _todoItemList ?? new List<TodoItem>();
+    }
+
+    #region Models
+
+    private enum RequestType
+    {
+        Add,
+        Delete,
+        All,
+        AllActive,
+        AllCompleted,
+        ClearCompleted,
+        ToggleAll,
+        ToggleItemComplete
+    }
+
+    private class TodoItem
+    {
+        public TodoItem(int id, string todo, int completed)
+        {
+            Id = id;
+            Todo = todo;
+            Completed = completed;
+            CreatedDate = DateTime.UtcNow;
+        }
+
+        public int Id { get; set; }
+
+        public string Todo { get; set; }
+
+        public int Completed { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string TodoMarkup
+        {
+            get
+            {
+                var delTagStart = Completed == 1 ? "<del>" : "";
+                var delTagEnd = Completed == 1 ? "</del>" : "";
+                return $"{delTagStart}{Todo}{delTagEnd}";
+            }
+        }
+
+        public bool Valid
+        {
+            get
+            {
+                return Id > 0 && !string.IsNullOrWhiteSpace(Todo);
+            }
+        }
+
+        #endregion Models
+    }
+}

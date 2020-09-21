@@ -1,10 +1,9 @@
-﻿using WebAssemblyChromelyControllersDemo.ChromelyControllers;
-using Chromely;
+﻿using Chromely;
 using Chromely.Core;
 using Chromely.Core.Configuration;
-using Chromely.Core.Helpers;
 using Chromely.Core.Infrastructure;
 using Chromely.Core.Network;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace WebAssemblyChromelyControllersDemo
@@ -21,7 +20,7 @@ namespace WebAssemblyChromelyControllersDemo
 
             AppBuilder
                 .Create()
-                .UseConfiguration<DefaultConfiguration>(config)
+                .UseConfig<DefaultConfiguration>(config)
                 .UseApp<DemoChromelyApp>()
                 .Build()
                 .Run(args);
@@ -30,13 +29,10 @@ namespace WebAssemblyChromelyControllersDemo
 
     public class DemoChromelyApp : ChromelyBasicApp
     {
-        public override void Configure(IChromelyContainer container)
+        public override void ConfigureServices(ServiceCollection services)
         {
-            base.Configure(container);
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(DemoController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(ExecuteJavaScriptDemoController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(TmdbMoviesController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(TodoListController));
+            base.ConfigureServices(services);
+            RegisterControllerAssembly(services, typeof(DemoChromelyApp).Assembly);
         }
     }
 }

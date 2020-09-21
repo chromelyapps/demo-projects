@@ -1,0 +1,58 @@
+<div class="container justify-content-center">
+
+        <div class="container">
+               <div class="row">
+                 <div class="col">
+                   <!-- -->
+                   <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-secondary btn-sm" (click)="getLatestMovies()">latest</button>
+                           <button type="button" class="btn btn-secondary btn-sm" (click)="getPopularMovies()">popular</button>
+                           <button type="button" class="btn btn-secondary btn-sm" (click)="getTopratedMovies()">top rated</button>
+                           <button type="button" class="btn btn-secondary btn-sm" (click)="getNowplayingMovies()">now playing</button>
+                           <button type="button" class="btn btn-secondary btn-sm" (click)="getUpcomingMovies()">upcoming</button>
+                         </div>
+                   <!-- -->
+                 </div>
+                 <div class="col">
+                     
+                   <!-- -->
+                   <div class="form-group row justify-content-end col-12">
+                        <div>
+                           <input [value]="_searchText"  (input)="_searchText = $event.target.value" type="text" class="form-control" placeholder="Search movies" style="width:auto;">
+                       </div>
+                       <button type="submit" class="btn btn-primary btn-sm" (click)="searchMovies()">Search</button>
+                   </div>
+                   <!-- -->
+                 </div>
+               </div>
+       </div>
+   
+       <!-- Movies List  -->
+       <div class="moviesCointainer container-fluid">
+            <div class="card-columns">
+                <div *ngFor="let item of _moviesList">
+
+                    <!-- Card -->
+                    <div class="card">
+                            <div class="row no-gutters">
+                            <div class="col-md-12 text-center">
+                                <img src="{{item.PosterUrl}}" alt="..." title="{{ item.Title }}" style="width: 100%;" />
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                    <h4 class="card-title text-info">{{ item.Title }}</h4>
+                                    <h6 class="card-subtitle text-muted">{{ item.ReleaseDate }}</h6>
+                                    <p class="card-text mt-4"><b>Popularity</b>: {{ item.Popularity }}<br /><b>Vote Count</b>:  {{ item.VoteCount }} <br /><b>Vote Average</b>:  {{ item.VoteAverage }}
+                                    <br /><br /><a href="{{item.HomePage}}">Homepage</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+       </div>
+   
+       <!-- End Moves List -->
+   
+</div>

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "common/*": ["src/common/*"]
+    },
+    "experimentalDecorators": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es2018",
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "types": [ "webpack-env" ]
+  },
+  "exclude": [
+    "node_modules",
+    "webpack",
+    "webpack.config.*"
+  ]
+}

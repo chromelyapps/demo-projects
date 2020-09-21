@@ -1,8 +1,8 @@
 ﻿using Chromely;
 using Chromely.Core;
 using Chromely.Core.Configuration;
-using Chromely.Core.Helpers;
 using Chromely.Core.Infrastructure;
+using Chromely.Core.Network;
 using System;
 
 namespace WebAssemblyBlazorComponentsDemo
@@ -19,7 +19,7 @@ namespace WebAssemblyBlazorComponentsDemo
 
             AppBuilder
                 .Create()
-                .UseConfiguration<DefaultConfiguration>(config)
+                .UseConfig<DefaultConfiguration>(config)
                 .UseApp<DemoChromelyApp>()
                 .Build()
                 .Run(args);

@@ -10,13 +10,10 @@
                 <div class="row col-12">
                         <ul class="nav nav-pills" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="pill" href="#sectionA">Get 1</a>
+                                    <a class="nav-link active" data-toggle="pill" href="#sectionA">Get</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#sectionB">Get 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#sectionC">Post</a>
+                                    <a class="nav-link" data-toggle="pill" href="#sectionB">Post</a>
                                 </li>
                         </ul>
                 </div>
@@ -31,7 +28,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @click="messageRouterGet1Run">Run</button>
+                                    Route Path:&ensp;/democontroller/movies/get &ensp; <button type="button" class="btn btn-primary btn-sm" @click="messageRouterGetRun">Run</button>
                                 </div>
                                 <div style="height:100px;"></div>
                                 <div class="col-12">
@@ -48,7 +45,7 @@
                                                     <th>RestfulAssembly</th>
                                                 </tr>
                                             </thead>
-                                             <tbody tr v-for="item in messageRouterGetResult1" :key="item.Id">
+                                             <tbody tr v-for="item in messageRouterGetResult" :key="item.Id">
                                                 <tr>
                                                     <th>{{ item.Id }}</th>
                                                     <th>{{ item.Title }}</th>
@@ -68,44 +65,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    Route Path:&ensp;/externalcontroller/movies &ensp;(Restful Service in External Assembly)&ensp;<button  type="button" class="btn btn-primary btn-sm" @click="messageRouterGet2Run">Run</button>
-                                </div>
-                                <div style="height:100px;"></div>
-                                <div class="col-12">
-                                    <div class='table-responsive'>
-                                        <table class='table'>
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Title</th>
-                                                    <th>Year</th>
-                                                    <th>Votes</th>
-                                                    <th>Rating</th>
-                                                    <th>Date</th>
-                                                    <th>RestfulAssembly</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody tr v-for="item in messageRouterGetResult2" :key="item.Id">
-                                                <tr>
-                                                    <th>{{ item.Id }}</th>
-                                                    <th>{{ item.Title }}</th>
-                                                    <th>{{ item.Year }}</th>
-                                                    <th>{{ item.Votes }}</th>
-                                                    <th>{{ item.Rating }}</th>
-                                                    <th>{{ item.Date }}</th>
-                                                    <th>{{ item.RestfulAssembly }}</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="sectionC" class="container tab-pane fade">
-                            <br>
-                            <div class="row">
-                                <div class="col-12">
-                                    Route Path:&ensp;/democontroller/movies&ensp;(Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @click="messageRouterPostRun">Run</button>
+                                    Route Path:&ensp;/democontroller/movies/post &ensp;<button type="button" class="btn btn-primary btn-sm" @click="messageRouterPostRun">Run</button>
                                 </div>
                                 <div style="height:100px;"></div>
                                 <div class="col-12">
@@ -140,16 +100,11 @@ type  MovieItem = {
 })
 export default class MessageRouterDemo extends Vue {
 
-    messageRouterGetResult1 = new Array<MovieItem>();
-    messageRouterGetResult2 = new Array<MovieItem>();
+    messageRouterGetResult = new Array<MovieItem>();
     messageRouterPostResult = 'Post request not ran or no result recieved.'
 
-    messageRouterGet1Run() {
-         chromelyService.messageRouterGetJson('/democontroller/movies', null, this.messageRouterGet1Callback);
-    }
-
-    messageRouterGet2Run() {
-          chromelyService.messageRouterGetJson('/externalcontroller/movies', null, this.messageRouterGet2Callback);
+    messageRouterGetRun() {
+         chromelyService.messageRouterGetJson('/democontroller/movies/get', null, this.messageRouterGetCallback);
     }
 
     messageRouterPostRun() {
@@ -162,18 +117,14 @@ export default class MessageRouterDemo extends Vue {
                 { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
             ];
 
-         chromelyService.messageRouterPostJson('/democontroller/movies', null, moviesJson, this.messageRouterPostCallback);
+         chromelyService.messageRouterPostJson('/democontroller/movies/post', null, moviesJson, this.messageRouterPostCallback);
     }
 
-    messageRouterGet1Callback (res: any) {
+    messageRouterGetCallback (res: any) {
             var dataArray = this.parseArrayResult(res);
-            this.messageRouterGetResult1 = dataArray
+            this.messageRouterGetResult = dataArray
     }
 
-    messageRouterGet2Callback(res: any) {
-        var dataArray = this.parseArrayResult(res)
-        this.messageRouterGetResult2 = dataArray
-    }
 
     messageRouterPostCallback(res: string) {
         this.messageRouterPostResult = res

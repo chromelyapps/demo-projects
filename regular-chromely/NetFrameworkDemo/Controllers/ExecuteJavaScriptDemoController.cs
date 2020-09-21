@@ -1,26 +1,19 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExecuteJavaScriptDemoController.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2018 Chromely Projects
-// </copyright>
-// <license>
-//      See the LICENSE.md file in the project root for more information.
-// </license>
-// --------------------------------------------------------------------------------------------------------------------
+﻿// Copyright © 2017-2020 Chromely Projects. All rights reserved.
+// Use of this source code is governed by MIT license that can be found in the LICENSE file.
 
 using System;
 using System.Text.Json;
-using Chromely.Core;
 using Chromely.Core.Configuration;
-using Chromely.Core.Infrastructure;
 using Chromely.Core.Logging;
 using Chromely.Core.Network;
+using Microsoft.Extensions.Logging;
 
 namespace NetFrameworkDemo.Controllers
 {
     /// <summary>
     /// The demo controller.
     /// </summary>
-    [ControllerProperty(Name = "ExecuteJavaScriptDemoController", Route = "executejavascript")]
+    [ControllerProperty(Name = "ExecuteJavaScriptDemoController")]
     public class ExecuteJavaScriptDemoController : ChromelyController
     {
         private readonly IChromelyConfiguration _config;
@@ -31,19 +24,10 @@ namespace NetFrameworkDemo.Controllers
         public ExecuteJavaScriptDemoController(IChromelyConfiguration config)
         {
             _config = config;
-            RegisterPostRequest("/executejavascript/execute", Execute);
+            RegisterRequest("/executejavascript/execute", Execute);
         }
 
-        /// <summary>
-        /// The execute.
-        /// </summary>
-        /// <param name="request">
-        /// The request.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ChromelyResponse"/>.
-        /// </returns>
-        private ChromelyResponse Execute(ChromelyRequest request)
+        private IChromelyResponse Execute(IChromelyRequest request)
         {
             var response = new ChromelyResponse(request.Id)
             {
@@ -69,7 +53,7 @@ namespace NetFrameworkDemo.Controllers
             }
             catch (Exception e)
             {
-                Logger.Instance.Log.Error(e);
+                Logger.Instance.Log.LogError(e, e.Message);
                 response.Data = e.Message;
                 response.ReadyState = (int)ReadyState.RequestReceived;
                 response.Status = (int)System.Net.HttpStatusCode.BadRequest;
@@ -79,9 +63,6 @@ namespace NetFrameworkDemo.Controllers
             return response;
         }
 
-        /// <summary>
-        /// The script info.
-        /// </summary>
         private class ScriptInfo
         {
             /// <summary>

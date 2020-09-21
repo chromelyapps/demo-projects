@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+
+<NavMenu />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="text-center m-0  d-flex flex-column justify-content-center">
+                @Body
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+}

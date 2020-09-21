@@ -10,13 +10,10 @@
                 <div class="row col-12">
                         <ul class="nav nav-pills" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="pill" href="#sectionA">Get 1</a>
+                                    <a class="nav-link active" data-toggle="pill" href="#sectionA">Get</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#sectionB">Get 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#sectionC">Post</a>
+                                    <a class="nav-link" data-toggle="pill" href="#sectionB">Post</a>
                                 </li>
                         </ul>
                 </div>
@@ -31,12 +28,12 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @click="httpGet1Run">Run</button>
+                                    Route Path:&ensp;/democontroller/movies/get &ensp; <button type="button" class="btn btn-primary btn-sm" @click="httpGetRun">Run</button>
                                 </div>
                                 <div style="height:100px;"></div>
                                 <div class="col-12">
                                     <div class='table-responsive'>
-                                        <table id="messageRouterResult1" class='table'>
+                                        <table class='table'>
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -48,7 +45,7 @@
                                                     <th>RestfulAssembly</th>
                                                 </tr>
                                             </thead>
-                                             <tbody tr v-for="item in httpGet1Result" :key="item.Id">
+                                             <tbody tr v-for="item in httpGetResult" :key="item.Id">
                                                 <tr>
                                                     <th>{{ item.Id }}</th>
                                                     <th>{{ item.Title }}</th>
@@ -68,44 +65,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    Route Path:&ensp;/externalcontroller/movies &ensp;(Restful Service in External Assembly)&ensp;<button  type="button" class="btn btn-primary btn-sm" @click="httpGet2Run">Run</button>
-                                </div>
-                                <div style="height:100px;"></div>
-                                <div class="col-12">
-                                    <div class='table-responsive'>
-                                        <table id="messageRouterResult2" class='table'>
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Title</th>
-                                                    <th>Year</th>
-                                                    <th>Votes</th>
-                                                    <th>Rating</th>
-                                                    <th>Date</th>
-                                                    <th>RestfulAssembly</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody tr v-for="item in httpGet2Result" :key="item.Id">
-                                                <tr>
-                                                    <th>{{ item.Id }}</th>
-                                                    <th>{{ item.Title }}</th>
-                                                    <th>{{ item.Year }}</th>
-                                                    <th>{{ item.Votes }}</th>
-                                                    <th>{{ item.Rating }}</th>
-                                                    <th>{{ item.Date }}</th>
-                                                    <th>{{ item.RestfulAssembly }}</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="sectionC" class="container tab-pane fade">
-                            <br>
-                            <div class="row">
-                                <div class="col-12">
-                                    Route Path:&ensp;/democontroller/movies&ensp;(Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @click="httpPostRun">Run</button>
+                                    Route Path:&ensp;/democontroller/movies/post&ensp;<button type="button" class="btn btn-primary btn-sm" @click="httpPostRun">Run</button>
                                 </div>
                                 <div style="height:100px;"></div>
                                 <div class="col-12">
@@ -140,31 +100,19 @@ type  MovieItem = {
 })
 export default class AjaxXhrDemo extends Vue {
 
-    httpGet1Result = new Array<MovieItem>();
-    httpGet2Result = new Array<MovieItem>();
+    httpGetResult = new Array<MovieItem>();
     httpPostResult = '';
 
-   httpGet1Run()  {
-        axios.get('http://chromely.com/democontroller/movies')
+   httpGetRun()  {
+        axios.get('http://chromely.com/democontroller/movies/get')
         .then(response => {
-            this.httpGet1Result = this.parseArrayResult(response.data);
+            this.httpGetResult = this.parseArrayResult(response.data);
         })
         .catch(error => {
             console.log(error);
         });
     }
     
-    httpGet2Run()  {
-
-        axios.get('http://chromely.com/externalcontroller/movies')
-        .then(response => {
-            this.httpGet2Result = this.parseArrayResult(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
-
     httpPostRun()  {
 
         var params = [
@@ -176,7 +124,7 @@ export default class AjaxXhrDemo extends Vue {
             { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
             ];
 
-        axios.post('http://chromely.com/democontroller/movies', params)
+        axios.post('http://chromely.com/democontroller/movies/post', params)
         .then(response => {
             this.httpPostResult = response.data.Data;
         })

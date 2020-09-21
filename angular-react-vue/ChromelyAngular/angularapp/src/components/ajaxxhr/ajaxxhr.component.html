@@ -9,13 +9,10 @@
             <div class="row col-12">
                     <ul class="nav nav-pills" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="pill" href="#sectionA">Get 1</a>
+                                <a class="nav-link active" data-toggle="pill" href="#sectionA">Get</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#sectionB">Get 2</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#sectionC">Post</a>
+                                <a class="nav-link" data-toggle="pill" href="#sectionB">Post</a>
                             </li>
                     </ul>
             </div>
@@ -30,7 +27,7 @@
                         <br>
                         <div class="row">
                             <div class="col-12">
-                                Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" (click)="httpGet1Run()">Run</button>
+                                Route Path:&ensp;/democontroller/movies/get &ensp;<button type="button" class="btn btn-primary btn-sm" (click)="httpGetRun()">Run</button>
                             </div>
                             <div style="height:100px;"></div>
                             <div class="col-12">
@@ -47,7 +44,7 @@
                                                 <th>RestfulAssembly</th>
                                             </tr>
                                         </thead>
-                                         <tbody tr *ngFor="let item of _httpGet1Result">
+                                         <tbody tr *ngFor="let item of _httpGetResult">
                                             <tr>
                                                 <th>{{ item.Id }}</th>
                                                 <th>{{ item.Title }}</th>
@@ -67,44 +64,7 @@
                         <br>
                         <div class="row">
                             <div class="col-12">
-                                Route Path:&ensp;/externalcontroller/movies &ensp;(Restful Service in External Assembly)&ensp;<button  type="button" class="btn btn-primary btn-sm" (click)="httpGet2Run()">Run</button>
-                            </div>
-                            <div style="height:100px;"></div>
-                            <div class="col-12">
-                                <div class='table-responsive'>
-                                    <table class='table'>
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Title</th>
-                                                <th>Year</th>
-                                                <th>Votes</th>
-                                                <th>Rating</th>
-                                                <th>Date</th>
-                                                <th>RestfulAssembly</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody tr *ngFor="let item of _httpGet2Result">
-                                            <tr>
-                                                <th>{{ item.Id }}</th>
-                                                <th>{{ item.Title }}</th>
-                                                <th>{{ item.Year }}</th>
-                                                <th>{{ item.Votes }}</th>
-                                                <th>{{ item.Rating }}</th>
-                                                <th>{{ item.Date }}</th>
-                                                <th>{{ item.RestfulAssembly }}</th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sectionC" class="container tab-pane fade">
-                        <br>
-                        <div class="row">
-                            <div class="col-12">
-                                Route Path:&ensp;/democontroller/movies&ensp;(Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" (click)="httpPostRun()">Run</button>
+                                Route Path:&ensp;/democontroller/movies/post&ensp;<button type="button" class="btn btn-primary btn-sm" (click)="httpPostRun()">Run</button>
                             </div>
                             <div style="height:100px;"></div>
                             <div class="col-12">

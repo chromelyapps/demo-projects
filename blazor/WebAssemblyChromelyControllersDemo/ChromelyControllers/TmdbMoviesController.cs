@@ -1,16 +1,19 @@
-﻿using System;
+﻿// Copyright © 2017-2020 Chromely Projects. All rights reserved.
+// Use of this source code is governed by MIT license that can be found in the LICENSE file.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Chromely.CefGlue;
+using Chromely;
 using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 
-namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
+namespace WebAssemblyChromelyControllersDemo.Controllers
 {
-    [ControllerProperty(Name = "TmdbMoviesController", Route = "tmdbmoviescontroller")]
+    [ControllerProperty(Name = "TmdbMoviesController")]
     public class TmdbMoviesController : ChromelyController
     {
         private const string TmdbBaseUrl = "https://api.themoviedb.org/3/";
@@ -34,8 +37,8 @@ namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
 
         #region HttpAttributes
 
-        [HttpGet(Route = "/tmdbmoviescontroller/movies")]
-        public ChromelyResponse GetMovies(ChromelyRequest request)
+        [RequestAction(RouteKey = "/tmdbmoviescontroller/movies")]
+        public IChromelyResponse GetMovies(IChromelyRequest request)
         {
             var parameters = request.Parameters as IDictionary<string, string>;
             var name = string.Empty;
@@ -109,7 +112,7 @@ namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
 
         #region CommandAttributes
 
-        [Command(Route = "/tmdbmoviescontroller/homepage")]
+        [CommandAction(RouteKey = "/tmdbmoviescontroller/homepage")]
         public void HomePage(IDictionary<string, string> queryParameters)
         {
             if (queryParameters == null || !queryParameters.Any())
@@ -127,7 +130,6 @@ namespace WebAssemblyChromelyControllersDemo.ChromelyControllers
             {
                 return;
             }
-
 
             var tmdbMovieTask = Task.Run(() =>
             {

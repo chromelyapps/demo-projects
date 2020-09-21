@@ -1,0 +1,53 @@
+ <div class="container-fluid">
+    
+    <div class="row col-12 justify-content-center">
+            <div class="col-8">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                    <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="checkboxToggleAllTodoItems"  [checked]="_checkedAll" (change)="_checkedAll = !_checkedAll" (click)="toggleAllTodoItems()">
+                                            <label class="custom-control-label" for="checkboxToggleAllTodoItems"></label>
+                                          </div>
+                            </span>
+                    </div>
+                    <input type="text" (keydown.enter)="addTodoItem($event)"  class="form-control" placeholder="What needs to be done?" style="font-size: 24px; text-align: center;">
+                </div>
+            </div>
+    </div>
+
+    <!-- TODO Items List  -->
+    <div class="row col-12 justify-content-center">
+                <div class="col-8">
+                  <ul class="list-group">
+                  
+                    <div *ngFor="let item of _todoItemsList">
+                      <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                        <div class="custom-control custom-switch">
+                          <input type="checkbox" class="custom-control-input"  id="{{item.CheckboxId}}" [checked]="item.ItemChecked" (click)="toggleTodoItem(item)"/>
+                          <label class="custom-control-label" for="{{item.CheckboxId}}" [innerHTML]="item.TodoHtml"></label>
+                          </div>
+                          <span class="badge badge-secondary badge-pill"><a href='javascript:void(0);' (click)="deleteTodoItem(item.Id)">X</a></span>
+                      </li>
+                    </div>
+  
+                  </ul>
+                </div>
+              </div>
+    <!-- End TODO Items List  -->
+
+    <div class="row col-12 justify-content-center">
+            <div class="col-8">
+                    <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                             <label>Chromely TODO List</label>
+                              <button type="button" class="btn btn-link"  (click)="getTodoList('all', '', '', '')">All</button>
+                              <button type="button" class="btn btn-link" (click)="getTodoList('allactive', '', '', '')">Active</button>
+                              <button type="button" class="btn btn-link" (click)="getTodoList('allcompleted', '', '', '')">Completed</button>
+                              <button type="button" class="btn btn-link" (click)="getTodoList('clearcompleted', '', '', '')">Clear completed</button>
+                            </li>
+                          </ul>
+            </div>
+    </div>
+    
+</div>   

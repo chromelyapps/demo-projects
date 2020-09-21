@@ -1,0 +1,261 @@
+﻿@page "/messagerouterdemo"
+
+@using System.Text.Json;
+@inject IJSRuntime JSRuntime
+
+<div class="container justify-content-center">
+    <!-- -->
+    <div class="form-group row justify-content-center col-12">
+        <div class="row col-12">
+            <h1>Message Router Demo</h1>
+        </div>
+
+        <!-- Nav pills -->
+        <div class="row col-12">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#sectionI">Get 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#sectionJ">Get 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#sectionK">Post</a>
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="row col-12">
+            <div class="row" style="height:25px;"></div>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="sectionI" class="container tab-pane active">
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly&ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="GetMovies">Run</button>
+                        </div>
+                        <div style="height:100px;"></div>
+                        <div class="col-12">
+                            <div class='table-responsive'>
+                                <table id="ajaxResult1" class='table'>
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Title</th>
+                                            <th>Year</th>
+                                            <th>Votes</th>
+                                            <th>Rating</th>
+                                            <th>Date</th>
+                                            <th>RestfulAssembly</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @((MarkupString)(_getResponseMarkup))
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sectionJ" class="container tab-pane fade">
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            Route Path:&ensp;/externalcontroller/movies &ensp; (Restful Service in External Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="GetMovies2">Run</button>
+                        </div>
+                        <div style="height:100px;"></div>
+                        <div class="col-12">
+                            <div class='table-responsive'>
+                                <table id="ajaxResult2" class='table'>
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Title</th>
+                                            <th>Year</th>
+                                            <th>Votes</th>
+                                            <th>Rating</th>
+                                            <th>Date</th>
+                                            <th>RestfulAssembly</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @((MarkupString)(_getResponse2Markup))
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sectionK" class="container tab-pane fade">
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            Route Path:&ensp;/democontroller/movies &ensp;(Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="PostMovies">Run</button>
+                        </div>
+                        <div style="height:100px;"></div>
+                        <div class="col-12">
+                            <div>
+                                @_postResponse
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+    private string _getResponseMarkup = string.Empty;
+    private string _getResponse2Markup = string.Empty;
+    private string _postResponse = string.Empty;
+
+    private void GetMovies()
+    {
+        var jsRequest = new JSRequest();
+        jsRequest.Url = "/democontroller/movies";
+        jsRequest.JSInvokeId = "GetMoviesCallback";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
+    }
+
+    private void GetMovies2()
+    {
+        var jsRequest = new JSRequest();
+        jsRequest.Url = "/externalcontroller/movies";
+        jsRequest.JSInvokeId = "GetMovies2Callback";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
+    }
+
+    private void PostMovies()
+    {
+        var movies = new List<Movie>();
+        movies.Add(new Movie() { Id = 1, Title = "The Shawshank Redemption", Year = 1994, Votes = 678790, Rating = 9.2 });
+        movies.Add(new Movie() { Id = 2, Title = "The Godfather", Year = 1972, Votes = 511495, Rating = 9.2 });
+        movies.Add(new Movie() { Id = 3, Title = "The Godfather = Part II", Year = 1974, Votes = 319352, Rating = 9.0 });
+        movies.Add(new Movie() { Id = 4, Title = "The Good, the Bad and the Ugly", Year = 1966, Votes = 213030, Rating = 8.9 });
+        movies.Add(new Movie() { Id = 5, Title = "My Fair Lady", Year = 1964, Votes = 533848, Rating = 8.9 });
+        movies.Add(new Movie() { Id = 6, Title = "12 Angry Men", Year = 1957, Votes = 164558, Rating = 8.9 });
+
+
+        var jsRequest = new JSRequest();
+        jsRequest.Url = "/democontroller/movies";
+        jsRequest.PostData = movies;
+        jsRequest.JSInvokeId = "PostMoviesCallback";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Post", jsRequest.ToJson(), dotNetReference);
+    }
+
+    [JSInvokable("GetMoviesCallback")]
+    public void GetMoviesResponse(string respose)
+    {
+        _getResponseMarkup = string.Empty;
+
+        try
+        {
+            _getResponseMarkup = ParseResponse(respose);
+        }
+        catch (Exception exception)
+        {
+            System.Console.WriteLine($"{exception.Message} - {exception.StackTrace}");
+        }
+
+        StateHasChanged();
+    }
+
+    [JSInvokable("GetMovies2Callback")]
+    public void GetMovies2Response(string respose)
+    {
+        _getResponse2Markup = string.Empty;
+
+        try
+        {
+            _getResponse2Markup = ParseResponse(respose);
+        }
+        catch (Exception exception)
+        {
+            System.Console.WriteLine($"{exception.Message} - {exception.StackTrace}");
+        }
+
+        StateHasChanged();
+    }
+
+    [JSInvokable("PostMoviesCallback")]
+    public void PostMoviesCallback(string respose)
+    {
+        _postResponse = string.Empty;
+
+        try
+        {
+            _postResponse = respose;
+        }
+        catch (Exception exception)
+        {
+            System.Console.WriteLine($"{exception.Message} - {exception.StackTrace}");
+        }
+
+        StateHasChanged();
+    }
+
+    private string ParseResponse(string response)
+    {
+        try
+        {
+            var options = new JsonSerializerOptions();
+            options.ReadCommentHandling = JsonCommentHandling.Skip;
+            options.AllowTrailingCommas = true;
+            var data = JsonSerializer.Deserialize<List<Movie>>(response, options);
+
+            if (data == null || !data.Any())
+            {
+                return string.Empty;
+            }
+
+            var result = string.Empty;
+            foreach (var item in data)
+            {
+                result += "<tr>";
+
+                result += "<td>" + item.Id + "</td>";
+                result += "<td>" + item.Title + "</td>";
+                result += "<td>" + item.Year + "</td>";
+                result += "<td>" + item.Votes + "</td>";
+                result += "<td>" + item.Rating + "</td>";
+                result += "<td>" + item.Date + "</td>";
+                result += "<td>" + item.RestfulAssembly + "</td>";
+
+                result += "</tr>";
+            }
+
+            return result;
+        }
+        catch (Exception exception)
+        {
+            System.Console.WriteLine($"{exception.Message} - {exception.StackTrace}");
+        }
+
+        return string.Empty;
+    }
+
+    #region
+    private class Movie
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public int Year { get; set; }
+        public int Votes { get; set; }
+        public double Rating { get; set; }
+        public DateTime Date { get; set; }
+        public string RestfulAssembly { get; set; }
+    }
+
+    #endregion
+}
+

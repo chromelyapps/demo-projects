@@ -18,35 +18,24 @@ type  MovieItem = {
 })
 export class MessageRouterComponent {
 
-  _messageRouterGetResult1: Array<MovieItem>;
-  _messageRouterGetResult2: Array<MovieItem>;
+  _messageRouterGetResult: Array<MovieItem>;
   _messageRouterPostResult: string;
 
   constructor(private _chromelyService: ChromelyService, private _zone: NgZone) {
-    this._messageRouterGetResult1 = new Array<MovieItem>();
-    this._messageRouterGetResult2 = new Array<MovieItem>();
+    this._messageRouterGetResult = new Array<MovieItem>();
     this._messageRouterPostResult = 'Post request not ran or no result recieved.'
   }
 
-  messageRouterGet1Run() {
-    this._chromelyService.cefQueryGetRequest('/democontroller/movies', null, data => {
+  messageRouterGet() {
+    this._chromelyService.cefQueryGetRequest('/democontroller/movies/get', null, data => {
       this._zone.run(
           () => {
-            this._messageRouterGetResult1 = this.parseArrayResult(data);
+            this._messageRouterGetResult = this.parseArrayResult(data);
           })
     });
   }
 
-  messageRouterGet2Run() {
-    this._chromelyService.cefQueryGetRequest('/externalcontroller/movies', null, data => {
-      this._zone.run(
-          () => {
-            this._messageRouterGetResult2 = this.parseArrayResult(data);
-          })
-    });
-  }
-
-  messageRouterPostRun() {
+  messageRouterPost() {
         var moviesJson = [
             { Id: 1, Title: "The Shawshank Redemption", Year: 1994, Votes: 678790, Rating: 9.2 },
             { Id: 2, Title: "The Godfather", Year: 1972, votes: 511495, Rating: 9.2 },
@@ -56,7 +45,7 @@ export class MessageRouterComponent {
             { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
         ];
 
-        this._chromelyService.cefQueryPostRequest('/democontroller/movies', null, moviesJson, data => {
+        this._chromelyService.cefQueryPostRequest('/democontroller/movies/post', null, moviesJson, data => {
           this._zone.run(
               () => {
                 this._messageRouterPostResult = data;

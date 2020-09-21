@@ -10,8 +10,8 @@
     <script src="../Content/js/tether.min.js"></script>
     <script src="../Content/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        function messageRouterResult1(res) {
-            $('#messageRouterResult1 tbody').empty();
+        function messageRouterGetResult(res) {
+            $('#messageRouterGetResult tbody').empty();
             var jsonData = JSON.parse(res);
             if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
                 for (var i = 0; i < jsonData.Data.length; i++) {
@@ -26,18 +26,18 @@
                     row += '<td>' + jsonData.Data[i].RestfulAssembly + '</td>';
 
                     row += '</tr>';
-                    $('#messageRouterResult1 tbody').append(row);
+                    $('#messageRouterGetResult tbody').append(row);
                 }
             }
         }
 
-        function messageRouterRun1() {
+        function messageRouterGetRun() {
 
-            $('#messageRouterResult1 tbody').html('');
+            $('#messageRouterGetResult tbody').html('');
 
             var request = {
                 "method": "GET",
-                "url": "/democontroller/movies",
+                "url": "/democontroller/movies/get",
                 "parameters": null,
                 "postData": null,
             };
@@ -45,65 +45,23 @@
             window.cefQuery({
                 request: JSON.stringify(request),
                 onSuccess: function (response) {
-                    messageRouterResult1(response);
+                    messageRouterGetResult(response);
                 }, onFailure: function (err, msg) {
                     console.log(err, msg);
                 }
             });
         }
 
-        function messageRouterResult2(res) {
-            $('#messageRouterResult2 tbody').empty();
+        function messageRouterPostResult(res) {
             var jsonData = JSON.parse(res);
             if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
-                for (var i = 0; i < jsonData.Data.length; i++) {
-                    var row = '<tr>';
-
-                    row += '<td>' + jsonData.Data[i].Id + '</td>';
-                    row += '<td>' + jsonData.Data[i].Title + '</td>';
-                    row += '<td>' + jsonData.Data[i].Year + '</td>';
-                    row += '<td>' + jsonData.Data[i].Votes + '</td>';
-                    row += '<td>' + jsonData.Data[i].Rating + '</td>';
-                    row += '<td>' + jsonData.Data[i].Date + '</td>';
-                    row += '<td>' + jsonData.Data[i].RestfulAssembly + '</td>';
-
-                    row += '</tr>';
-                    $('#messageRouterResult2 tbody').append(row);
-                }
+                $('#messageRouterPostResult').html(jsonData.Data);
             }
         }
 
-        function messageRouterRun2() {
+        function messageRouterPostRun() {
 
-            $('#messageRouterResult2 tbody').html('');
-
-            var request = {
-                "method": "GET",
-                "url": "/externalcontroller/movies",
-                "parameters": null,
-                "postData": null,
-            };
-
-            window.cefQuery({
-                request: JSON.stringify(request),
-                onSuccess: function (response) {
-                    messageRouterResult2(response);
-                }, onFailure: function (err, msg) {
-                    console.log(err, msg);
-                }
-            });
-        }
-
-        function messageRouterResult3(res) {
-            var jsonData = JSON.parse(res);
-            if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
-                $('#messageRouterResult3').html(jsonData.Data);
-            }
-        }
-
-        function messageRouterRun3() {
-
-            $('#messageRouterResult3').html('');
+            $('#messageRouterPostResult').html('');
 
             var moviesJson = [
                 { Id: 1, Title: "The Shawshank Redemption", Year: 1994, Votes: 678790, Rating: 9.2 },
@@ -116,7 +74,7 @@
 
             var request = {
                 "method": "POST",
-                "url": "/democontroller/movies",
+                "url": "/democontroller/movies/post",
                 "parameters": null,
                 "postData": moviesJson,
             };
@@ -124,7 +82,7 @@
             window.cefQuery({
                 request: JSON.stringify(request),
                 onSuccess: function (response) {
-                    messageRouterResult3(response);
+                    messageRouterPostResult(response);
                 }, onFailure: function (err, msg) {
                     console.log(err, msg);
                 }
@@ -145,13 +103,10 @@
                 <div class="row col-12">
                         <ul class="nav nav-pills" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="pill" href="#sectionA">Get 1</a>
+                                    <a class="nav-link active" data-toggle="pill" href="#sectionA">Get</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#sectionB">Get 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="pill" href="#sectionC">Post</a>
+                                    <a class="nav-link" data-toggle="pill" href="#sectionB">Post</a>
                                 </li>
                         </ul>
                 </div>
@@ -166,12 +121,12 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly)&ensp;<button id="buttonMessageRouterRun1" type="button" class="btn btn-primary btn-sm" onclick="messageRouterRun1()">Run</button>
+                                    Route Path:&ensp;/democontroller/movies/get &ensp; <button id="buttonmessageRouterGetRun" type="button" class="btn btn-primary btn-sm" onclick="messageRouterGetRun()">Run</button>
                                 </div>
                                 <div style="height:100px;"></div>
                                 <div class="col-12">
                                     <div class='table-responsive'>
-                                        <table id="messageRouterResult1" class='table'>
+                                        <table id="messageRouterGetResult" class='table'>
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -194,39 +149,11 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    Route Path:&ensp;/externalcontroller/movies &ensp;(Restful Service in External Assembly)&ensp;<button id="buttonMessageRouterRun2" type="button" class="btn btn-primary btn-sm" onclick="messageRouterRun2()">Run</button>
+                                    Route Path:&ensp;/democontroller/movies/post&ensp;<button id="buttonmessageRouterPostRun" type="button" class="btn btn-primary btn-sm" onclick="messageRouterPostRun()">Run</button>
                                 </div>
                                 <div style="height:100px;"></div>
                                 <div class="col-12">
-                                    <div class='table-responsive'>
-                                        <table id="messageRouterResult2" class='table'>
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Title</th>
-                                                    <th>Year</th>
-                                                    <th>Votes</th>
-                                                    <th>Rating</th>
-                                                    <th>Date</th>
-                                                    <th>RestfulAssembly</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="sectionC" class="container tab-pane fade">
-                            <br>
-                            <div class="row">
-                                <div class="col-12">
-                                    Route Path:&ensp;/democontroller/movies&ensp;(Restful Service in Local Assembly)&ensp;<button id="buttonMessageRouterRun3" type="button" class="btn btn-primary btn-sm" onclick="messageRouterRun3()">Run</button>
-                                </div>
-                                <div style="height:100px;"></div>
-                                <div class="col-12">
-                                    <div id="messageRouterResult3"></div>
+                                    <div id="messageRouterPostResult"></div>
                                 </div>
                             </div>
                         </div>

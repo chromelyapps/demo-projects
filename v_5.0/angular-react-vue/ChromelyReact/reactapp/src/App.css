@@ -1,0 +1,28 @@
+.navbar {
+  background:none;
+  box-shadow: none;
+}
+.navbar-brand
+{
+  font-family: 'Palatino';
+  font-style: italic;
+  color:'grey';
+  font-size: 30px;
+  margin: 0px;
+}
+
+iframe, object, embed {
+  max-width: 100%;
+}
+
+.spacer10 {
+  margin-top: 10px; /* define margin as you see fit */
+}
+
+.spacer25 {
+  margin-top: 25px; /* define margin as you see fit */
+}
+
+.spacer100 {
+  margin-top: 100px; /* define margin as you see fit */
+}

@@ -23,24 +23,17 @@ class MessageRouterDemo extends Component {
         super(props);
 
         this.state = {
-            messageRouterGet1Result: [],
-            messageRouterGet2Result: [],
+            messageRouterGetResult: [],
             messageRouterPostResult: ''
           };
 
-        this.messageRouterGet1Run = this.messageRouterGet1Run.bind(this);
-        this.messageRouterGet2Run = this.messageRouterGet2Run.bind(this);
+        this.messageRouterGetRun = this.messageRouterGetRun.bind(this);
         this.messageRouterPostRun = this.messageRouterPostRun.bind(this);
     }
 
-    messageRouterGet1Run(event) {
+    messageRouterGetRun(event) {
         event.preventDefault()
-        messageRouterGet('/democontroller/movies', null, this.onGetCallback1, this);
-    }
-
-    messageRouterGet2Run(event) {
-        event.preventDefault()
-        messageRouterGet('/externalcontroller/movies', null, this.onGetCallback2, this);
+        messageRouterGet('/democontroller/movies/get', null, this.onGetCallback, this);
     }
 
     messageRouterPostRun(event) {
@@ -55,23 +48,16 @@ class MessageRouterDemo extends Component {
         { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
         ];
 
-        messageRouterPost('/democontroller/movies', null, moviesJson, this.onPostCallback, this);
+        messageRouterPost('/democontroller/movies/post', null, moviesJson, this.onPostCallback, this);
     }
 
-    onGetCallback1(data, _self) {
+    onGetCallback(data, _self) {
         var dataArray = _self.parseArrayResult(data);
         _self.setState({
-            messageRouterGet1Result: dataArray
+            messageRouterGetResult: dataArray
         });
     }
     
-    onGetCallback2(data, _self) {
-        var dataArray = _self.parseArrayResult(data);
-        _self.setState({
-            messageRouterGet2Result: dataArray
-        });
-    }
-
     onPostCallback(data, _self) {
         _self.setState({
             messageRouterPostResult: data
@@ -98,8 +84,7 @@ class MessageRouterDemo extends Component {
 
    render() {
 
-    const { messageRouterGet1Result } = this.state;
-    const { messageRouterGet2Result } = this.state;
+    const { messageRouterGetResult } = this.state;
     const { messageRouterPostResult } = this.state;
 
     return (
@@ -114,13 +99,10 @@ class MessageRouterDemo extends Component {
         <div className="row col-12">
                 <ul className="nav nav-pills" role="tablist">
                         <li className="nav-item">
-                            <a className="nav-link active" data-toggle="pill" href="#sectionA">Get 1</a>
+                            <a className="nav-link active" data-toggle="pill" href="#sectionA">Get</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" data-toggle="pill" href="#sectionB">Get 2</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="pill" href="#sectionC">Post</a>
+                            <a className="nav-link" data-toggle="pill" href="#sectionB">Post</a>
                         </li>
                 </ul>
         </div>
@@ -134,7 +116,7 @@ class MessageRouterDemo extends Component {
             <div id="sectionA" className="container tab-pane active">
                     <div className="row">
                         <div className="col-12">
-                            Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly)&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.messageRouterGet1Run}>Run</button>
+                            Route Path:&ensp;/democontroller/movies/get &ensp; <button type="button" className="btn btn-primary btn-sm" onClick={this.messageRouterGetRun}>Run</button>
                         </div>
                         <div className="col-12 spacer25">
                             <div className='table-responsive'>
@@ -151,7 +133,7 @@ class MessageRouterDemo extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    { messageRouterGet1Result.map(function(item, key) {
+                                    { messageRouterGetResult.map(function(item, key) {
                                         return <BoundObjectGetRows key={key} item={item}/>;
                                     }) }
                                     </tbody>
@@ -161,41 +143,10 @@ class MessageRouterDemo extends Component {
                     </div>
                 </div>
             <div id="sectionB" className="container tab-pane fade">
-                <div className="row">
-                    <div className="col-12">
-                        Route Path:&ensp;/externalcontroller/movies &ensp;(Restful Service in External Assembly)&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.messageRouterGet2Run}>Run</button>
-                    </div>
-                    <div className="col-12 spacer25">
-                        <div className='table-responsive'>
-                            <table className='table'>
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Title</th>
-                                        <th>Year</th>
-                                        <th>Votes</th>
-                                        <th>Rating</th>
-                                        <th>Date</th>
-                                        <th>RestfulAssembly</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                { messageRouterGet2Result.map(function(item, key) {
-                                    return <BoundObjectGetRows key={key} item={item}/>;
-                                }) }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div id="sectionC" className="container tab-pane fade">
                 <br/>
                 <div className="row">
                     <div className="col-12">
-                        Route Path:&ensp;/democontroller/movies&ensp;(Restful Service in Local Assembly)&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.messageRouterPostRun}>Run</button>
+                        Route Path:&ensp;/democontroller/movies/post&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.messageRouterPostRun}>Run</button>
                     </div>
                     <div className="col-12 spacer25">
                     <div>&ensp;&ensp;&ensp;{messageRouterPostResult}</div>

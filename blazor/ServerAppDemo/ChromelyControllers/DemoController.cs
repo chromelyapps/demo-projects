@@ -1,60 +1,41 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DemoController.cs" company="Chromely Projects">
-//   Copyright (c) 2017-2019 Chromely Projects
-// </copyright>
-// <license>
-//      See the LICENSE.md file in the project root for more information.
-// </license>
-// --------------------------------------------------------------------------------------------------------------------
+﻿// Copyright © 2017-2020 Chromely Projects. All rights reserved.
+// Use of this source code is governed by MIT license that can be found in the LICENSE file.
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
-using Chromely.CefGlue;
+using Chromely;
+using Chromely.Core;
 using Chromely.Core.Configuration;
 using Chromely.Core.Network;
 
-namespace ServerAppDemo.ChromelyControllers
+namespace ServerAppDemo.Controllers
 {
     /// <summary>
     /// The demo controller.
     /// </summary>
-    [ControllerProperty(Name = "DemoController", Route = "democontroller")]
+    [ControllerProperty(Name = "DemoController")]
     public class DemoController : ChromelyController
     {
         private readonly IChromelyConfiguration _config;
+        private readonly IChromelySerializerUtil _serializerUtil;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DemoController"/> class.
         /// </summary>
-        public DemoController(IChromelyConfiguration config)
+        public DemoController(IChromelyConfiguration config, IChromelySerializerUtil serializerUtil)
         {
             _config = config;
+            _serializerUtil = serializerUtil;
 
-            RegisterGetRequest("/democontroller/movies", GetMovies);
-            RegisterPostRequest("/democontroller/movies", SaveMovies);
+            RegisterRequest("/democontroller/movies/get", GetMovies);
+            RegisterRequest("/democontroller/movies/post", SaveMovies);
         }
-
-        #region HttpAttributes
-
-        [HttpGet(Route = "/externalcontroller/testhttp/one")]
-        public ChromelyResponse HttpTestOne(ChromelyRequest request)
-        {
-            return new ChromelyResponse();
-        }
-
-        [HttpPost(Route = "/externalcontroller/testhttp/two")]
-        public ChromelyResponse HttpTestTwo(ChromelyRequest request)
-        {
-            return new ChromelyResponse();
-        }
-
-        #endregion
 
         #region CommandAttributes
 
-        [Command(Route = "/democontroller/showdevtools")]
+        [CommandAction(RouteKey = "/democontroller/showdevtools")]
         public void ShowDevTools(IDictionary<string, string> queryParameters)
         {
             if (_config != null && !string.IsNullOrWhiteSpace(_config.DevToolsUrl))
@@ -65,16 +46,7 @@ namespace ServerAppDemo.ChromelyControllers
 
         #endregion
 
-        /// <summary>
-        /// The get movies.
-        /// </summary>
-        /// <param name="request">
-        /// The request.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ChromelyResponse"/>.
-        /// </returns>
-        private ChromelyResponse GetMovies(ChromelyRequest request)
+        private IChromelyResponse GetMovies(IChromelyRequest request)
         {
             var movieInfos = new List<MovieInfo>();
             var assemblyName = typeof(MovieInfo).Assembly.GetName().Name;
@@ -92,22 +64,7 @@ namespace ServerAppDemo.ChromelyControllers
             };
         }
 
-        /// <summary>
-        /// The save movies.
-        /// </summary>
-        /// <param name="request">
-        /// The request.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ChromelyResponse"/>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// ArgumentNullException - request is null exception.
-        /// </exception>
-        /// <exception cref="Exception">
-        /// Exception - post data is null exception.
-        /// </exception>
-        private ChromelyResponse SaveMovies(ChromelyRequest request)
+        private IChromelyResponse SaveMovies(IChromelyRequest request)
         {
             if (request == null)
             {
@@ -120,7 +77,7 @@ namespace ServerAppDemo.ChromelyControllers
             }
 
             var response = new ChromelyResponse(request.Id);
-            var postDataJson = request.PostData.ToJson();
+            var postDataJson = _serializerUtil.ObjectToJson(request.PostData);
 
             var options = new JsonSerializerOptions();
             options.ReadCommentHandling = JsonCommentHandling.Skip;

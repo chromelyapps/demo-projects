@@ -1,0 +1,168 @@
+﻿@page "/tmdbmovies"
+
+@using System.Text.Json;
+@inject IJSRuntime JSRuntime
+
+@{
+    RenderFragment<Result> ItemTemplate = (movieItem) => @<div class='col-sm-6 col-lg-3 mb-3'>
+        <div class='card h-100'>
+            <div class='row no-gutters'>
+                <div class='col-md-12 text-center'>
+                    <img src='https://image.tmdb.org/t/p/original@(movieItem.poster_path)' alt='...' style='width: 100%;' title='@movieItem.overview'>
+                </div>
+                <div class='col-md-12'>
+                    <div class='card-body'>
+                        <h4 class='card-title text-info'>@movieItem.original_title</h4>
+                        <h6 class='card-subtitle text-muted'>@movieItem.release_date</h6>
+                        <p class='card-text mt-4'>
+                            <b>Popularity</b>: @movieItem.popularity<br><b>Vote Count</b>: " + @movieItem.vote_count<br><b>Vote Average</b>: @movieItem.vote_average
+                            <br><br><a href='http://command.com/tmdbmoviescontroller/homepage?movieid=@(movieItem.id)'>Homepage</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>;
+}
+
+<div class="container justify-content-center">
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- -->
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("latest"))">latest</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("latest"))">popular</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("toprated"))">top rated</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("nowplaying"))">now playing</button>
+                    <button type="button" class="btn btn-secondary btn-sm" @onclick="@(() => GetTmdbMovies("upcoming"))">upcoming</button>
+                </div>
+                <!-- -->
+            </div>
+            <div class="col">
+
+                <!-- -->
+                <div class="form-group row justify-content-end col-12">
+                    <div>
+                        <input @bind="_searchQuery" type="text" class="form-control" placeholder="Search Movies" style="width:auto;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" @onclick="SearchMovies">Search</button>
+                </div>
+                <!-- -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Movies List  -->
+    <div class="container">
+        <div class="row">
+            @if (_movieList == null)
+            {
+                _movieList = new List<Result>();
+            }
+            @foreach (var item in _movieList)
+            {
+                @ItemTemplate(item)
+            }
+        </div>
+    </div>
+
+    <!-- End Moves List -->
+
+</div>
+
+@code {
+
+    private List<Result> _movieList;
+    private string _searchQuery;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            GetMoviesRequest("popular");
+        }
+    }
+
+    private void GetTmdbMovies(string name)
+    {
+        GetMoviesRequest(name);
+    }
+
+    private void SearchMovies()
+    {
+        GetMoviesRequest("search", _searchQuery);
+    }
+
+    private void GetMoviesRequest(string reqType, string query = "")
+    {
+        var jsRequest = new JSRequest();
+        jsRequest.Parameters["name"] = reqType;
+        jsRequest.Parameters["query"] = query;
+        jsRequest.Url = "/tmdbmoviescontroller/movies";
+        jsRequest.JSInvokeId = "TmdbMoviesCallback";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
+    }
+
+    [JSInvokable("TmdbMoviesCallback")]
+    public void GetMoviesResponse(string respose)
+    {
+        _movieList = new List<Result>();
+
+        try
+        {
+            var options = new JsonSerializerOptions();
+            options.ReadCommentHandling = JsonCommentHandling.Skip;
+            options.AllowTrailingCommas = true;
+            _movieList = JsonSerializer.Deserialize<List<Result>>(respose, options);
+        }
+        catch (Exception exception)
+        {
+            System.Console.WriteLine($"{exception.Message} - {exception.StackTrace}");
+        }
+
+        StateHasChanged();
+    }
+
+    #region Model
+
+    private class Result
+    {
+        public double popularity { get; set; }
+        public int vote_count { get; set; }
+        public bool video { get; set; }
+        public string poster_path { get; set; }
+        public int id { get; set; }
+        public bool adult { get; set; }
+        public string backdrop_path { get; set; }
+        public string original_language { get; set; }
+        public string original_title { get; set; }
+        public List<int> genre_ids { get; set; }
+        public string title { get; set; }
+        public double vote_average { get; set; }
+        public string overview { get; set; }
+        private string _releaseDate;
+
+        public string release_date
+        {
+            get
+            {
+                DateTime dateTime;
+                if (DateTime.TryParse(_releaseDate, out dateTime))
+                {
+                    return string.Format("{0:dddd, MMMM d, yyyy}", dateTime);
+                }
+
+                return _releaseDate;
+            }
+            set
+            {
+                _releaseDate = value;
+            }
+        }
+    }
+
+    #endregion Model
+}  

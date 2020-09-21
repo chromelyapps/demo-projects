@@ -24,24 +24,22 @@ class AjaxXhrDemo extends Component {
         super(props);
 
         this.state = {
-            httpGet1Result: [],
-            httpGet2Result: [],
+            httpGetResult: [],
             httpPostResult: ''
           };
 
-        this.httpGet1Run = this.httpGet1Run.bind(this);
-        this.httpGet2Run = this.httpGet2Run.bind(this);
+        this.httpGetRun = this.httpGetRun.bind(this);
         this.httpPostRun = this.httpPostRun.bind(this);
     }
 
-    httpGet1Run(event)  {
+    httpGetRun(event)  {
         event.preventDefault();
 
-        axios.get('http://chromely.com/democontroller/movies')
+        axios.get('http://chromely.com/democontroller/movies/get')
         .then(response => {
             var dataArray = this.parseArrayResult(response.data);
             this.setState({
-                httpGet1Result: dataArray
+                httpGetResult: dataArray
             });
         })
         .catch(error => {
@@ -49,21 +47,6 @@ class AjaxXhrDemo extends Component {
         });
     }
     
-    httpGet2Run(event)  {
-        event.preventDefault();
-
-        axios.get('http://chromely.com/externalcontroller/movies')
-        .then(response => {
-            var dataArray = this.parseArrayResult(response.data);
-            this.setState({
-                httpGet2Result: dataArray
-            });
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
-
     httpPostRun(event)  {
         event.preventDefault();
 
@@ -76,7 +59,7 @@ class AjaxXhrDemo extends Component {
             { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
             ];
 
-        axios.post('http://chromely.com/democontroller/movies', params)
+        axios.post('http://chromely.com/democontroller/movies/post', params)
         .then(response => {
             this.setState({
                 httpPostResult: response.data.Data
@@ -107,8 +90,7 @@ class AjaxXhrDemo extends Component {
 
    render() {
 
-    const { httpGet1Result } = this.state;
-    const { httpGet2Result } = this.state;
+    const { httpGetResult } = this.state;
     const { httpPostResult } = this.state;
 
     return (
@@ -123,13 +105,10 @@ class AjaxXhrDemo extends Component {
         <div className="row col-12">
                 <ul className="nav nav-pills" role="tablist">
                         <li className="nav-item">
-                            <a className="nav-link active" data-toggle="pill" href="#sectionA">Get 1</a>
+                            <a className="nav-link active" data-toggle="pill" href="#sectionA">Get</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" data-toggle="pill" href="#sectionB">Get 2</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" data-toggle="pill" href="#sectionC">Post</a>
+                            <a className="nav-link" data-toggle="pill" href="#sectionB">Post</a>
                         </li>
                 </ul>
         </div>
@@ -143,7 +122,7 @@ class AjaxXhrDemo extends Component {
             <div id="sectionA" className="container tab-pane active">
                     <div className="row">
                         <div className="col-12">
-                            Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly)&ensp;    <button type="button" className="btn btn-primary btn-sm" onClick={this.httpGet1Run}>Run</button>
+                            Route Path:&ensp;/democontroller/movies/get &ensp;  <button type="button" className="btn btn-primary btn-sm" onClick={this.httpGetRun}>Run</button>
                         </div>
                         <div className="col-12 spacer25">
                             <div className='table-responsive'>
@@ -160,7 +139,7 @@ class AjaxXhrDemo extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    { httpGet1Result.map(function(item, key) {
+                                    { httpGetResult.map(function(item, key) {
                                         return <BoundObjectGetRows key={key} item={item}/>;
                                     }) }
                                     </tbody>
@@ -170,41 +149,10 @@ class AjaxXhrDemo extends Component {
                     </div>
                 </div>
             <div id="sectionB" className="container tab-pane fade">
-                <div className="row">
-                    <div className="col-12">
-                        Route Path:&ensp;/externalcontroller/movies &ensp;(Restful Service in External Assembly)&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.httpGet2Run}>Run</button>
-                    </div>
-                    <div className="col-12 spacer25">
-                        <div className='table-responsive'>
-                            <table className='table'>
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Title</th>
-                                        <th>Year</th>
-                                        <th>Votes</th>
-                                        <th>Rating</th>
-                                        <th>Date</th>
-                                        <th>RestfulAssembly</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                { httpGet2Result.map(function(item, key) {
-                                    return <BoundObjectGetRows key={key} item={item}/>;
-                                }) }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-            <div id="sectionC" className="container tab-pane fade">
                 <br/>
                 <div className="row">
                     <div className="col-12">
-                        Route Path:&ensp;/democontroller/movies&ensp;(Restful Service in Local Assembly)&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.httpPostRun}>Run</button>
+                        Route Path:&ensp;/democontroller/movies/post&ensp;<button type="button" className="btn btn-primary btn-sm" onClick={this.httpPostRun}>Run</button>
                     </div>
                     <div className="col-12 spacer25">
                         <div>&ensp;&ensp;&ensp;{httpPostResult}</div>

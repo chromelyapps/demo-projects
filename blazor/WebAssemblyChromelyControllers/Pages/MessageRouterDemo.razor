@@ -14,10 +14,7 @@
         <div class="row col-12">
             <ul class="nav nav-pills" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#sectionI">Get 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="pill" href="#sectionJ">Get 2</a>
+                    <a class="nav-link active" data-toggle="pill" href="#sectionI">Get</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#sectionK">Post</a>
@@ -36,7 +33,7 @@
                     <br>
                     <div class="row">
                         <div class="col-12">
-                            Route Path:&ensp;/democontroller/movies &ensp; (Restful Service in Local Assembly&ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="GetMovies">Run</button>
+                            Route Path:&ensp;/democontroller/movies/get &ensp; <button type="button" class="btn btn-primary btn-sm" @onclick="GetMovies">Run</button>
                         </div>
                         <div style="height:100px;"></div>
                         <div class="col-12">
@@ -61,40 +58,11 @@
                         </div>
                     </div>
                 </div>
-                <div id="sectionJ" class="container tab-pane fade">
-                    <br>
-                    <div class="row">
-                        <div class="col-12">
-                            Route Path:&ensp;/externalcontroller/movies &ensp; (Restful Service in External Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="GetMovies2">Run</button>
-                        </div>
-                        <div style="height:100px;"></div>
-                        <div class="col-12">
-                            <div class='table-responsive'>
-                                <table id="ajaxResult2" class='table'>
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Title</th>
-                                            <th>Year</th>
-                                            <th>Votes</th>
-                                            <th>Rating</th>
-                                            <th>Date</th>
-                                            <th>RestfulAssembly</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @((MarkupString)(_getResponse2Markup))
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div id="sectionK" class="container tab-pane fade">
                     <br>
                     <div class="row">
                         <div class="col-12">
-                            Route Path:&ensp;/democontroller/movies &ensp;(Restful Service in Local Assembly)&ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="PostMovies">Run</button>
+                            Route Path:&ensp;/democontroller/movies/post &ensp;<button type="button" class="btn btn-primary btn-sm" @onclick="PostMovies">Run</button>
                         </div>
                         <div style="height:100px;"></div>
                         <div class="col-12">
@@ -119,17 +87,8 @@
     private void GetMovies()
     {
         var jsRequest = new JSRequest();
-        jsRequest.Url = "/democontroller/movies";
+        jsRequest.Url = "/democontroller/movies/get";
         jsRequest.JSInvokeId = "GetMoviesCallback";
-        var dotNetReference = DotNetObjectReference.Create(this);
-        JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
-    }
-
-    private void GetMovies2()
-    {
-        var jsRequest = new JSRequest();
-        jsRequest.Url = "/externalcontroller/movies";
-        jsRequest.JSInvokeId = "GetMovies2Callback";
         var dotNetReference = DotNetObjectReference.Create(this);
         JSRuntime.InvokeVoidAsync("MessageRouter.Get", jsRequest.ToJson(), dotNetReference);
     }
@@ -146,7 +105,7 @@
 
 
         var jsRequest = new JSRequest();
-        jsRequest.Url = "/democontroller/movies";
+        jsRequest.Url = "/democontroller/movies/post";
         jsRequest.PostData = movies;
         jsRequest.JSInvokeId = "PostMoviesCallback";
         var dotNetReference = DotNetObjectReference.Create(this);

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-chromely-mvc", "web-chromely-mvc\web-chromely-mvc.csproj", "{735E1CCE-764C-4B6F-B7C4-04F868878084}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-chromely-bootstrap4", "web-chromely-bootstrap4\web-chromely-bootstrap4.csproj", "{0C635A09-050B-4DA1-803A-147FF48FEB03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{735E1CCE-764C-4B6F-B7C4-04F868878084}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C635A09-050B-4DA1-803A-147FF48FEB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C635A09-050B-4DA1-803A-147FF48FEB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C635A09-050B-4DA1-803A-147FF48FEB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C635A09-050B-4DA1-803A-147FF48FEB03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B7FF5D6-E8FF-4D51-BB1E-3A4ECC2B2931}
+	EndGlobalSection
+EndGlobal

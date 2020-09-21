@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-faded">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<!-- Brand -->
+	<a class="navbar-brand text-muted" href="#">Demos</a>
+
+	
+	<!-- Links -->
+	<div class="collapse navbar-collapse justify-content-end" id="nav-content">   
+	<ul class="nav nav-pills">
+	  <li class="nav-item">
+		  <a class="nav-link" routerLink="/home">home</a>
+	  </li>
+	  <li class="nav-item">
+        <a class="nav-link" routerLink="/tmdb">tmdb movies</a>
+	  </li>
+	  <li class="nav-item">
+        <a class="nav-link" routerLink="/todolist">todo list</a>
+	  </li>
+	  <li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">basics</a>
+        <div class="dropdown-menu dropdown-menu-right">
+			<a class="dropdown-item" routerLink="/messagerouter">Message Router Demo</a>
+			<a class="dropdown-item" routerLink="/ajaxxhr">Ajax Demo</a>
+			<a class="dropdown-item" routerLink="/javascriptdemo">Execute JavaScript Demo</a>
+			<div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/html5tests">HTML5 Tests</a>
+            <a class="dropdown-item" routerLink="/html6tests">HTML6 Tests</a>
+			<a class="dropdown-item" routerLink="/shakatests">Google Shaka Support Tests</a>
+			<div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="showDevTools()">Show DevTools</a>
+        </div>
+	  </li>
+	</ul>
+	</div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="text-center m-0  d-flex flex-column justify-content-center">
+              <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,8 +7,7 @@ using Chromely.Core.Configuration;
 using Chromely;
 using System.Threading;
 using System.Reflection;
-using Chromely.Core.Network;
-using ServerAppDemo.ChromelyControllers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ServerAppDemo
 {
@@ -57,7 +56,7 @@ namespace ServerAppDemo
                 try
                 {
                     var builder = AppBuilder.Create();
-                    builder = builder.UseConfiguration<DefaultConfiguration>(config);
+                    builder = builder.UseConfig<DefaultConfiguration>(config);
                     builder = builder.UseApp<DemoChromelyApp>();
                     builder = builder.Build();
                     builder.Run(args);
@@ -82,13 +81,10 @@ namespace ServerAppDemo
 
     public class DemoChromelyApp : ChromelyBasicApp
     {
-        public override void Configure(IChromelyContainer container)
+        public override void ConfigureServices(ServiceCollection services)
         {
-            base.Configure(container);
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(DemoController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(ExecuteJavaScriptDemoController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(TmdbMoviesController));
-            container.RegisterSingleton(typeof(ChromelyController), Guid.NewGuid().ToString(), typeof(TodoListController));
+            base.ConfigureServices(services);
+            RegisterControllerAssembly(services, typeof(DemoChromelyApp).Assembly);
         }
     }
 }

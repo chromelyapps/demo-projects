@@ -1,0 +1,103 @@
+﻿@page "/javascriptdemo"
+
+@inject IJSRuntime JSRuntime
+
+<div class="container justify-content-center">
+    <!-- -->
+    <div class="form-group row justify-content-center col-12">
+        <div class="row col-8">
+            <h1>Execute JavaScript Demo</h1>
+        </div>
+        <div class="row col-8">
+            <div class="card">
+                <div class="card-header">Script:</div>
+                <div class="card-body">
+                    <div class="col-8">
+                        <textarea class="form-control" @bind="_demoscript" @onkeyup="CheckScriptRunnable" rows="5" cols="100%"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-8">
+            <button type="button" class="btn btn-primary btn-sm" disabled="@_isScriptRunDisabled" @onclick="Execute" style="margin: 5px;">Execute</button>
+        </div>
+        <div class="row col-8">
+            <table id="resulttable" class="table table-striped" style="margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 100px;">Type</th>
+                        <th scope="col">Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @((MarkupString)(_responseMarkup))
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    private string _demoscript = "alert('Chromely : Build .NET/.NET Core HTML5 desktop apps using cross-platform native GUI API.');";
+    private bool _isScriptRunDisabled = false;
+    private string _responseMarkup = string.Empty;
+    private List<Result> _responseItems = new List<Result>();
+
+    private void CheckScriptRunnable(KeyboardEventArgs args)
+    {
+        _isScriptRunDisabled = (string.IsNullOrWhiteSpace(_demoscript) || _demoscript.Length < 5);
+        StateHasChanged();
+    }
+
+    private void Execute()
+    {
+        var scriptInfo = new scriptInfo() { framename = "alldemoframe", script = _demoscript };
+
+        var jsRequest = new JSRequest();
+        jsRequest.PostData = scriptInfo;
+        jsRequest.Url = "/executejavascript/execute";
+        jsRequest.JSInvokeId = "ScriptRunResponse";
+        var dotNetReference = DotNetObjectReference.Create(this);
+        JSRuntime.InvokeVoidAsync("MessageRouter.Post", jsRequest.ToJson(), dotNetReference);
+    }
+
+    [JSInvokable("ScriptRunResponse")]
+    public void ScriptRunResponse(string respose)
+    {
+        _responseItems.Add(new Result() { Value = respose, Created = DateTime.Now });
+        var result = string.Empty;
+        foreach (var item in _responseItems.OrderByDescending(x => x.Created))
+        {
+            result += "<tr>";
+
+            result += "<td>Execute</td>";
+            result += "<td>" + item.Value + "</td>";
+
+            result += "</tr>";
+        }
+
+        _responseMarkup = result;
+        _demoscript = string.Empty;
+        _isScriptRunDisabled = true;
+
+        StateHasChanged();
+    }
+
+    #region Model
+
+    private class Result
+    {
+        public string Value { get; set; }
+        public DateTime Created { get; set; }
+    }
+
+    private class scriptInfo
+    {
+        public string framename { get; set; }
+        public string script { get; set; }
+    }
+
+    #endregion
+}

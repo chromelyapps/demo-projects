@@ -18,35 +18,22 @@ type  MovieItem = {
 })
 export class AjaxXhrComponent {
 
-  _httpGet1Result: Array<MovieItem>;
-  _httpGet2Result: Array<MovieItem>;
+  _httpGetResult: Array<MovieItem>;
   _httpPostResult: string;
 
   constructor() {
-    this._httpGet1Result = new Array<MovieItem>();
-    this._httpGet2Result = new Array<MovieItem>();
+    this._httpGetResult = new Array<MovieItem>();
     this._httpPostResult = 'Post request not ran or no result recieved.'
   }
 
-  httpGet1Run()  {
-    axios.get('http://chromely.com/democontroller/movies')
+  httpGetRun()  {
+    axios.get('http://chromely.com/democontroller/movies/get')
     .then(response => {
-        this._httpGet1Result = this.parseArrayResult(response.data);
+        this._httpGetResult = this.parseArrayResult(response.data);
     })
     .catch(error => {
         console.log(error);
     });
-  }
-
-  httpGet2Run()  {
-
-      axios.get('http://chromely.com/externalcontroller/movies')
-      .then(response => {
-          this._httpGet2Result = this.parseArrayResult(response.data);
-      })
-      .catch(error => {
-          console.log(error);
-      });
   }
 
   httpPostRun()  {
@@ -60,7 +47,7 @@ export class AjaxXhrComponent {
           { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
           ];
 
-      axios.post('http://chromely.com/democontroller/movies', params)
+      axios.post('http://chromely.com/democontroller/movies/post', params)
       .then(response => {
           this._httpPostResult = response.data.Data;
       })
