@@ -41,11 +41,6 @@ After downloading the source code - either by cloning or direct download, you ne
 ````
  Sample - https://github.com/chromelyapps/demo-projects/blob/495b630c19953581fff9bea57bf95e1693893df1/regular-chromely/CrossPlatDemo/CrossPlatDemo.csproj#L7
  
-- Configuration
-
-The [configuration file](https://github.com/chromelyapps/demo-projects/blob/master/regular-chromely/CrossPlatDemo/chromelyconfig.json) is for Windows by default. This needs to be changed for Linux and MacOS please select [appropriate one](https://github.com/chromelyapps/demo-projects/tree/master/regular-chromely/CrossPlatDemo/config) - ensure to rename to chromelyconfig.json. The other alternative is to delete the configuration file and it will fall back to using the [default config object](https://github.com/chromelyapps/Chromely/blob/1a358986894377da8cffe87e00ce0d5893db690b/src/Chromely.Core/Configuration/DefaultConfiguration.cs#L98). 
-
-There is also [config file option](https://github.com/chromelyapps/demo-projects/blob/master/regular-chromely/CrossPlatDemo/config/config_option.json) that shows how to select options for configuation file.
 
 - Download and install .NET Core 3 Runtime binaries.
 You will need .NET Core 3 runtime installed. You can install directly if you know what is required. Or you start with building and running and see what is missing.
