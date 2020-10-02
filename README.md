@@ -1,3 +1,5 @@
+an amazing project sir but plz make index page of resources
+
 <p align="center"><img src="https://github.com/chromelyapps/Chromely/blob/master/nugets/chromely.ico?raw=true" /></p>
 <h1 align="center">Chromely Demo Projects</h1>
 
