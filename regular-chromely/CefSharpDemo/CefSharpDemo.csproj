@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common" Version="83.4.20" />
-    <PackageReference Include="Chromely.CefSharp" Version="5.1.83" />
+    <PackageReference Include="CefSharp.Common" Version="86.0.241" />
+    <PackageReference Include="Chromely.CefSharp" Version="5.1.86" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.5" />

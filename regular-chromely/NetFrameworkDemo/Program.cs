@@ -43,7 +43,7 @@ namespace NetFrameworkDemo
 
     public class DemoApp : ChromelyBasicApp
     {
-        public override void ConfigureServices(ServiceCollection services)
+        public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
             services.AddLogging(configure => configure.AddConsole());
@@ -76,19 +76,6 @@ namespace NetFrameworkDemo
             options.AllowTrailingCommas = true;
             services.AddSingleton<JsonSerializerOptions>(options);
             */
-
-            RegisterControllerAssembly(services, typeof(DemoApp).Assembly);
-        }
-    }
-
-    // Windows only
-    public class Demo2App : ChromelyFramelessApp
-    {
-        public override void ConfigureServices(ServiceCollection services)
-        {
-            base.ConfigureServices(services);
-            services.AddLogging(configure => configure.AddConsole());
-            services.AddLogging(configure => configure.AddFile("Logs/serilog-{Date}.txt"));
 
             RegisterControllerAssembly(services, typeof(DemoApp).Assembly);
         }

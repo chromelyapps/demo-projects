@@ -81,7 +81,7 @@ namespace ServerAppDemo
 
     public class DemoChromelyApp : ChromelyBasicApp
     {
-        public override void ConfigureServices(ServiceCollection services)
+        public override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
             RegisterControllerAssembly(services, typeof(DemoChromelyApp).Assembly);
