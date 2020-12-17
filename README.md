@@ -52,5 +52,7 @@ dotnet run
 ````
 and see what errors you get. It will usually tell you what is missing.
 
+- If you are running on MacOS for the first time, you may run into [issue #27](https://github.com/chromelyapps/demo-projects/issues/27).
+
 
 **** This is just how to run the demos. For full documentation please [see wiki](https://github.com/chromelyapps/Chromely/wiki).
