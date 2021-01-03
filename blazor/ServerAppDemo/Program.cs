@@ -13,19 +13,27 @@ namespace ServerAppDemo
 {
     public class Program
     {
+        private static Task BlazorTask;
+        private static CancellationTokenSource BlazorTaskTokenSource;
+
         public static void Main(string[] args)
         {
             var appName = Assembly.GetEntryAssembly()?.GetName().Name;
             var firstProcess = ServerAppUtil.IsMainProcess(args);
             var port = ServerAppUtil.AvailablePort;
-
+            
             if (firstProcess)
             {
                 if (port != -1)
                 {
                     // start the kestrel server in a background thread
-                    var blazorTask = new Task(() => CreateHostBuilder(args, port).Build().Run(), TaskCreationOptions.LongRunning);
-                    blazorTask.Start();
+                    AppDomain.CurrentDomain.ProcessExit += ProcessExit;
+                    BlazorTaskTokenSource = new CancellationTokenSource();
+                    BlazorTask = new Task(() =>
+                    {
+                        CreateHostBuilder(args, port).Build().Run();
+                    }, BlazorTaskTokenSource.Token, TaskCreationOptions.LongRunning);
+                    BlazorTask.Start();
 
                     // wait till its up
                     while (ServerAppUtil.IsPortAvailable(port))
@@ -77,6 +85,18 @@ namespace ServerAppDemo
                     .UseStartup<Startup>()
                     .UseUrls(new[] { $"https://127.0.0.1:{port}" });
                 });
+
+        private static void ProcessExit(object sender, EventArgs e)
+        {
+            // Clean up kestrel process if not taken down by OS. This can
+            // occur when the app is closed from WindowController (frameless).
+            Task.Run(() =>
+            {
+                WaitHandle.WaitAny(new[] { BlazorTaskTokenSource?.Token.WaitHandle });
+                BlazorTask?.Dispose();
+            });
+            BlazorTaskTokenSource?.Cancel();
+        }
     }
 
     public class DemoChromelyApp : ChromelyBasicApp
