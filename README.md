@@ -45,6 +45,8 @@ After downloading the source code - either by cloning or direct download, you ne
 - Download and install .NET Core 3 Runtime binaries.
 You will need .NET Core 3 runtime installed. You can install directly if you know what is required. Or you start with building and running and see what is missing.
 
+- You can try .NET 5 too, but these demos require .NET Core 3 at minimum.
+
 ````
 dotnet restore
 dotnet build
