@@ -1,7 +1,11 @@
 <p align="center"><img src="https://github.com/chromelyapps/Chromely/blob/master/nugets/chromely.ico?raw=true" /></p>
 <h1 align="center">Chromely Demo Projects</h1>
 
-<p align="center">This repository holds 2 sets of demos, each with their own examples.</p>
+![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) For developers who are interested in [WebView2](https://docs.microsoft.com/en-us/microsoft-edge/webview2/) there is [EdgeSharp](https://github.com/edgesharp/EdgeSharp), an offshoot of Chromely.
+<br />
+<br />
+
+<p>This repository holds 2 sets of demos, each with their own examples.</p>
 
 ### Regular Chromely
 For more info please see - [Chromely Wiki](https://github.com/chromelyapps/Chromely/wiki).
