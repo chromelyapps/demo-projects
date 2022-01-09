@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,7 @@ import { ChromelyService } from './../services/chromely.service';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [ChromelyService],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, ChromelyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
