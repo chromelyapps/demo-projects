@@ -1,6 +1,6 @@
 
 module.exports = {
-    messageRouterGet: (url, parameters, callback, _self) => {
+    messageRouterGet: (url, parameters, callback) => {
         var request = {
             "method": "GET",
             "url": url,
@@ -12,7 +12,7 @@ module.exports = {
             onSuccess: (response) => {
                 var jsonData = JSON.parse(response);
                 if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
-                    if(callback) callback(jsonData.Data, _self);
+                    if(callback) callback(jsonData.Data);
                 } else {
                     console.log("An error occurs during message routing. With ur:" + url + ". Response received:" + response);
                 }
@@ -23,7 +23,7 @@ module.exports = {
         });
     },
 
-    messageRouterPost: (url, parameters, postData, callback, _self) => {
+    messageRouterPost: (url, parameters, postData, callback) => {
         var request = {
             "method": "POST",
             "url": url,
@@ -35,7 +35,7 @@ module.exports = {
             onSuccess: (response) => {
                 var jsonData = JSON.parse(response);
                 if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
-                    if(callback) callback(jsonData.Data, _self);
+                    if(callback) callback(jsonData.Data);
                 } else {
                     console.log("An error occurs during message routing. With ur:" + url + ". Response received:" + response);
                 }

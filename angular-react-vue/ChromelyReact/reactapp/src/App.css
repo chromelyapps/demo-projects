@@ -1,28 +1,38 @@
-.navbar {
-  background:none;
-  box-shadow: none;
-}
-.navbar-brand
-{
-  font-family: 'Palatino';
-  font-style: italic;
-  color:'grey';
-  font-size: 30px;
-  margin: 0px;
+.App {
+  text-align: center;
 }
 
-iframe, object, embed {
-  max-width: 100%;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.spacer10 {
-  margin-top: 10px; /* define margin as you see fit */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.spacer25 {
-  margin-top: 25px; /* define margin as you see fit */
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.spacer100 {
-  margin-top: 100px; /* define margin as you see fit */
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

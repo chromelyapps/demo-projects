@@ -68,7 +68,7 @@
     </Exec>
 
     <Message Importance="High" Text="Copying React App to debug folder.." />
-    <Exec Command="xcopy &quot;$(ProjectDir)reactapp\dist&quot; &quot;$(TargetDir)dist&quot;   /i /s /r /y /c" />
+    <Exec Command="xcopy &quot;$(ProjectDir)reactapp\build&quot; &quot;$(TargetDir)dist&quot;   /i /s /r /y /c" />
   </Target>
 
   <Target Name="ReleaseChromelyApp" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
