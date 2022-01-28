@@ -14,15 +14,18 @@ export class HomeComponent implements OnInit {
 
   constructor(private _chromelyService: ChromelyService,
     private _zone: NgZone) {
+      this._chromelyOjective = "";
+      this._chromelyPlatform = "";
+      this._chromelyVersion = "";
   }
 
   ngOnInit() {
-    this._chromelyService.cefQueryGetRequest('/info', null, data => {
+    this._chromelyService.cefQueryGetRequest('/info', null, (data: { objective: string; platform: string; version: string; }) => {
       this._zone.run(
           () => {
-            this._chromelyOjective = data.divObjective;
-            this._chromelyPlatform = data.divPlatform;
-            this._chromelyVersion = data.divVersion;
+            this._chromelyOjective = data.objective;
+            this._chromelyPlatform = data.platform;
+            this._chromelyVersion = data.version;
           })
     });
   }  

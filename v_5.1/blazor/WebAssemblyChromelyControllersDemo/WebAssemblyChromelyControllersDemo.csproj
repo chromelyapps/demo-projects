@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <!-- <RuntimeIdentifier>linux-x64</RuntimeIdentifier>-->
+    <!-- <RuntimeIdentifier>osx-x64</RuntimeIdentifier>-->
+    <Platforms>x64</Platforms>
+    <!-- <ApplicationIcon>chromely.ico</ApplicationIcon>-->
+    <AssemblyName>blazordemo</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chromely" Version="5.1.96.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.5" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Program.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="chromely.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

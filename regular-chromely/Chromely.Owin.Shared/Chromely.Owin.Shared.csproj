@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Platforms>AnyCPU</Platforms>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<EmbedAllSources>true</EmbedAllSources>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Chromely" Version="5.2.96-pre01" />
+		<PackageReference Include="Chromely.Core" Version="5.2.0-pre01" />
+		<PackageReference Include="Chromely.Owin" Version="5.2.0-pre01" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>

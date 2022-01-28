@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class Html6TestsComponent implements OnInit {
   _url: string = "http://html6test.com/";
-  _urlSafe: SafeResourceUrl;
+  _urlSafe: SafeResourceUrl = "";
 
   constructor(public sanitizer: DomSanitizer) { }
 

@@ -79,11 +79,15 @@ export default function TodoList() {
     };
 
     const getTodoList = (reqType, id, todo, completed) => {
-        var parameters = {};
-        parameters["name"] = reqType;
-        parameters["id"] = id;
-        parameters["todo"] = todo;
-        parameters["completed"] = completed.toString();
+        const keys = {};
+        keys["name"] = reqType;
+        keys["id"] = id;
+        keys["todo"] = todo;
+        keys["completed"] = completed.toString();
+
+        var parameters = {
+            'keys': keys
+        };
 
         messageRouterGet('/todolistcontroller/items', parameters, onGetListsCallback);
     };

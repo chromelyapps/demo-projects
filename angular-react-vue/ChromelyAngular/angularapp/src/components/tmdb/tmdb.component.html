@@ -5,7 +5,6 @@
                  <div class="col">
                    <!-- -->
                    <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-secondary btn-sm" (click)="getLatestMovies()">latest</button>
                            <button type="button" class="btn btn-secondary btn-sm" (click)="getPopularMovies()">popular</button>
                            <button type="button" class="btn btn-secondary btn-sm" (click)="getTopratedMovies()">top rated</button>
                            <button type="button" class="btn btn-secondary btn-sm" (click)="getNowplayingMovies()">now playing</button>
@@ -18,7 +17,7 @@
                    <!-- -->
                    <div class="form-group row justify-content-end col-12">
                         <div>
-                           <input [value]="_searchText"  (input)="_searchText = $event.target.value" type="text" class="form-control" placeholder="Search movies" style="width:auto;">
+                           <input [value]="_searchText"  (input)="setSearchText($any($event.target).value)" type="text" class="form-control" placeholder="Search movies" style="width:auto;">
                        </div>
                        <button type="submit" class="btn btn-primary btn-sm" (click)="searchMovies()">Search</button>
                    </div>

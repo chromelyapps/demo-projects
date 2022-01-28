@@ -1,10 +1,11 @@
-{
+﻿{
   "profiles": {
     "Web.Chromely.Bootstrap4": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy",
         "ASPNETCORE_CHROMELY": "false"
       },
       "applicationUrl": "http://localhost:1111/"
@@ -13,7 +14,8 @@
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       },
       "applicationUrl": "http://localhost:1111/"
     }

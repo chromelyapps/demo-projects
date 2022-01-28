@@ -16,6 +16,10 @@ export class JavaScriptDemoComponent {
     this._results = new Array<any>();
   }
 
+  setScriptValue(scriptVal: string) {
+    this._scriptValue = scriptVal;
+  }
+
    executeRun() {
         if (!this._scriptValue || this._scriptValue.length == 0) {
             this.onError("Script must not be empty.");
@@ -25,7 +29,7 @@ export class JavaScriptDemoComponent {
         }
         else {
             var postData = { "framename": "", "script": this._scriptValue };
-            this._chromelyService.cefQueryPostRequest('/executejavascript/execute', null, postData, data => {
+            this._chromelyService.cefQueryPostRequest('/executejavascript/execute', null, postData, (data: any) => {
               this._zone.run(
                   () => {
                     var dataArray = this._results;

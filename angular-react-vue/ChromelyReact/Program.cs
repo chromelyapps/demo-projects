@@ -1,64 +1,52 @@
-﻿using System;
-using Chromely;
-using Chromely.Core;
-using Chromely.Core.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿// Copyright © 2017 Chromely Projects. All rights reserved.
+// Use of this source code is governed by MIT license that can be found in the LICENSE file.
 
-namespace ChromelyReact
+var config = DefaultConfiguration.CreateForRuntimePlatform();
+config.StartUrl = "local://dist/index.html";
+
+ThreadApt.STA();
+
+AppBuilder
+    .Create(args)
+    .UseConfig<DefaultConfiguration>(config)
+    .UseApp<DemoApp>()
+    .Build()
+    .Run();
+
+public class DemoApp : ChromelyBasicApp
 {
-    class Program
+    public override void ConfigureServices(IServiceCollection services)
     {
-        [STAThread]
-        static void Main(string[] args)
-        {
-            var config = DefaultConfiguration.CreateForRuntimePlatform();
-            config.StartUrl = "local://dist/index.html";
+        base.ConfigureServices(services);
+        services.AddLogging(configure => configure.AddConsole());
+        services.AddLogging(configure => configure.AddFile("Logs/serilog-{Date}.txt"));
 
-            AppBuilder
-            .Create()
-            .UseConfig<DefaultConfiguration>(config)
-            .UseApp<DemoApp>()
-            .Build()
-            .Run(args);
-        }
-    }
+        /*
+        // Optional - adding custom handler
+        services.AddSingleton<CefDragHandler, CustomDragHandler>();
+        */
 
-    public class DemoApp : ChromelyBasicApp
-    {
-        public override void ConfigureServices(IServiceCollection services)
-        {
-            base.ConfigureServices(services);
-            services.AddLogging(configure => configure.AddConsole());
-            services.AddLogging(configure => configure.AddFile("Logs/serilog-{Date}.txt"));
+        /*
+        // Optional- using config section to register IChromelyConfiguration
+        // This just shows how it can be used, developers can use custom classes to override this approach
+        //
+        var builder = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
 
-            /*
-            // Optional - adding custom handler
-            services.AddSingleton<CefDragHandler, CustomDragHandler>();
-            */
+        var configuration = builder.Build();
+        var config = DefaultConfiguration.CreateFromConfigSection(configuration);
+        services.AddSingleton<IChromelyConfiguration>(config);
+        */
 
-            /*
-            // Optional- using config section to register IChromelyConfiguration
-            // This just shows how it can be used, developers can use custom classes to override this approach
-            //
-            var builder = new ConfigurationBuilder()
-                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json");
+        /* Optional
+        var options = new JsonSerializerOptions();
+        options.ReadCommentHandling = JsonCommentHandling.Skip;
+        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.AllowTrailingCommas = true;
+        services.AddSingleton<JsonSerializerOptions>(options);
+        */
 
-            var configuration = builder.Build();
-            var config = DefaultConfiguration.CreateFromConfigSection(configuration);
-            services.AddSingleton<IChromelyConfiguration>(config);
-            */
-
-            /* Optional
-            var options = new JsonSerializerOptions();
-            options.ReadCommentHandling = JsonCommentHandling.Skip;
-            options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-            options.AllowTrailingCommas = true;
-            services.AddSingleton<JsonSerializerOptions>(options);
-            */
-
-            RegisterControllerAssembly(services, typeof(DemoApp).Assembly);
-        }
+        RegisterChromelyControllerAssembly(services, typeof(MovieController).Assembly);
     }
 }

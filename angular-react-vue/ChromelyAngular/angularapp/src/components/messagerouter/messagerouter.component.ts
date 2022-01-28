@@ -27,7 +27,7 @@ export class MessageRouterComponent {
   }
 
   messageRouterGet() {
-    this._chromelyService.cefQueryGetRequest('/democontroller/movies/get', null, data => {
+    this._chromelyService.cefQueryGetRequest('/democontroller/movies/get', null, (data: any) => {
       this._zone.run(
           () => {
             this._messageRouterGetResult = this.parseArrayResult(data);
@@ -45,7 +45,9 @@ export class MessageRouterComponent {
             { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
         ];
 
-        this._chromelyService.cefQueryPostRequest('/democontroller/movies/post', null, moviesJson, data => {
+        var reqMovies = { "movies": moviesJson };
+
+        this._chromelyService.cefQueryPostRequest('/democontroller/movies/post', null, reqMovies, (data: string) => {
           this._zone.run(
               () => {
                 this._messageRouterPostResult = data;

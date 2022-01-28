@@ -109,7 +109,9 @@
                     { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
                 ];
 
-                chromelyService.messageRouterPostJson('/democontroller/movies/post', null, moviesJson, messageRouterPostCallback);
+                var reqMovies = { "movies": moviesJson };
+
+                chromelyService.messageRouterPostJson('/democontroller/movies/post', null, reqMovies, messageRouterPostCallback);
             }
 
             const messageRouterGetCallback = (res) => {

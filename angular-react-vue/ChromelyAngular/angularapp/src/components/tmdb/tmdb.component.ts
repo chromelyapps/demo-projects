@@ -32,14 +32,14 @@ export class TmdbComponent implements OnInit {
        this.getMovies('popular', '');
     }  
 
-    searchMovies(event) {
+    setSearchText(searchTextVal: string) {
+      this._searchText = searchTextVal;
+    }
+
+    searchMovies() {
       this.getMovies('search', this._searchText);
     }
     
-    getLatestMovies() {
-      this.getMovies('latest', '');
-    }
-
     getPopularMovies() {
       this.getMovies('popular', '');
     }
@@ -56,13 +56,13 @@ export class TmdbComponent implements OnInit {
       this.getMovies('upcoming', '');
     }
   
-    getMovies(reqType, queryValue) {
-      var parameters = {};
-      parameters["name"] = reqType;
-      parameters["query"] = queryValue;
-      console.log(parameters);
+    getMovies(reqType: string, queryValue: string) {
+      var parameters = {
+        'name': reqType,
+        'query': queryValue
+      };
 
-      this._chromelyService.cefQueryGetRequest('/tmdbmoviescontroller/movies', parameters, data => {
+      this._chromelyService.cefQueryGetRequest('/tmdbmoviescontroller/movies', parameters, (data: any) => {
         this._zone.run(
             () => {
               this._moviesList = this.parseArrayResult(data);

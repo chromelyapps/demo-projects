@@ -29,13 +29,17 @@ export class TodoListComponent {
  }
 
   getTodoList(reqType:string, id:string, todo:string, completed: number) {
-    const parameters: Dict1 = {};
-    parameters["name"] = reqType;
-    parameters["id"] = id;
-    parameters["todo"] = todo;
-    parameters["completed"] = completed.toString();
+    const keys: Dict1 = {};
+    keys["name"] = reqType;
+    keys["id"] = id;
+    keys["todo"] = todo;
+    keys["completed"] = completed.toString();
 
-    this._chromelyService.cefQueryGetRequest('/todolistcontroller/items', parameters, data => {
+    var parameters = {
+      'keys': keys
+    };
+
+    this._chromelyService.cefQueryGetRequest('/todolistcontroller/items', parameters, (data: any) => {
       this._zone.run(
           () => {
             this.onGetListsCallback(data);
@@ -70,7 +74,7 @@ export class TodoListComponent {
     this._todoItemsList = tempList;
   }
 
-  addTodoItem(event) {
+  addTodoItem(event: any) {
     this.getTodoList("add", "", event.target.value, 0);
     event.target.value = "";
     this._checkedAll = false;

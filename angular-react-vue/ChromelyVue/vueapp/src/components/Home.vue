@@ -60,9 +60,9 @@
         })
 
         const getInfoCallback = (res) => {
-            chromelyOjective.value = res.divObjective,
-            chromelyPlatform.value = res.divPlatform,
-            chromelyVersion.value = res.divVersion;
+            chromelyOjective.value = res.objective,
+            chromelyPlatform.value = res.platform,
+            chromelyVersion.value = res.version;
         }
 
         return {

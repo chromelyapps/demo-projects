@@ -8,7 +8,7 @@
                             <div class="card-header">Script:</div>
                             <div class="card-body">
                                     <div class="col-8">
-                                            <textarea  class="form-control" rows="5" cols="100%" [value]="_scriptValue"  (input)="_scriptValue = $event.target.value"  placeholder="Enter JavaScript method here .." ></textarea>
+                                            <textarea  class="form-control" rows="5" cols="100%" [value]="_scriptValue"  (input)="setScriptValue($any($event.target).value)"  placeholder="Enter JavaScript method here .." ></textarea>
                                         </div>
                             </div>
                         </div>

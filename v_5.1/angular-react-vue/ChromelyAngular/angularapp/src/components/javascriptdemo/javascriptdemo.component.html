@@ -1,0 +1,36 @@
+<div class="container justify-content-center">
+        <div class="form-group row justify-content-center col-12">
+                <div class="row col-8">
+                        <h1>Execute JavaScript Demo</h1>
+                    </div>
+                    <div class="row col-8">
+                        <div class="card">
+                            <div class="card-header">Script:</div>
+                            <div class="card-body">
+                                    <div class="col-8">
+                                            <textarea  class="form-control" rows="5" cols="100%" [value]="_scriptValue"  (input)="_scriptValue = $event.target.value"  placeholder="Enter JavaScript method here .." ></textarea>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-8">
+                            <button id="execute" type="button" class="btn btn-primary btn-sm" (click)="executeRun()" style="margin: 5px;">Execute</button>
+                        </div>
+                    <div class="row col-8">
+                        <table class="table table-striped"  style="margin-top: 10px;">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 100px;">Type</th>
+                                <th scope="col">Output</th>
+                            </tr>
+                            </thead>
+                            <tbody tr *ngFor="let item of _results">
+                                <tr>
+                                    <th>Execute</th>
+                                    <th>{{ item }}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                </div>
+</div>

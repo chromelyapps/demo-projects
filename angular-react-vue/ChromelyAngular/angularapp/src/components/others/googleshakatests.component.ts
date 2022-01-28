@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class GoogleShakaTestsComponent implements OnInit {
   _url: string = "https://shaka-player-demo.appspot.com/demo/#asset=https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd;lang=en-US;build=uncompiled";
-  _urlSafe: SafeResourceUrl;
+  _urlSafe: SafeResourceUrl = "";
 
   constructor(public sanitizer: DomSanitizer) { }
 

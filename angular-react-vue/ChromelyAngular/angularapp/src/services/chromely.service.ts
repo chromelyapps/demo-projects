@@ -19,7 +19,7 @@ export class ChromelyService {
 
         messsageRouterQuery(
             request,
-            response => {
+            (response: string)  => {
                 var jsonData = JSON.parse(response);
                 if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
                     callback(jsonData.Data);
@@ -40,7 +40,7 @@ export class ChromelyService {
 
         messsageRouterQuery(
             request,
-            response => {
+            (response: string) => {
                 var jsonData = JSON.parse(response);
                 if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
                     callback(jsonData.Data);

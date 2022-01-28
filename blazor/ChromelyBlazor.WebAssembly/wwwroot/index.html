@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Chromely</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .navbar {
+            background: none;
+            box-shadow: none;
+        }
+
+        .navbar-brand {
+            font-family: 'Palatino';
+            font-style: italic;
+            color: grey;
+            font-size: 30px;
+            margin: 0px;
+        }
+
+        iframe, object, embed {
+            max-width: 100%;
+        }
+    </style>
+    <script>
+        function executeRequest(dotNetRequest, dotNetObject) {
+
+            // Ensure request is json
+            var requestObj = JSON.parse(dotNetRequest);
+
+            var request = {
+                "url": requestObj.Url,
+                "parameters": requestObj.Parameters,
+                "postData": requestObj.PostData
+            };
+
+            window.cefQuery({
+                request: JSON.stringify(request),
+                onSuccess: (response) => {
+                    var jsonData = JSON.parse(response);
+                    if (jsonData.ReadyState == 4 && jsonData.Status == 200) {
+                        if (dotNetObject) dotNetObject.invokeMethodAsync(requestObj.JSInvokeId, JSON.stringify(jsonData.Data));
+                    } else {
+                        console.log("An error occurs during message routing. With ur:" + url + ". Response received:" + response);
+                    }
+                },
+                onFailure: (err, msg) => {
+                    console.log(err, msg);
+                }
+            });
+        }
+
+        function openExternalUrl(url) {
+            var link = document.createElement('a');
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app">Loading...</div>
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

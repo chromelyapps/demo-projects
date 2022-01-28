@@ -99,7 +99,7 @@
                         Popularity: data[i].popularity,
                         VoteCount: data[i].vote_count,
                         VoteAverage: data[i].vote_average,
-                        HomePage: "http://command.com/tmdbmoviescontroller/homepage?movieid=" + data[i].id
+                        HomePage: "http://command.com/tmdbmoviescontroller/homepage?movieId=" + data[i].id
                     };
                     dataArray.push(tempItem);
                 }

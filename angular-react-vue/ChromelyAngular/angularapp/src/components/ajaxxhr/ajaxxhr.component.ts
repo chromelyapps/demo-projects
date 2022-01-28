@@ -38,7 +38,7 @@ export class AjaxXhrComponent {
 
   httpPostRun()  {
 
-      var params = [
+      var moviesJson = [
           { Id: 1, Title: "The Shawshank Redemption", Year: 1994, Votes: 678790, Rating: 9.2 },
           { Id: 2, Title: "The Godfather", Year: 1972, votes: 511495, Rating: 9.2 },
           { Id: 3, Title: "The Godfather: Part II", Year: 1974, Votes: 319352, Rating: 9.0 },
@@ -47,9 +47,11 @@ export class AjaxXhrComponent {
           { Id: 6, Title: "12 Angry Men", Year: 1957, Votes: 164558, Rating: 8.9 }
           ];
 
-      axios.post('http://chromely.com/democontroller/movies/post', params)
-      .then(response => {
-          this._httpPostResult = response.data.Data;
+      var params = { "movies": moviesJson };
+
+      axios.post('http://chromely.com/democontroller/movies/post', JSON.stringify(params))
+        .then(response => {
+          this._httpPostResult = response.data;
       })
       .catch(error => {
           console.log(error);

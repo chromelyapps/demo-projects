@@ -4,18 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-      path: '',
-      children: [
-        { path: 'home', loadChildren: './home/home.module#HomeModule'},
-        { path: 'tmdb', loadChildren: './tmdb/tmdb.module#TmdbModule'},
-        { path: 'todolist', loadChildren: './todolist/todolist.module#TodoListModule'},
-        { path: 'messagerouter', loadChildren: './messagerouter/messagerouter.module#MessageRouterModule'},
-        { path: 'ajaxxhr', loadChildren: './ajaxxhr/ajaxxhr.module#AjaxXhrModule'},
-        { path: 'javascriptdemo', loadChildren: './javascriptdemo/javascriptdemo.module#JavaScriptDemoModule'},
-        { path: 'html5tests', loadChildren: './others/html5tests.module#Html5TestsModule'},
-        { path: 'html6tests', loadChildren: './others/html6tests.module#Html6TestsModule'},
-        { path: 'shakatests', loadChildren: './others/googleshakatests.module#GoogleShakaTestsModule'}
-      ]
+    path: '',
+    children: [
+      { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+      { path: 'tmdb', loadChildren: () => import('./tmdb/tmdb.module').then(m => m.TmdbModule) },
+      { path: 'todolist', loadChildren: () => import('./todolist/todolist.module').then(m => m.TodoListModule) },
+      { path: 'messagerouter', loadChildren: () => import('./messagerouter/messagerouter.module').then(m => m.MessageRouterModule) },
+      { path: 'ajaxxhr', loadChildren: () => import('./ajaxxhr/ajaxxhr.module').then(m => m.AjaxXhrModule) },
+      { path: 'javascriptdemo', loadChildren: () => import('./javascriptdemo/javascriptdemo.module').then(m => m.JavaScriptDemoModule) },
+      { path: 'html5tests', loadChildren: () => import('./others/html5tests.module').then(m => m.Html5TestsModule) },
+      { path: 'html6tests', loadChildren: () => import('./others/html6tests.module').then(m => m.Html6TestsModule) },
+      { path: 'shakatests', loadChildren: () => import('./others/googleshakatests.module').then(m => m.GoogleShakaTestsModule) }
+    ]
   }
 ];
 

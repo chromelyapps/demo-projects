@@ -100,11 +100,15 @@
           }
 
           const getTodoList = (reqType, id, todo, completed) => {
-              const parameters = {};
-              parameters["name"] = reqType;
-              parameters["id"] = id;
-              parameters["todo"] = todo;
-              parameters["completed"] = completed.toString();
+              const keys = {};
+              keys["name"] = reqType;
+              keys["id"] = id;
+              keys["todo"] = todo;
+              keys["completed"] = completed.toString();
+
+              var parameters = {
+                  'keys': keys
+              };
 
               chromelyService.messageRouterGetJson('/todolistcontroller/items', parameters, onGetListsCallback);
           }

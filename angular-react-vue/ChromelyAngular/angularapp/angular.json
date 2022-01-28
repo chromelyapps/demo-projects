@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-routing-demo": {
+    "angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -18,7 +18,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -36,21 +35,6 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -62,25 +46,42 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "angular-routing-demo:build"
-          },
           "configurations": {
             "production": {
-              "browserTarget": "angular-routing-demo:build:production"
+              "browserTarget": "angular:build:production"
+            },
+            "development": {
+              "browserTarget": "angular:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-routing-demo:build"
+            "browserTarget": "angular:build"
           }
         },
         "test": {
@@ -99,33 +100,9 @@
             ],
             "scripts": []
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-routing-demo:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "angular-routing-demo:serve:production"
-            }
-          }
         }
       }
-    }},
-  "defaultProject": "angular-routing-demo"
+    }
+  },
+  "defaultProject": "angular"
 }

@@ -7,7 +7,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class Html5TestsComponent implements OnInit {
   _url: string = "https://html5test.com/";
-  _urlSafe: SafeResourceUrl;
+  _urlSafe: SafeResourceUrl = "";
 
   constructor(public sanitizer: DomSanitizer) { }
 

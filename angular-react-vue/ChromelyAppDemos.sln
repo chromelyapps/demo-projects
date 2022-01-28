@@ -1,13 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29230.61
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyAngular", "ChromelyAngular\ChromelyAngular.csproj", "{6001309D-CCAF-4B01-A9D1-3FD123FF3D30}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyReact", "ChromelyReact\ChromelyReact.csproj", "{86A000C0-E833-4DEE-9CD7-4D07515F31F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromelyVue", "ChromelyVue\ChromelyVue.csproj", "{43141D33-4A27-4A15-93EC-6E3204ECE401}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chromely.Shared", "Chromely.Shared\Chromely.Shared.csproj", "{EFFEE354-31D1-4288-A532-13BB73F6339D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A40D3E8-A690-4D9B-ADF8-111E52A3802F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +31,10 @@ Global
 		{43141D33-4A27-4A15-93EC-6E3204ECE401}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{43141D33-4A27-4A15-93EC-6E3204ECE401}.Debug|Any CPU.Build.0 = Debug|x64
 		{43141D33-4A27-4A15-93EC-6E3204ECE401}.Release|Any CPU.ActiveCfg = Release|x64
+		{EFFEE354-31D1-4288-A532-13BB73F6339D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFFEE354-31D1-4288-A532-13BB73F6339D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFFEE354-31D1-4288-A532-13BB73F6339D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFFEE354-31D1-4288-A532-13BB73F6339D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

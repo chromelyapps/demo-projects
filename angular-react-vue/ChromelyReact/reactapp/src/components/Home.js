@@ -9,9 +9,9 @@ export default function Home() {
     const [chromelyVersion, setChromelyVersion] = useState('');
 
     const getInfoCallback = (data) => {
-        setChromelyOjective(data.divObjective);
-        setChromelyPlatform(data.divPlatform);
-        setChromelyVersion(data.divVersion);
+        setChromelyOjective(data.objective);
+        setChromelyPlatform(data.platform);
+        setChromelyVersion(data.version);
     };
 
     const getInfo = () => {
