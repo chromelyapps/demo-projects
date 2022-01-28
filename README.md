@@ -46,10 +46,10 @@ After downloading the source code - either by cloning or direct download, you ne
  Sample - https://github.com/chromelyapps/demo-projects/blob/ba0560987eca48d106c2000c4e835f84745755f7/regular-chromely/Chromely.CrossPlat/Chromely.CrossPlat.csproj#L9
  
 
-- Download and install .NET Core 3 Runtime binaries.
-You will need .NET Core 3 runtime installed. You can install directly if you know what is required. Or you start with building and running and see what is missing.
+- Download and install .NET 6 Runtime binaries.
+You will need .NET 6 runtime installed. You can install directly if you know what is required. Or you start with building and running and see what is missing.
 
-- You can try .NET 5 too, but these demos require .NET Core 3 at minimum.
+- You can try .NET Core 3/.NET 5 too, but the [target framework](https://github.com/chromelyapps/demo-projects/blob/d637e251daed946464ab37d751f30634f1d2bea4/regular-chromely/Chromely.CrossPlat/Chromely.CrossPlat.csproj#L5) would need to be changed . The demos require .NET Core 3 at minimum.
 
 ````
 dotnet restore
