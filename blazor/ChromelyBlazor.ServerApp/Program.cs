@@ -13,9 +13,9 @@ if (firstProcess)
         ServerAppUtil.BlazorTaskTokenSource = new CancellationTokenSource();
         ServerAppUtil.BlazorTask = new Task(() =>
         {
-            BlazorAppBuilder.Create(args, port)
+            BlazorAppBuilder.Create(args)
                 .Build()
-                .Run();
+                .Run(port);
 
         }, ServerAppUtil.BlazorTaskTokenSource.Token, TaskCreationOptions.LongRunning);
         ServerAppUtil.BlazorTask.Start();
