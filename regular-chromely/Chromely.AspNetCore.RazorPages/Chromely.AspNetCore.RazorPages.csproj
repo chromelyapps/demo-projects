@@ -8,9 +8,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Chromely" Version="5.2.96" />
-		<PackageReference Include="Chromely.Core" Version="5.2.0" />
-		<PackageReference Include="Chromely.Owin" Version="5.2.0" />
+		<PackageReference Include="Chromely" Version="5.2.101" />
+		<PackageReference Include="Chromely.Core" Version="5.2.1" />
+		<PackageReference Include="Chromely.Owin" Version="5.2.1" />
 		<PackageReference Include="Chromium.AspNetCore.Bridge" Version="1.0.1" />
 	</ItemGroup>
 

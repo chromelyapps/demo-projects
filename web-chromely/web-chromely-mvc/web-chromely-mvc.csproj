@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Chromely" Version="5.2.96" />
+    <PackageReference Include="Chromely" Version="5.2.101" />
   </ItemGroup>
 
 	<ItemGroup>
